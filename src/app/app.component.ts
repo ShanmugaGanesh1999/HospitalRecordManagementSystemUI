@@ -21,13 +21,10 @@ export class AppComponent {
   }
 
   logout() {
-    this.openSnackBar('Logout successful', 'undo');
+    this.openSnackBar('Logout successful', 'Close');
     localStorage.clear();
     this.router.navigate(['login']);
   }
 
-  ngOnInit(): void {
-    this.appService.loading = true;
-    setTimeout(() => (this.appService.loading = false), 3000);
-  }
+  ngOnInit(): void {}
 }

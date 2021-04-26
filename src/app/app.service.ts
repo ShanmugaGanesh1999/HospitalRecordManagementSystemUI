@@ -5,5 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class AppService {
   loading = false;
+  navHead = 'Login';
+  logoutButton = false;
   constructor() {}
 }

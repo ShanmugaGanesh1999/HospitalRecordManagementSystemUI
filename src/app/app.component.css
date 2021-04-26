@@ -2,6 +2,12 @@
   flex: 1 1 auto;
 }
 
+.page-center {
+  margin-left: 2%;
+  color: #fff;
+  opacity: 0.8;
+}
+
 mat-form-field {
   margin-right: 12px;
 }
@@ -15,6 +21,7 @@ mat-form-field {
 }
 
 .highlight:hover {
+  opacity: 0.8;
   background-color: #673ab7;
   color: #fff;
 }
