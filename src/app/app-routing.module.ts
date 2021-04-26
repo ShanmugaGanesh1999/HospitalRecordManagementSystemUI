@@ -1,10 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { DoctorComponent } from './doctor/doctor.component';
+import { LoginComponent } from './login/login.component';
+import { ManagementComponent } from './management/management.component';
+import { ReceptionistComponent } from './receptionist/receptionist.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'doctor-page', component: DoctorComponent },
+  { path: 'receptionist-page', component: ReceptionistComponent },
+  { path: 'management-page', component: ManagementComponent },
+  { path: 'login', component: LoginComponent },
+  { path: '**', component: LoginComponent },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
