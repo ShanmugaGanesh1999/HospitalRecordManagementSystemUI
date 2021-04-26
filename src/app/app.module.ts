@@ -10,6 +10,13 @@ import { ManagementComponent } from './management/management.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatRippleModule } from '@angular/material/core';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -25,6 +32,13 @@ import { MatIconModule } from '@angular/material/icon';
     BrowserAnimationsModule,
     MatToolbarModule,
     MatIconModule,
+    MatTooltipModule,
+    MatProgressBarModule,
+    MatButtonModule,
+    MatTabsModule,
+    MatSnackBarModule,
+    MatRippleModule,
+    MatMenuModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
