@@ -1,0 +1,44 @@
+.example-small-box,
+.example-large-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 16px;
+  padding: 16px;
+  border-radius: 8px;
+}
+.example-stretched-tabs {
+  margin: 2.5%;
+  max-width: 95%;
+}
+
+.example-large-box {
+  height: 100vh;
+  width: 90%;
+  background-color: #673ab7;
+}
+
+.table-size {
+  margin: 10px;
+}
+
+mat-grid-tile {
+  width: 30%;
+  height: 50%;
+  background: #949396;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+}
+
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.example-headers-align .mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}

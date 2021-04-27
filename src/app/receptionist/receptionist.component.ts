@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AddPatientComponent } from './add-patient/add-patient.component';
 import { ReceptionistService } from './receptionist.service';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-receptionist',
@@ -14,8 +15,12 @@ export class ReceptionistComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
-    private receptionistService: ReceptionistService
-  ) {}
+    private receptionistService: ReceptionistService,
+    private appService: AppService
+  ) {
+    appService.navHead = 'Receptionist';
+    appService.logoutButton = true;
+  }
 
   ngOnInit(): void {
     this.getAllPatients();

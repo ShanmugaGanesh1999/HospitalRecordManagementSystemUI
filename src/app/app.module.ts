@@ -20,6 +20,16 @@ import { AlertsModule } from 'angular-alert-module';
 import { HttpClientModule } from '@angular/common/http';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { AddPatientComponent } from './receptionist/add-patient/add-patient.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatRippleModule } from '@angular/material/core';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTableModule } from '@angular/material/table';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -33,7 +43,16 @@ import { AddPatientComponent } from './receptionist/add-patient/add-patient.comp
   entryComponents: [],
   imports: [
     BrowserModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatExpansionModule,
+    HttpClientModule,
+    MatGridListModule,
+    MatCardModule,
     AppRoutingModule,
+    MatTableModule,
     BrowserAnimationsModule,
     MatToolbarModule,
     MatIconModule,
@@ -45,8 +64,11 @@ import { AddPatientComponent } from './receptionist/add-patient/add-patient.comp
     MatInputModule,
     MatCardModule,
     AlertsModule,
-    HttpClientModule,
-    MatExpansionModule,
+    MatProgressBarModule,
+    MatTabsModule,
+    MatSnackBarModule,
+    MatRippleModule,
+    MatMenuModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
