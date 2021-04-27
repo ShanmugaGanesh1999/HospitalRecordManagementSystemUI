@@ -1,0 +1,46 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.page-center {
+  margin-left: 2%;
+  color: #fff;
+  opacity: 0.8;
+}
+
+mat-form-field {
+  margin-right: 12px;
+}
+
+.app-toolbar {
+  position: sticky;
+  position: -webkit-sticky; /* For macOS/iOS Safari */
+  top: 0; /* Sets the sticky toolbar to be on top */
+  z-index: 1000; /* Ensure that your app's content doesn't overlap the toolbar */
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+}
+
+.highlight:hover {
+  opacity: 0.8;
+  background-color: #673ab7;
+  color: #fff;
+}
+
+.wrapper {
+  display: flex;
+  width: 100%;
+  position: fixed;
+  justify-content: center;
+  z-index: 1100;
+  align-items: center;
+  background: #d8d8d899;
+  height: calc(120vh);
+}
+
+.inner {
+  padding: 12px;
+}
+
+/* .mat-progress-color::ng-deep circle {
+  stroke: #673ab7 !important;
+} */

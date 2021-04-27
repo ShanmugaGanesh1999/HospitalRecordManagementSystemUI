@@ -1,0 +1,49 @@
+<section class="main-background">
+  <div class="example-container">
+    <form [formGroup]="addPatientForm">
+      <mat-card-header>
+        <mat-card-title class="h1-style">Add Patient</mat-card-title>
+      </mat-card-header>
+      <br />
+      <mat-form-field appearance="outline">
+        <mat-label>Patient Name</mat-label>
+        <input matInput placeholder="Enter Patient Name" formControlName="pname" type="text" required />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="ml-2">
+        <mat-label>Patient's Email</mat-label>
+        <input matInput placeholder="Enter Patient Email Address" type="text" formControlName="emailId" type="email"
+          [ngClass]="{ 'is-invalid': submitted && f.emailId.errors }" required />
+        <div *ngIf="submitted && f.emailId.errors">
+          <div *ngIf="f.emailId.errors.email">
+            Email must be a valid email address
+          </div>
+        </div>
+      </mat-form-field><br />
+      <mat-form-field appearance="outline">
+        <mat-label>Gender</mat-label>
+        <input matInput placeholder="Enter Gender" formControlName="gender" type="text" required />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="ml-2">
+        <mat-label>Mobile Number</mat-label>
+        <input matInput formControlName="mobileNo" type="number" pattern="^[6789]\d{9}$" minlength="10" maxlength="10"
+          placeholder="Enter Mobile Number" required />
+        <div *ngIf="f.mobileNo.touched && f.mobileNo.errors">
+          <app-alerts>
+            Mobile Number that must satisfy the following condition:<br />1.
+            must contain 10 digits<br />2. must starts with 6, 7, 8,
+            9</app-alerts>
+        </div>
+      </mat-form-field>
+      <br />
+      <mat-form-field appearance="outline">
+        <mat-label>DOB</mat-label>
+        <input matInput placeholder="Enter DOB" formControlName="dob" type="date" required />
+      </mat-form-field>
+      <br />
+
+    </form>
+  </div>
+  <button mat-raised-button mat-dialog-close class="btn2" (click)="onClickSave()" color="primary">
+    Save
+  </button>
+</section>

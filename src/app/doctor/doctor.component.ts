@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-doctor',
@@ -6,7 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./doctor.component.css'],
 })
 export class DoctorComponent implements OnInit {
-  constructor() {}
+  constructor(private appService: AppService) {
+    appService.logoutButton = true;
+    appService.navHead = 'Doctor';
+  }
 
   ngOnInit(): void {}
 }
