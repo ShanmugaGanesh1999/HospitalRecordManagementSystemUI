@@ -1,1 +1,41 @@
-<p>receptionist works!</p>
+<section>
+  <div>
+    <div class="example-flex-container">
+      <div class="example-button-container">
+        <button mat-fab mat-raised-button matTooltip="Add Patient" color="primary" (click)="onClickAddPatient()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+      <div class="example-button-container">
+        <button mat-fab mat-raised-button matTooltip="Search for Patient" color="accent">
+          <mat-icon>search</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="panel">
+  <mat-accordion *ngFor="let patient of patients,let i = index">
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="details-panel">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon>hotel</mat-icon>&nbsp;&nbsp;
+          <span>{{patient.patientId}}</span>
+        </mat-panel-title>
+        <mat-panel-description>
+          <span> {{patient.name}}</span>
+        </mat-panel-description>
+        <mat-panel-description>
+          <span> {{patient.dob | date:'MM/dd/yyyy' }}</span>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-icon>perm_identity</mat-icon>&nbsp;&nbsp;
+      <span> Gender: {{patient.gender}}</span><br>
+      <mat-icon> email</mat-icon>&nbsp;&nbsp;
+      <span> EmailId: {{patient.emailId}}</span><br>
+      <mat-icon> phone</mat-icon>&nbsp;&nbsp;
+      <span> MobileNo: {{patient.mobileNo}}</span>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>

@@ -1,0 +1,16 @@
+mat-form-field {
+  color: rgb(0, 0, 8);
+  width: 270px;
+}
+
+.example-container {
+  width: 600px;
+  margin: auto;
+  padding: 2%;
+  height: 300px;
+}
+
+.ml-2 {
+  margin-left: 2%;
+}
+
