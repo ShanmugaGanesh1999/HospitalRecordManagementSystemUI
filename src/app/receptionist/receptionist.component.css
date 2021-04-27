@@ -1,12 +1,10 @@
-.logout {
-  margin-left: 1000px;
-  font-family: "Times New Roman", Times, serif;
-}
+
 
 .example-flex-container {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  margin-top: 15px;
 }
 
 .example-button-container {
