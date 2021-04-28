@@ -11,9 +11,9 @@ export class ReceptionistService {
 
   getAllPatients() {
     const token = localStorage.getItem('token');
-    console.log(token);
+    // console.log(token);
     const headers = new HttpHeaders().set('x-access-token', token + '');
-    console.log(headers);
+    // console.log(headers);
     return this.httpClient.get(this.baseUrl + 'getAllPatients', {
       headers: headers,
     });
