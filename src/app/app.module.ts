@@ -30,6 +30,11 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { SearchPatientComponent } from './receptionist/search-patient/search-patient.component';
+import { FixAppointmentComponent } from './receptionist/fix-appointment/fix-appointment.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -39,6 +44,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     ReceptionistComponent,
     ManagementComponent,
     AddPatientComponent,
+    SearchPatientComponent,
+    FixAppointmentComponent,
   ],
   entryComponents: [],
   imports: [
@@ -63,12 +70,15 @@ import { MatNativeDateModule } from '@angular/material/core';
     ReactiveFormsModule,
     MatInputModule,
     MatCardModule,
-    AlertsModule,
+    AlertsModule.forRoot(),
     MatProgressBarModule,
     MatTabsModule,
     MatSnackBarModule,
     MatRippleModule,
     MatMenuModule,
+    MatSelectModule,
+    MatPaginatorModule,
+    MatRadioModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

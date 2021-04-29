@@ -1,0 +1,12 @@
+.highlight{
+    font-weight: 500;
+}
+.details {
+  font-style: italic;
+}
+mat-dialog-container{
+    color: blueviolet !important;;
+}
+h2{
+    color: blueviolet;
+}

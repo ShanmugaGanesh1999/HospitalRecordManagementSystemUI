@@ -7,7 +7,8 @@
         </button>
       </div>
       <div class="example-button-container">
-        <button mat-fab mat-raised-button matTooltip="Search for Patient" color="accent">
+        <button mat-fab mat-raised-button matTooltip="Search for Patient" color="accent"
+          (click)="onClickSearchPatient()">
           <mat-icon>search</mat-icon>
         </button>
       </div>
@@ -16,6 +17,16 @@
 </section>
 
 <section class="panel">
+  <form [formGroup]="searchForm">
+    <mat-form-field>
+      <mat-label>Search patient name</mat-label>
+      <input matInput formControlName="searchInput" (keyup)="searchTerm$.next($any($event.target).value)" type="text" />
+      <button mat-button *ngIf="searchInput.value" matSuffix mat-icon-button aria-label="Clear"
+        (click)="onClickClose()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </form>
   <mat-accordion *ngFor="let patient of patients,let i = index">
     <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="details-panel">
       <mat-expansion-panel-header>
@@ -39,3 +50,6 @@
     </mat-expansion-panel>
   </mat-accordion>
 </section>
+<mat-paginator (page)="onClickPaginator($event)" [length]="length" [pageSize]="pageSize"
+  [pageSizeOptions]="pageSizeOptions" [showFirstLastButtons]="true">
+</mat-paginator>

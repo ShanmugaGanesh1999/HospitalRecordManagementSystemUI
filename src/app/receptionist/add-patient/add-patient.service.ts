@@ -7,7 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class AddPatientService {
   constructor(private httpClient: HttpClient) {}
 
-  basePatientURL = 'http://localhost:3000/Patients/';
+  basePatientURL = 'http://localhost:3000/patients/';
   addPatient(params: any) {
     console.log(params);
     const token = localStorage.getItem('token');

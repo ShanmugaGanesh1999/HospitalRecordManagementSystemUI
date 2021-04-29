@@ -1,0 +1,19 @@
+<div class="example-container">
+  <form [formGroup]="patientIdForm">
+    <mat-card-header>
+      <mat-card-title class="h1-style">Enter Patient Id</mat-card-title>
+    </mat-card-header>
+    <br />
+    <mat-form-field appearance="outline">
+      <mat-label>Patient Id</mat-label>
+      <input matInput placeholder="Enter Patient Id" formControlName="pId" type="number" minlength="4" maxlength="4"
+        required />
+    </mat-form-field>
+  </form>
+  <button mat-raised-button mat-dialog-close (click)="onClickSearch()" color="primary">
+    Search
+  </button>&nbsp;&nbsp;
+  <button mat-raised-button mat-dialog-close color="warn">
+    Close
+  </button>
+</div>
