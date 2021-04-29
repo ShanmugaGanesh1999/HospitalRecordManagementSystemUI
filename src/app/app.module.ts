@@ -35,6 +35,7 @@ import { SearchPatientComponent } from './receptionist/search-patient/search-pat
 import { FixAppointmentComponent } from './receptionist/fix-appointment/fix-appointment.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { MatRadioModule } from '@angular/material/radio';
   imports: [
     BrowserModule,
     MatFormFieldModule,
+    MatSortModule,
     MatInputModule,
     MatNativeDateModule,
     MatDatepickerModule,

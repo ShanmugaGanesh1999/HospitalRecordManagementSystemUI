@@ -11,15 +11,25 @@
   margin: 2.5%;
   max-width: 95%;
 }
-
+.make-huge:hover {
+  color: #000;
+  transform: scale(1.5);
+}
 .example-large-box {
   /* height: 100vh; */
   width: 90%;
   background-color: #673ab7;
 }
 
+.mat-sort-header-container {
+  align-items: center;
+}
+
 .table-size {
-  margin: 10px;
+  margin-left: 25%;
+  text-align: right;
+  color: #fff;
+  font-size: medium;
 }
 
 mat-grid-tile {
@@ -46,6 +56,13 @@ mat-grid-tile {
 .example-header-image {
   background-image: url("https://thumbs.dreamstime.com/z/doctor-portrait-23753621.jpg");
   background-size: cover;
+}
+
+.mat-paginator {
+  margin-left: 2%;
+  margin-right: 2%;
+  background-color: #673ab7;
+  color: #fff;
 }
 
 .example-card {
