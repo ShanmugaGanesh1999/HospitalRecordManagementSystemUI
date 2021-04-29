@@ -45,9 +45,9 @@
 </mat-toolbar>
 
 <div *ngIf="appService.loading" class="wrapper">
-    <div class="inner">
-        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-    </div>
+  <div class="inner">
+    <mat-spinner class="mat-spinner-color"></mat-spinner>
+  </div>
 </div>
 
 <router-outlet></router-outlet>

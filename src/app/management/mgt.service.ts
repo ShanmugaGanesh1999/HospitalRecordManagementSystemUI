@@ -20,9 +20,7 @@ export class MgtService {
         'getAllCounts?skip=' +
         params.skip +
         '&limit=' +
-        params.limit +
-        '&searchText=' +
-        params.searchText,
+        params.limit,
       { headers: this.headers }
     );
   }

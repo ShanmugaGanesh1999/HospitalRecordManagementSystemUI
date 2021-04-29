@@ -5,47 +5,54 @@
   class="example-stretched-tabs mat-elevation-z4"
 >
   <mat-tab label="Dashboard">
-    <mat-grid-list cols="2" rowHeight="4:5">
+    <mat-grid-list cols="2" row ='2' rowHeight="1:1">
       <mat-grid-tile>
         <div class="example-large-box mat-elevation-z4 grid-section">
-          <form [formGroup]="searchForm" class="table-size">
-            <mat-form-field>
-              <mat-label>Filter</mat-label>
-              <input matInput formControlName="searchInput" (keyup)="searchTerm$.next($any($event.target).value)" type="text" />
-              <button mat-button *ngIf="searchInput.value" matSuffix mat-icon-button aria-label="Clear" (click)="onClickClose()">
-                <mat-icon>close</mat-icon>
-              </button>
-            </mat-form-field>
-          </form>
-          
-          <table matSort (matSortChange)="sortData($event)" class="table-size">
-            <tr style="text-align:center ;">
-              <th class="make-huge" mat-sort-header="date">Date</th>
-              <th class="make-huge" mat-sort-header="count">Count</th>
-            </tr>
-          
-            <tr *ngFor="let ele of dateCountArr">
-              <td class="make-huge">{{ele.date|date: "fullDate"}}</td>
-              <td class="make-huge">{{ele.count}}</td>
-            </tr>
-          </table>
+          <mat-card class="example-card2">
+            <mat-card-header>
+              <div mat-card-avatar class="example-header-image2"></div>
+              <mat-card-title>View Count</mat-card-title>
+              <mat-card-subtitle>Number of Appointments</mat-card-subtitle>
+            </mat-card-header>
+            <table
+              matSort
+              (matSortChange)="sortData($event)"
+              class="table-size"
+            >
+              <tr style="text-align: center">
+                <th class="make-huge" mat-sort-header="date">Date</th>
+                <th class="make-huge" mat-sort-header="count">Count</th>
+              </tr>
 
-          <mat-paginator class="mat-paginator"
-            (page)="onClickPaginator($event)"
-            [length]="length"
-            [pageSize]="pageSize"
-            [pageSizeOptions]="pageSizeOptions"
-            [showFirstLastButtons]="true"
-          >
-          </mat-paginator>
+              <tr *ngFor="let ele of dateCountArr">
+                <td class="make-huge">{{ ele.date | date: "fullDate" }}</td>
+                <td class="make-huge">{{ ele.count }}</td>
+              </tr>
+            </table>
+
+            <mat-paginator
+              class="mat-paginator"
+              (page)="onClickPaginator($event)"
+              [length]="length"
+              [pageSize]="pageSize"
+              [pageSizeOptions]="pageSizeOptions"
+              [showFirstLastButtons]="true"
+            >
+            </mat-paginator>
+            <mat-card-actions>
+              <button mat-button matTooltip="Refresh count data" (click)="refreshCount()">
+                REFRESH
+              </button>
+            </mat-card-actions>
+          </mat-card>
         </div>
       </mat-grid-tile>
       <mat-grid-tile>
         <mat-card class="example-card">
           <mat-card-header>
             <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>Doctor</mat-card-title>
-            <mat-card-subtitle>Add doctors</mat-card-subtitle>
+            <mat-card-title>Create Doctor</mat-card-title>
+            <mat-card-subtitle>Add Doctor details</mat-card-subtitle>
           </mat-card-header>
           <form
             [formGroup]="createDoctorForm"
@@ -90,7 +97,7 @@
                 </mat-form-field>
 
                 <mat-action-row>
-                  <button mat-button color="primary" (click)="nextStep()">
+                  <button mat-raised-button color="primary" (click)="nextStep()">
                     Next
                   </button>
                 </mat-action-row>
@@ -134,10 +141,10 @@
                 </mat-form-field>
 
                 <mat-action-row>
-                  <button mat-button color="warn" (click)="prevStep()">
+                  <button mat-raised-button color="warn" (click)="prevStep()">
                     Previous
                   </button>
-                  <button mat-button color="primary" (click)="nextStep()">
+                  <button mat-raised-button color="primary" (click)="nextStep()">
                     Next
                   </button>
                 </mat-action-row>
@@ -186,10 +193,10 @@
                 </mat-form-field>
 
                 <mat-action-row>
-                  <button mat-button color="warn" (click)="prevStep()">
+                  <button mat-raised-button color="warn" (click)="prevStep()">
                     Previous
                   </button>
-                  <button mat-button color="primary" (click)="onSubmit()">
+                  <button mat-raised-button matTooltip="Create a new doctor" color="primary" (click)="onSubmit()">
                     Submit
                   </button>
                 </mat-action-row>
@@ -197,14 +204,17 @@
             </mat-accordion>
           </form>
           <mat-card-actions>
-            <button mat-button (click)="openSnackBar('Liked', 'Close')">
-              LIKE
-            </button>
-            <button mat-button (click)="openSnackBar('Shared', 'Close')">
-              SHARE
+            <button mat-button matTooltip="Refresh the current page"(click)="refreshDoctor()">
+              REFRESH
             </button>
           </mat-card-actions>
         </mat-card>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div class="example-large-box mat-elevation-z4 grid-section1">3</div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div class="example-large-box mat-elevation-z4 grid-section2">4</div>
       </mat-grid-tile>
     </mat-grid-list>
   </mat-tab>
