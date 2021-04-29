@@ -2,7 +2,7 @@
   <div class="example-container">
     <form [formGroup]="addPatientForm">
       <mat-card-header>
-        <mat-card-title class="h1-style">Add Patient</mat-card-title>
+        <mat-card-title class="h1-style">{{isEdit ? "Edit" : "Add"}} Patient</mat-card-title>
       </mat-card-header>
       <br />
       <mat-form-field appearance="outline">

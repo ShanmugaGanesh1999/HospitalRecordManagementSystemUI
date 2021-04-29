@@ -19,6 +19,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 })
 export class ReceptionistComponent implements OnInit {
   panelOpenState = false;
+  isEdit = false;
   patients: any = [];
   searchInput = new FormControl('');
   searchTerm$ = new Subject<string>();
@@ -46,7 +47,12 @@ export class ReceptionistComponent implements OnInit {
   }
 
   onClickAddPatient() {
-    this.dialog.open(AddPatientComponent);
+    this.dialog.open(AddPatientComponent, {
+      data: {
+        details: [],
+        isEdit: this.isEdit,
+      },
+    });
   }
 
   onClickSearchPatient() {
@@ -74,6 +80,14 @@ export class ReceptionistComponent implements OnInit {
       );
   }
 
+  onClickEdit(patient: any) {
+    this.dialog.open(AddPatientComponent, {
+      data: {
+        details: patient,
+        isEdit: true,
+      },
+    });
+  }
   searchEventListener(searchTerms: Observable<string>) {
     searchTerms
       .pipe(debounceTime(400), distinctUntilChanged())
@@ -98,7 +112,7 @@ export class ReceptionistComponent implements OnInit {
       );
   }
 
-  onClickClose() {
+  onClickCloseSearch() {
     this.searchInput.setValue('');
     this.getAllPatients();
   }
