@@ -1,5 +1,3 @@
-
-
 .example-flex-container {
   display: flex;
   justify-content: space-between;
@@ -13,21 +11,20 @@
   width: 120px;
 }
 
-.panel{
+.panel {
   margin: 30px;
-   }
-
-.details-panel{
-   background-color: rgb(240, 163, 19);
-   border:solid 10px white;
-   color:white  !important;
-   font-weight: 500;
 }
 
-.mat-expansion-panel-header{
+.details-panel {
+  background-color: rgb(240, 163, 19);
+  border: solid 10px white;
+  color: white !important;
+  font-weight: 500;
+}
+
+.mat-expansion-panel-header {
   font-family: Roboto, "Helvetica Neue", sans-serif;
   font-size: 15px;
   font-weight: 500;
   color: white !important;
 }
-
