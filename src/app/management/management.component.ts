@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Sort } from '@angular/material/sort';
-import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
 import { AppService } from '../app.service';
 import { MgtService } from './mgt.service';
 @Component({
@@ -14,9 +12,6 @@ import { MgtService } from './mgt.service';
 export class ManagementComponent implements OnInit {
   // dateCountArr = new MatTableDataSource<dateCountElement>([]);
   dateCountArr: dateCountElement[] = [];
-  searchForm: FormGroup;
-  searchTerm$ = new Subject<string>();
-  searchInput = new FormControl('');
   length = 0;
   pageSize = 5;
   pageSizeOptions: number[] = [5, 10, 25, 100];
@@ -43,7 +38,6 @@ export class ManagementComponent implements OnInit {
   dop = new FormControl('');
 
   constructor(
-    private router: Router,
     private appService: AppService,
     private _snackBar: MatSnackBar,
     private mgtService: MgtService
@@ -51,9 +45,6 @@ export class ManagementComponent implements OnInit {
     appService.navHead = 'Management';
     appService.logoutButton = true;
     this.getCount();
-    this.searchForm = new FormGroup({
-      searchInput: this.searchInput,
-    });
     this.createDoctorForm = new FormGroup({
       firstName: this.firstName,
       lastName: this.lastName,
@@ -68,7 +59,6 @@ export class ManagementComponent implements OnInit {
     this.appService.loading = true;
     this.mgtService
       .getAllCounts({
-        searchText: this.searchInput.value ? this.searchInput.value : '',
         skip: this.pagePosition,
         limit: this.pageSize,
       })
@@ -81,10 +71,7 @@ export class ManagementComponent implements OnInit {
         (err) => console.log(err)
       );
   }
-  onClickClose() {
-    this.searchInput.setValue('');
-    this.getCount();
-  }
+
   onSubmit() {
     this.appService.loading = true;
     this.nextStep();
@@ -126,6 +113,7 @@ export class ManagementComponent implements OnInit {
     console.log('event', event);
     this.pagePosition = event.pageIndex * event.pageSize;
     this.pageSize = event.pageSize;
+    console.log(this.pagePosition, this.pageSize);
     this.getCount();
   }
   keyDownFunction(event: any) {
@@ -152,6 +140,14 @@ export class ManagementComponent implements OnInit {
           return 0;
       }
     });
+  }
+  refreshCount() {
+    this.getCount();
+    this.openSnackBar('Count refreshed', 'Close');
+  }
+
+  refreshDoctor() {
+    window.location.reload();
   }
 
   ngOnInit(): void {}

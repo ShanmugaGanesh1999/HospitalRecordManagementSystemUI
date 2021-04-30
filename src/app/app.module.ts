@@ -36,6 +36,7 @@ import { FixAppointmentComponent } from './receptionist/fix-appointment/fix-appo
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSortModule } from '@angular/material/sort';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { MatSortModule } from '@angular/material/sort';
   imports: [
     BrowserModule,
     MatFormFieldModule,
+    MatProgressSpinnerModule,
     MatSortModule,
     MatInputModule,
     MatNativeDateModule,
