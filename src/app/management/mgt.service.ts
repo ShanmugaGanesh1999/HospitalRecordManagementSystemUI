@@ -13,6 +13,24 @@ export class MgtService {
   mgtURL = 'http://localhost:3000/management/';
   drURL = 'http://localhost:3000/doctor/';
   comURL = 'http://localhost:3000/common/';
+  appURL = 'http://localhost:3000/appointment/';
+
+  getAppointments(params: any) {
+    return this.httpClient.get(
+      this.appURL +
+        'getAllAppointmentsToday?status=' +
+        params.status +
+        '&skip=' +
+        params.skip +
+        '&limit=' +
+        params.limit +
+        '&search=' +
+        params.search,
+      {
+        headers: this.headers,
+      }
+    );
+  }
 
   getAllCounts(params: any) {
     return this.httpClient.get(

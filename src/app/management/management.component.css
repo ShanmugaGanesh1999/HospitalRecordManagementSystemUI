@@ -56,6 +56,11 @@ mat-grid-tile {
   background-size: cover;
 }
 
+.example-header-image3 {
+  background-image: url("https://images.pexels.com/photos/4021769/pexels-photo-4021769.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+  background-size: cover;
+}
+
 .mat-paginator {
   margin-left: 2%;
   margin-right: 2%;
@@ -71,13 +76,14 @@ mat-grid-tile {
 }
 
 .table-size {
-  margin-left: 25%;
-  text-align: right;
+  margin: 2.5%;
+  text-align: center;
   color: #fff;
   font-size: larger;
 }
 
 .example-card2 {
+  margin: 5%;
   background: transparent;
   color: #fff;
 }
@@ -87,9 +93,46 @@ mat-grid-tile {
 }
 
 .grid-section1 {
-  margin-top: -110%; /*its dashboard left bottom -  */
+  margin-top: -95%; /*its dashboard left bottom - appointment part */
 }
 
 .grid-section2 {
   margin-top: -110%; /*its dashboard right bottom -  */
+}
+
+/* section 3 */
+
+table {
+  width: 100%;
+}
+
+tr.example-detail-row {
+  height: 0;
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+  background: #efefef;
+}
+
+.example-element-row td {
+  border-bottom-width: 0;
+}
+
+.example-element-detail {
+  overflow: hidden;
+}
+
+ol {
+  background: #ff9999;
+  padding: 20px;
+}
+
+ol li {
+  background: #ffe5e5;
+  padding: 5px;
+  margin-left: 35px;
 }

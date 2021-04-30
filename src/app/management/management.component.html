@@ -5,7 +5,7 @@
   class="example-stretched-tabs mat-elevation-z4"
 >
   <mat-tab label="Dashboard">
-    <mat-grid-list cols="2" row ='2' rowHeight="1:1">
+    <mat-grid-list cols="2" row="2" rowHeight="1:1">
       <mat-grid-tile>
         <div class="example-large-box mat-elevation-z4 grid-section">
           <mat-card class="example-card2">
@@ -20,8 +20,8 @@
               class="table-size"
             >
               <tr style="text-align: center">
-                <th class="make-huge" mat-sort-header="date">Date</th>
-                <th class="make-huge" mat-sort-header="count">Count</th>
+                <th mat-sort-header="date">Date</th>
+                <th mat-sort-header="count">Count</th>
               </tr>
 
               <tr *ngFor="let ele of dateCountArr">
@@ -40,7 +40,11 @@
             >
             </mat-paginator>
             <mat-card-actions>
-              <button mat-button matTooltip="Refresh count data" (click)="refreshCount()">
+              <button
+                mat-button
+                matTooltip="Refresh count data"
+                (click)="refreshCount()"
+              >
                 REFRESH
               </button>
             </mat-card-actions>
@@ -97,7 +101,11 @@
                 </mat-form-field>
 
                 <mat-action-row>
-                  <button mat-raised-button color="primary" (click)="nextStep()">
+                  <button
+                    mat-raised-button
+                    color="primary"
+                    (click)="nextStep()"
+                  >
                     Next
                   </button>
                 </mat-action-row>
@@ -144,7 +152,11 @@
                   <button mat-raised-button color="warn" (click)="prevStep()">
                     Previous
                   </button>
-                  <button mat-raised-button color="primary" (click)="nextStep()">
+                  <button
+                    mat-raised-button
+                    color="primary"
+                    (click)="nextStep()"
+                  >
                     Next
                   </button>
                 </mat-action-row>
@@ -196,7 +208,12 @@
                   <button mat-raised-button color="warn" (click)="prevStep()">
                     Previous
                   </button>
-                  <button mat-raised-button matTooltip="Create a new doctor" color="primary" (click)="onSubmit()">
+                  <button
+                    mat-raised-button
+                    matTooltip="Create a new doctor"
+                    color="primary"
+                    (click)="onSubmit()"
+                  >
                     Submit
                   </button>
                 </mat-action-row>
@@ -204,14 +221,113 @@
             </mat-accordion>
           </form>
           <mat-card-actions>
-            <button mat-button matTooltip="Refresh the current page"(click)="refreshDoctor()">
+            <button
+              mat-button
+              matTooltip="Refresh the current page"
+              (click)="refreshDoctor()"
+            >
               REFRESH
             </button>
           </mat-card-actions>
         </mat-card>
       </mat-grid-tile>
       <mat-grid-tile>
-        <div class="example-large-box mat-elevation-z4 grid-section1">3</div>
+        <div class="example-large-box mat-elevation-z4 grid-section1">
+          <mat-card class="example-card2">
+            <mat-card-header>
+              <div mat-card-avatar class="example-header-image3"></div>
+              <mat-card-title>View Appointment</mat-card-title>
+              <mat-card-subtitle>Number of Appointments Today</mat-card-subtitle>
+            </mat-card-header>
+            <form [formGroup]="searchForm">
+              <mat-form-field>
+                <mat-label>Filter Patient</mat-label>
+                <input matInput formControlName="searchInput" (keyup)="searchTerm$.next($any($event.target).value)" type="text" />
+                <button mat-button *ngIf="searchInput.value" matSuffix mat-icon-button aria-label="Clear"
+                  (click)="onClickCloseSearch()">
+                  <mat-icon>close</mat-icon>
+                </button>
+              </mat-form-field>
+            </form>
+          <table
+            mat-table
+            [dataSource]="dataAppSource"
+            multiTemplateDataRows
+            class="mat-elevation-z8"
+          >
+            <ng-container
+              matColumnDef="{{ column }}"
+              *ngFor="let column of columnsToDisplay"
+            >
+              <th mat-header-cell *matHeaderCellDef style="font-weight: bolder;font-size: larger;">{{ column }}</th>
+              <td mat-cell *matCellDef="let element">{{ element[column] }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="expandedDetail">
+              <td
+                mat-cell
+                *matCellDef="let element"
+                [attr.colspan]="columnsToDisplay.length"
+              >
+                <div
+                  class="example-element-detail"
+                  [@detailExpand]="
+                    element == expandedElement ? 'expanded' : 'collapsed'
+                  "
+                >
+                  <ol>
+                    <li><strong>Patient EmailId:</strong> &nbsp;
+                      <i style="color: #3399ff;">{{ element.patientEmailId }}</i>
+                    </li>
+                    <li><strong>Patient Age:</strong> &nbsp;
+                      <i style="color: #3399ff;">{{ element.patientAge }}</i>
+                    </li>
+                    <li><strong>Patient Gender:</strong> &nbsp;
+                      <i style="color: #3399ff;">{{ element.patientGender }}</i>
+                    </li>
+                    <li><strong>Doctor EmailId:</strong> &nbsp;
+                      <i style="color: #3399ff;">{{ element.doctorEmailId }}</i>
+                    </li>
+                    <li><strong>Doctor Specialization:</strong> &nbsp;
+                      <i style="color: #3399ff;">{{ element.doctorSpecialization }}</i>
+                    </li>
+                    <li><strong>Doctor Experience:</strong> &nbsp;
+                      <i style="color: #3399ff;">{{ element.doctorExperience }}</i>
+                    </li>
+                    <li><strong>Patient Complication:</strong> &nbsp;
+                      <i style="color: #3399ff;">{{ element.complication }}</i>
+                    </li>
+                  </ol>
+                </div>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+            <tr
+              mat-row
+              *matRowDef="let element; columns: columnsToDisplay"
+              class="example-element-row"
+              [class.example-expanded-row]="expandedElement === element"
+              (click)="
+                expandedElement = expandedElement === element ? null : element
+              "
+            ></tr>
+            <tr
+              mat-row
+              *matRowDef="let row; columns: ['expandedDetail']"
+              class="example-detail-row"
+            ></tr>
+          </table>
+          <mat-paginator class="mat-paginator" (page)="onClickPaginator0($event)" [length]="length0" [pageSize]="pageSize0"
+            [pageSizeOptions]="pageSizeOptions0" [showFirstLastButtons]="true">
+          </mat-paginator>
+          <mat-card-actions>
+            <button mat-button matTooltip="Refresh appointment data" (click)="refreshAppointment()">
+              REFRESH
+            </button>
+          </mat-card-actions>
+          </mat-card>
+        </div>
       </mat-grid-tile>
       <mat-grid-tile>
         <div class="example-large-box mat-elevation-z4 grid-section2">4</div>
