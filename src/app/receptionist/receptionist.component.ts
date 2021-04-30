@@ -73,7 +73,7 @@ export class ReceptionistComponent implements OnInit {
     console.log(this.searchInput.value);
     this.receptionistService
       .getAllPatients({
-        searchText: this.searchInput.value ? this.searchInput.value : '',
+        searchText1: this.searchInput.value ? this.searchInput.value : '',
         skip: this.pagePosition,
         limit: this.pageSize,
       })
@@ -127,7 +127,7 @@ export class ReceptionistComponent implements OnInit {
     this.getAllPatients();
   }
 
-  searchText = '';
+  searchText1 = '';
 
   onClickPaginator(event: any) {
     // console.log('event', event);

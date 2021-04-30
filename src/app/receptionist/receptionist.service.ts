@@ -21,7 +21,7 @@ export class ReceptionistService {
         '&limit=' +
         params.limit +
         '&searchText=' +
-        params.searchText,
+        params.searchText1,
       { headers: headers }
     );
   }
