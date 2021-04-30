@@ -4,12 +4,14 @@
       <mat-card-title class="h1-style">Enter Patient Id</mat-card-title>
     </mat-card-header>
     <br />
-    <mat-form-field appearance="outline">
+    <mat-form-field hintLabel="Enter only 4 digits" appearance="outline">
       <mat-label>Patient Id</mat-label>
-      <input matInput placeholder="Enter Patient Id" formControlName="pId" type="number" minlength="4" maxlength="4"
-        required />
+      <input matInput #input placeholder="Enter Patient Id" formControlName="pId" type="number"
+        onKeyPress="if(this.value.length==4) return false;" required />
+      <mat-hint align="end">{{input.value?.length || 0}}/4</mat-hint>
+      <mat-error *ngIf="pId.invalid || pId.touched">Please enter a value</mat-error>
     </mat-form-field>
-  </form>
+  </form><br />
   <button mat-raised-button mat-dialog-close (click)="onClickSearch()" color="primary">
     Search
   </button>&nbsp;&nbsp;

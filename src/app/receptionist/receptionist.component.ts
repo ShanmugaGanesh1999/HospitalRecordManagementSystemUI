@@ -11,6 +11,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-receptionist',
@@ -32,7 +33,8 @@ export class ReceptionistComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private receptionistService: ReceptionistService,
-    private appService: AppService
+    private appService: AppService,
+    private _snackBar: MatSnackBar
   ) {
     appService.navHead = 'Receptionist';
     appService.logoutButton = true;
@@ -44,6 +46,14 @@ export class ReceptionistComponent implements OnInit {
 
   ngOnInit(): void {
     this.searchEventListener(this.searchTerm$);
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 5 * 1000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom',
+    });
   }
 
   onClickAddPatient() {
@@ -60,7 +70,7 @@ export class ReceptionistComponent implements OnInit {
   }
 
   getAllPatients() {
-    //console.log(this.searchInput.value);
+    console.log(this.searchInput.value);
     this.receptionistService
       .getAllPatients({
         searchText: this.searchInput.value ? this.searchInput.value : '',
@@ -75,7 +85,7 @@ export class ReceptionistComponent implements OnInit {
         },
         (error: any) => {
           //console.log(error.message);
-          alert('No patient found');
+          this.openSnackBar('No patient found', 'Close');
         }
       );
   }
@@ -93,7 +103,7 @@ export class ReceptionistComponent implements OnInit {
       .pipe(debounceTime(400), distinctUntilChanged())
       .switchMap((term: any) => {
         try {
-          //console.log('term', term);
+          console.log('term', term);
           this.getAllPatients();
           return term;
         } catch (error) {
@@ -106,7 +116,7 @@ export class ReceptionistComponent implements OnInit {
           //console.log(term);
         },
         (err: any) => {
-          //console.log('456', err);
+          console.log('456', err);
           this.searchEventListener(this.searchTerm$);
         }
       );

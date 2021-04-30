@@ -45,43 +45,48 @@ export class FixAppointmentComponent implements OnInit {
         //console.log(this.doctors);
       },
       (error: any) => {
-        console.log(error.message);
-        alert(error.message);
+        //console.log(error.message);
+        this._snackBar.open(error.message, 'close', {
+          duration: 5000,
+          horizontalPosition: 'center',
+          verticalPosition: 'bottom',
+        });
       }
     );
   }
 
   onClickFix() {
-    this.fixAppointmentService
-      .fixAppointment({
-        patientId: this.patient._id,
-        doctorId: this.doctorId.value,
-      })
-      .subscribe(
-        (data: any) => {
-          //alert(data.message);
-          this._snackBar.openFromComponent(FixedComponent, {
-            duration: 10000,
-          });
-        },
-        (error: any) => {
-          //console.log(error.message);
-          alert(error.message);
-        }
-      );
-    //console.log(this.submitted);
+    if (this.doctorId.value === '') {
+      this.fixAppointmentService
+        .fixAppointment({
+          patientId: this.patient._id,
+          doctorId: this.doctorId.value,
+        })
+        .subscribe(
+          (data: any) => {
+            //alert(data.message);
+            this._snackBar.open('Appointment fixed!!!', 'close', {
+              duration: 5000,
+              horizontalPosition: 'center',
+              verticalPosition: 'bottom',
+            });
+          },
+          (error: any) => {
+            //console.log(error.message);
+            this._snackBar.open(error.message, 'close', {
+              duration: 5000,
+              horizontalPosition: 'center',
+              verticalPosition: 'bottom',
+            });
+          }
+        );
+      //console.log(this.submitted);
+    } else {
+      this._snackBar.open('Choose a doctor to fix appointment', 'close', {
+        duration: 5000,
+        horizontalPosition: 'center',
+        verticalPosition: 'bottom',
+      });
+    }
   }
 }
-
-@Component({
-  selector: 'fixed',
-  templateUrl: 'fixed.html',
-  styles: [
-    `
-      .example {
-        color: hotpink;
-      }
-    `,
-  ],
-})
-export class FixedComponent {}

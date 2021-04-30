@@ -6,6 +6,7 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-add-patient',
@@ -26,7 +27,8 @@ export class AddPatientComponent implements OnInit {
   constructor(
     private addPatientService: AddPatientService,
     public dialogRef: MatDialogRef<AddPatientComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private _snackBar: MatSnackBar
   ) {
     this.addPatientForm = new FormGroup({
       pname: this.pname,
@@ -48,6 +50,15 @@ export class AddPatientComponent implements OnInit {
       this.mobileNo.setValue(this.data.details.mobileNo);
     }
   }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 5 * 1000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom',
+    });
+  }
+
   getErrorMessage() {
     if (this.addPatientForm.hasError('required')) {
       return 'You must enter a value';
@@ -70,7 +81,7 @@ export class AddPatientComponent implements OnInit {
         this.emailId.invalid ||
         this.mobileNo.invalid
       ) {
-        alert('Enter proper details');
+        this.openSnackBar('Enter proper details', 'Close');
       } else {
         this.addPatientService
           .updatePatient({
@@ -84,11 +95,11 @@ export class AddPatientComponent implements OnInit {
           .subscribe(
             (data: any) => {
               //console.log(data);
-              alert('Patient details updated');
+              this.openSnackBar('Patient details updated', 'Close');
             },
             (error: any) => {
               //console.log(error.message);
-              alert(error.message);
+              this.openSnackBar(error.message, 'Close');
             }
           );
         this.submitted = true;
@@ -104,7 +115,7 @@ export class AddPatientComponent implements OnInit {
         this.emailId.invalid ||
         this.mobileNo.invalid
       ) {
-        alert('Enter proper details');
+        this.openSnackBar('Enter proper details', 'Close');
       } else {
         this.addPatientService
           .addPatient({
@@ -116,11 +127,13 @@ export class AddPatientComponent implements OnInit {
           })
           .subscribe(
             (data: any) => {
-              alert('Patient added');
+              this.openSnackBar('Patient added', 'Close');
             },
             (error: any) => {
-              //console.log(error.message);
-              alert(error.message);
+              this.openSnackBar(
+                'Something wrong! Patient Not updated',
+                'Close'
+              );
             }
           );
         this.submitted = true;

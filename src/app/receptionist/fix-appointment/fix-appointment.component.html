@@ -15,13 +15,14 @@
      <form [formGroup]="appointmentForm">
        <mat-form-field appearance="fill">
          <mat-label>Doctor</mat-label>
-         <mat-select formControlName="doctorId">
+         <mat-select formControlName="doctorId" required>
            <mat-option *ngFor="let doctor of doctors" value="{{doctor._id}}">
              {{doctor.doctorName}}
              -
              {{doctor.specialization}}
            </mat-option>
          </mat-select>
+         <mat-error *ngIf="doctorId.touched && doctorId.invalid">Select a value</mat-error>
        </mat-form-field>
      </form>
      <hr>

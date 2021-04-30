@@ -25,8 +25,8 @@
       </mat-form-field>
       <mat-form-field appearance="outline" class="ml-2">
         <mat-label>Mobile Number</mat-label>
-        <input matInput formControlName="mobileNo" #input type="number" pattern="^[6789]\d{9}$" maxlength="10"
-          placeholder="Enter Mobile Number" required>
+        <input matInput formControlName="mobileNo" #input type="number" pattern="^[6789]\d{9}$"
+          onKeyPress="if(this.value.length==10) return false;" placeholder="Enter Mobile Number" required>
         <mat-hint align="end">Max Length:10 {{input.value?.length || 0}}/10</mat-hint>
         <mat-error *ngIf="mobileNo.touched && mobileNo.value==''">
           You must enter a value</mat-error>

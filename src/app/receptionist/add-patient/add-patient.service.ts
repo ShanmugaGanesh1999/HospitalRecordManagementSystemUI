@@ -9,7 +9,7 @@ export class AddPatientService {
 
   basePatientURL = 'http://localhost:3000/patients/';
   addPatient(params: any) {
-    //console.log(params);
+    console.log(params);
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('x-access-token', token + '');
     return this.httpClient.post(

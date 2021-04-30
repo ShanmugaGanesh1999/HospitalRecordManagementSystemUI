@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SearchPatientService } from './search-patient.service';
 import { MatDialog } from '@angular/material/dialog';
 import { FixAppointmentComponent } from '../fix-appointment/fix-appointment.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-search-patient',
@@ -16,7 +17,8 @@ export class SearchPatientComponent implements OnInit {
 
   constructor(
     private searchPatientService: SearchPatientService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private _snackBar: MatSnackBar
   ) {
     this.patientIdForm = new FormGroup({
       pId: this.pId,
@@ -38,7 +40,11 @@ export class SearchPatientComponent implements OnInit {
       },
       (error: any) => {
         //console.log(error.message);
-        alert('No patient found');
+        this._snackBar.open('No Patient with this ID', 'close', {
+          duration: 5000,
+          horizontalPosition: 'center',
+          verticalPosition: 'bottom',
+        });
       }
     );
   }
