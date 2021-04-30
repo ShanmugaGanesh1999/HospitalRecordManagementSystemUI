@@ -96,6 +96,7 @@ export class AddPatientComponent implements OnInit {
             (data: any) => {
               //console.log(data);
               this.openSnackBar('Patient details updated', 'Close');
+              window.location.reload();
             },
             (error: any) => {
               //console.log(error.message);
