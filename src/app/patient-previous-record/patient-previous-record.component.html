@@ -1,0 +1,23 @@
+<section>
+  <button mat-fab mat-raised-button mat-dialog-close class="btn" color="warn">
+    <mat-icon style="font-size: 25px;">close</mat-icon>
+  </button>
+  <br /><br />
+  <table class="table">
+    <tr style="text-align: center">
+      <th>Date</th>
+      <th>Doctor</th>
+      <th>Complication</th>
+      <th>Prescription</th>
+
+    </tr>
+
+    <tr *ngFor="let detail of details">
+      <td>{{ detail.date | date:"fullDate"}}</td>
+      <td>{{ detail.doctorName }}</td>
+      <td>{{ detail.complication }}</td>
+      <td>{{ detail.prescription }}</td>
+    </tr>
+  </table>
+
+</section>

@@ -38,6 +38,7 @@ import { FixAppointmentComponent } from './receptionist/fix-appointment/fix-appo
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSortModule } from '@angular/material/sort';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { PatientPreviousRecordComponent } from './patient-previous-record/patient-previous-record.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MedicationComponent,
     SearchPatientComponent,
     FixAppointmentComponent,
+    PatientPreviousRecordComponent,
   ],
   entryComponents: [],
   imports: [

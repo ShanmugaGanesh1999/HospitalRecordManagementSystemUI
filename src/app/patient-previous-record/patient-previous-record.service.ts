@@ -4,24 +4,18 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 @Injectable({
   providedIn: 'root',
 })
-export class ReceptionistService {
+export class PatientPreviousRecordService {
   constructor(private httpClient: HttpClient) {}
 
-  baseUrl = 'http://localhost:3000/patients/';
+  baseUrl = 'http://localhost:3000/appointment/';
 
-  getAllPatients(params: any) {
+  getDetails(pId: any) {
     const token = localStorage.getItem('token');
     //console.log(token);
     const headers = new HttpHeaders().set('x-access-token', token + '');
     //console.log(headers);
     return this.httpClient.get(
-      this.baseUrl +
-        'getAllPatientsByName?skip=' +
-        params.skip +
-        '&limit=' +
-        params.limit +
-        '&searchText=' +
-        params.searchText1,
+      this.baseUrl + 'getAppointmentDetailsByPatientId/?patientObjectId=' + pId,
       { headers: headers }
     );
   }
