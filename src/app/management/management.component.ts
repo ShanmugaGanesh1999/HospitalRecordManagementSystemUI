@@ -14,6 +14,14 @@ import {
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { ReceptionistService } from '../receptionist/receptionist.service';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/switchMap';
+import { MatDialog } from '@angular/material/dialog';
+import { PatientPreviousRecordComponent } from '../patient-previous-record/patient-previous-record.component';
+
 @Component({
   selector: 'app-management',
   templateUrl: './management.component.html',
@@ -32,11 +40,13 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 export class ManagementComponent implements OnInit {
   dateCountArr: dateCountElement[] = [];
   length = 0;
+  lengthOfPatients = 0;
   pageSize = 5;
   pageSizeOptions: number[] = [5, 10, 25, 100];
   pagePosition = 0;
   displayedColumns: string[] = ['date', 'count'];
-
+  panelOpenState = false;
+  patients: any = [];
   searchInput = new FormControl('');
   searchTerm$ = new Subject<string>();
   searchForm: FormGroup;
@@ -72,7 +82,9 @@ export class ManagementComponent implements OnInit {
   constructor(
     private appService: AppService,
     private _snackBar: MatSnackBar,
-    private mgtService: MgtService
+    private mgtService: MgtService,
+    private receptionistService: ReceptionistService,
+    private dialog: MatDialog
   ) {
     appService.navHead = 'Management';
     appService.logoutButton = true;
@@ -89,6 +101,10 @@ export class ManagementComponent implements OnInit {
       specialization: this.specialization,
       dop: this.dop,
     });
+    this.searchForm = new FormGroup({
+      searchInput: this.searchInput,
+    });
+    this.getAllPatients();
   }
   getAppointments() {
     this.appService.loading = true;
@@ -122,23 +138,6 @@ export class ManagementComponent implements OnInit {
             else this.openSnackBar('Appointments not found :(', 'Close');
           }
           this.length0 = data.count;
-          this.appService.loading = false;
-        },
-        (err) => console.log(err)
-      );
-  }
-
-  getCount() {
-    this.appService.loading = true;
-    this.mgtService
-      .getAllCounts({
-        skip: this.pagePosition,
-        limit: this.pageSize,
-      })
-      .subscribe(
-        (data: any) => {
-          this.dateCountArr = data.data;
-          this.length = data.count;
           this.appService.loading = false;
         },
         (err) => console.log(err)
@@ -188,6 +187,7 @@ export class ManagementComponent implements OnInit {
     this.pagePosition = event.pageIndex * event.pageSize;
     this.pageSize = event.pageSize;
     this.getCount();
+    this.getAllPatients();
   }
 
   onClickPaginator0(event: any) {
@@ -236,6 +236,44 @@ export class ManagementComponent implements OnInit {
     window.location.reload();
   }
 
+  getCount() {
+    this.appService.loading = true;
+    this.mgtService
+      .getAllCounts({
+        skip: this.pagePosition,
+        limit: this.pageSize,
+      })
+      .subscribe(
+        (data: any) => {
+          this.dateCountArr = data.data;
+          this.length = data.count;
+          this.appService.loading = false;
+        },
+        (err) => console.log(err)
+      );
+  }
+
+  getAllPatients() {
+    //console.log(this.searchInput.value);
+    this.receptionistService
+      .getAllPatients({
+        searchText: this.searchInput.value ? this.searchInput.value : '',
+        skip: this.pagePosition,
+        limit: this.pageSize,
+      })
+      .subscribe(
+        (data: any) => {
+          this.patients = data.data;
+          this.lengthOfPatients = data.totalLength;
+          //console.log(this.lengthOfPatients);
+        },
+        (error: any) => {
+          //console.log(error.message);
+          this.openSnackBar('No patient found', 'Close');
+        }
+      );
+  }
+
   searchEventListener(searchTerms: Observable<string>) {
     searchTerms
       .pipe(debounceTime(400), distinctUntilChanged())
@@ -243,6 +281,8 @@ export class ManagementComponent implements OnInit {
         try {
           // console.log('term', term);
           this.getAppointments();
+          console.log('term', term);
+          this.getAllPatients();
           return term;
         } catch (error) {
           //console.log('123', error.message);
@@ -254,7 +294,7 @@ export class ManagementComponent implements OnInit {
           console.log(term);
         },
         (err: any) => {
-          // console.log('456', err);
+          console.log('456', err);
           this.searchEventListener(this.searchTerm$);
         }
       );
@@ -269,6 +309,15 @@ export class ManagementComponent implements OnInit {
 
   ngOnInit(): void {
     this.searchEventListener(this.searchTerm$);
+    this.getAllPatients();
+  }
+
+  onClickPreviousDetails(patientId: any) {
+    this.dialog.open(PatientPreviousRecordComponent, {
+      data: {
+        details: patientId,
+      },
+    });
   }
 }
 
