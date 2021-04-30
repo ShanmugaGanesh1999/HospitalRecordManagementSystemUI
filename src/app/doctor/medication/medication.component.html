@@ -1,0 +1,48 @@
+<section class="main-background">
+  <div class="example-container">
+    <form [formGroup]="addPatientMedicationForm">
+      <!-- <div *ngIf="submitted && f.errors" class="invalid-feedback">
+        <div *ngIf="f.errors"></div>
+      </div> -->
+      <div class="ml-1">
+        <mat-card-header>
+          <mat-card-title class="h1-style"
+            >Add Patient Medication</mat-card-title
+          > </mat-card-header
+        ><br /><br />
+        <mat-form-field class="ml-2">
+          <mat-label>Prescription</mat-label>
+          <mat-card>
+            <textarea
+              matInput
+              placeholder="Enter Patient Prescription"
+              formControlName="prescription"
+              type="text"
+              required
+            >
+            </textarea></mat-card></mat-form-field
+        ><br />
+        <mat-form-field class="ml-2">
+          <mat-label>Complication</mat-label>
+          <textarea
+            matInput
+            placeholder="Enter Patient Complication"
+            type="text"
+            formControlName="complication"
+            required
+          ></textarea></mat-form-field
+        ><br />
+      </div>
+    </form>
+    <button
+      mat-fab
+      mat-dialog-button
+      class="btn2"
+      (click)="onClickSave()"
+      color="primary"
+      [disabled]="!addPatientMedicationForm.valid"
+    >
+      <mat-icon>done</mat-icon>
+    </button>
+  </div>
+</section>

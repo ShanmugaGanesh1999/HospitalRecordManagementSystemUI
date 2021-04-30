@@ -30,6 +30,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MedicationComponent } from './doctor/medication/medication.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     ReceptionistComponent,
     ManagementComponent,
     AddPatientComponent,
+    MedicationComponent,
   ],
   entryComponents: [],
   imports: [
@@ -70,6 +73,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatSnackBarModule,
     MatRippleModule,
     MatMenuModule,
+    MatPaginatorModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

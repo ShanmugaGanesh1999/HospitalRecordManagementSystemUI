@@ -23,6 +23,7 @@
     "@angular/router": "~11.2.10",
     "angular-alert-module": "^2.0.3",
     "rxjs": "~6.6.0",
+    "rxjs-compat": "^6.5.3",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"
   },

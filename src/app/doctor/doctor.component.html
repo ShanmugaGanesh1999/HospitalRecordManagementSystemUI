@@ -1,14 +1,25 @@
 <section>
   <div class="example-flex-container">
     <div class="example-button-container">
-      <button
-        mat-fab
-        mat-raised-button
-        matTooltip="Search for Patient"
-        color="accent"
-      >
-        <mat-icon>search</mat-icon>
-      </button>
+      <form [formGroup]="patientSearchForm">
+        <mat-form-field class="search-input">
+          <mat-label style="color: #1e86a1">Search candidate name</mat-label>
+          <input
+            matInput
+            formControlName="searchInput"
+            (keyup)="searchTerm$.next($any($event.target).value)"
+            type="text"
+          />
+          <button
+            mat-fab
+            mat-raised-button
+            matTooltip="Search for Patient"
+            color="accent"
+          >
+            <mat-icon>search</mat-icon>
+          </button>
+        </mat-form-field>
+      </form>
     </div>
   </div>
 </section>
@@ -32,10 +43,30 @@
       <span> Gender: {{ patient.gender }}</span
       ><br />
       <mat-icon> email</mat-icon>&nbsp;&nbsp;
-      <span> EmailId: {{ patient.emailId }}</span
-      ><br />
+      <span> EmailId: {{ patient.emailId }}</span>
+      <button
+        matTooltip="Add Patient Medication"
+        mat-fab
+        color="Warn"
+        style="margin-left: 30%"
+        (click)="onClickAddPatientMedication(patient.patientId)"
+      >
+        <mat-icon>event</mat-icon>
+      </button>
+      <br />
       <mat-icon> phone</mat-icon>&nbsp;&nbsp;
       <span> MobileNo: {{ patient.mobileNo }}</span>
     </mat-expansion-panel>
   </mat-accordion>
 </section>
+
+<div>
+  <mat-paginator
+    (page)="onClickPaginator($event)"
+    [length]="length"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="pageSizeOptions"
+    [showFirstLastButtons]="true"
+  >
+  </mat-paginator>
+</div>
