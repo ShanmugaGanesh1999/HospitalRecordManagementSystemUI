@@ -30,10 +30,11 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MedicationComponent } from './doctor/medication/medication.component';
 import { MatSelectModule } from '@angular/material/select';
 import { SearchPatientComponent } from './receptionist/search-patient/search-patient.component';
 import { FixAppointmentComponent } from './receptionist/fix-appointment/fix-appointment.component';
-import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSortModule } from '@angular/material/sort';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -48,6 +49,7 @@ import { GraphAnalysisComponent } from './management/graph-analysis/graph-analys
     ReceptionistComponent,
     ManagementComponent,
     AddPatientComponent,
+    MedicationComponent,
     SearchPatientComponent,
     FixAppointmentComponent,
     PatientPreviousRecordComponent,
@@ -86,8 +88,8 @@ import { GraphAnalysisComponent } from './management/graph-analysis/graph-analys
     MatSnackBarModule,
     MatRippleModule,
     MatMenuModule,
-    MatSelectModule,
     MatPaginatorModule,
+    MatSelectModule,
     MatRadioModule,
   ],
   providers: [],
