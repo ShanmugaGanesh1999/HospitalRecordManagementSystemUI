@@ -1,4 +1,4 @@
-<section>
+<!-- <section>
   <div class="example-flex-container">
     <div class="example-button-container">
       <form [formGroup]="patientSearchForm">
@@ -22,8 +22,30 @@
       </form>
     </div>
   </div>
-</section>
-
+</section> -->
+<div class="right">
+  <form [formGroup]="patientSearchForm">
+    <mat-form-field>
+      <mat-label>Search patient name</mat-label>
+      <input
+        matInput
+        formControlName="searchInput"
+        (keyup)="searchTerm$.next($any($event.target).value)"
+        type="text"
+      />
+      <button
+        mat-button
+        *ngIf="searchInput.value"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="onClickCloseSearch()"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </form>
+</div>
 <section class="panel">
   <mat-accordion *ngFor="let patient of patientIdData; let i = index">
     <mat-expansion-panel class="details-panel">
