@@ -2,15 +2,18 @@
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin-top: 15px;
 }
 
 .example-button-container {
   display: flex;
   justify-content: center;
   width: 120px;
+  margin-top: 15px;
+  margin-bottom: 10px;
 }
-
+.top-section{
+  background: #949396;
+}
 .panel {
   margin: 30px;
 }
@@ -28,3 +31,74 @@
   font-weight: 500;
   color: white !important;
 }
+
+.example-small-box,
+.example-large-box {
+  /* display: flex; */
+  align-items: center;
+  justify-content: center;
+  margin: 16px;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.example-stretched-tabs {
+  margin: 2.5%;
+  max-width: 95%;
+}
+
+.make-huge:hover {
+  color: #000;
+  transform: scale(1.5);
+}
+
+.example-large-box {
+  /* height: 100vh; */
+  width: 90%;
+  background-color: #673ab7;
+}
+
+.mat-sort-header-container {
+  align-items: center;
+}
+
+mat-grid-tile {
+  width: 30%;
+  height: 50%;
+  background: #949396;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+}
+
+.example-header-image {
+  background-image: url("https://img.icons8.com/bubbles/2x/patient-care.png");
+  background-size: cover;
+}
+
+.example-header-image2 {
+  background-image: url("https://www.pinclipart.com/picdir/middle/21-217004_doctor-patient-icon-clipart.png");
+  background-size: cover;
+}
+
+.mat-paginator {
+  
+  background-color: #673ab7;
+  color: #fff;
+}
+
+.example-card {
+  margin-top: 0%;
+  /*its dashboard right top - doctor creation */
+  max-width: 90%;
+  color: #fff;
+  background: #673ab7;
+}
+
+.example-card2 {
+  background: transparent;
+  color: #fff;
+}
+.grid-section {
+  margin-top: 0%;
+  /*its dashboard left top - count table */
+}
+

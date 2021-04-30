@@ -266,13 +266,13 @@
   </mat-tab>
   <mat-tab label="Patient">
     <div class="example-large-box mat-elevation-z4">
-      <form [formGroup]="searchForm">
+      <form [formGroup]="searchForm1">
         <mat-form-field>
           <mat-label>Search patient name</mat-label>
-          <input matInput formControlName="searchInput" (keyup)="searchTerm$.next($any($event.target).value)"
+          <input matInput formControlName="searchInput1" (keyup)="searchTerm1$.next($any($event.target).value)"
             type="text" />
-          <button mat-button *ngIf="searchInput.value" matSuffix mat-icon-button aria-label="Clear"
-            (click)="onClickCloseSearch()">
+          <button mat-button *ngIf="searchInput1.value" matSuffix mat-icon-button aria-label="Clear"
+            (click)="onClickCloseSearch1()">
             <mat-icon>close</mat-icon>
           </button>
         </mat-form-field>
@@ -303,8 +303,8 @@
           </button>
         </mat-expansion-panel>
       </mat-accordion>
-      <mat-paginator class="mat-paginator" (page)="onClickPaginator($event)" [length]="lengthOfPatients"
-        [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" [showFirstLastButtons]="true">
+      <mat-paginator class="mat-paginator" (page)="onClickPaginator1($event)" [length]="lengthOfPatients"
+        [pageSize]="pageSize1" [pageSizeOptions]="pageSizeOptions1" [showFirstLastButtons]="true">
       </mat-paginator>
     </div>
   </mat-tab>

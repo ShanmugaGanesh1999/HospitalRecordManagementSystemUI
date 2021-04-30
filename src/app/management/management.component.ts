@@ -44,11 +44,17 @@ export class ManagementComponent implements OnInit {
   pageSize = 5;
   pageSizeOptions: number[] = [5, 10, 25, 100];
   pagePosition = 0;
+  pageSize1 = 3;
+  pageSizeOptions1: number[] = [3, 5, 10, 25, 100];
+  pagePosition1 = 0;
   displayedColumns: string[] = ['date', 'count'];
   panelOpenState = false;
   patients: any = [];
+  searchInput1 = new FormControl('');
   searchInput = new FormControl('');
+  searchTerm1$ = new Subject<string>();
   searchTerm$ = new Subject<string>();
+  searchForm1: FormGroup;
   searchForm: FormGroup;
 
   step = 0;
@@ -101,8 +107,8 @@ export class ManagementComponent implements OnInit {
       specialization: this.specialization,
       dop: this.dop,
     });
-    this.searchForm = new FormGroup({
-      searchInput: this.searchInput,
+    this.searchForm1 = new FormGroup({
+      searchInput1: this.searchInput1,
     });
     this.getAllPatients();
   }
@@ -187,7 +193,6 @@ export class ManagementComponent implements OnInit {
     this.pagePosition = event.pageIndex * event.pageSize;
     this.pageSize = event.pageSize;
     this.getCount();
-    this.getAllPatients();
   }
 
   onClickPaginator0(event: any) {
@@ -254,12 +259,12 @@ export class ManagementComponent implements OnInit {
   }
 
   getAllPatients() {
-    //console.log(this.searchInput.value);
+    //console.log(this.searchInput1.value);
     this.receptionistService
       .getAllPatients({
-        searchText: this.searchInput.value ? this.searchInput.value : '',
-        skip: this.pagePosition,
-        limit: this.pageSize,
+        searchText1: this.searchInput1.value ? this.searchInput1.value : '',
+        skip: this.pagePosition1,
+        limit: this.pageSize1,
       })
       .subscribe(
         (data: any) => {
@@ -274,6 +279,31 @@ export class ManagementComponent implements OnInit {
       );
   }
 
+  searchEventListener1(searchTerms1: Observable<string>) {
+    searchTerms1
+      .pipe(debounceTime(400), distinctUntilChanged())
+      .switchMap((term: any) => {
+        try {
+          // console.log('term', term);
+          console.log('term', term);
+          this.getAllPatients();
+          return term;
+        } catch (error) {
+          //console.log('123', error.message);
+          return null;
+        }
+      })
+      .subscribe(
+        (term: any) => {
+          console.log(term);
+        },
+        (err: any) => {
+          console.log('456', err);
+          this.searchEventListener1(this.searchTerm1$);
+        }
+      );
+  }
+
   searchEventListener(searchTerms: Observable<string>) {
     searchTerms
       .pipe(debounceTime(400), distinctUntilChanged())
@@ -282,7 +312,6 @@ export class ManagementComponent implements OnInit {
           // console.log('term', term);
           this.getAppointments();
           console.log('term', term);
-          this.getAllPatients();
           return term;
         } catch (error) {
           //console.log('123', error.message);
@@ -309,9 +338,24 @@ export class ManagementComponent implements OnInit {
 
   ngOnInit(): void {
     this.searchEventListener(this.searchTerm$);
+    this.searchEventListener1(this.searchTerm1$);
+    this.getAppointments();
     this.getAllPatients();
   }
 
+  searchText1 = '';
+
+  onClickPaginator1(event: any) {
+    //console.log('event', event);
+    this.pagePosition1 = event.pageIndex * event.pageSize;
+    this.pageSize1 = event.pageSize;
+    this.getAllPatients();
+  }
+
+  onClickCloseSearch1() {
+    this.searchInput1.setValue('');
+    this.getAllPatients();
+  }
   onClickPreviousDetails(patientId: any) {
     this.dialog.open(PatientPreviousRecordComponent, {
       data: {
