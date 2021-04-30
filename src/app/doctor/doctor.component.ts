@@ -51,28 +51,110 @@ export class DoctorComponent implements OnInit {
   }
 
   searchText = '';
+  docArr = [];
 
   getDoctorIdByEmailId(emailId: any) {
     this.doctorService.getDoctorIdByEmailId(emailId).subscribe(
       (data: any) => {
+        console.log(data.doctorId);
+        this.docArr = data.doctorId;
         var doctorId = data.doctorId;
-        // console.log('doctorId', doctorId);
-        this.doctorService
-          .getAllPendingPatients({
-            searchText: this.searchInput.value ? this.searchInput.value : '',
-            skip: this.pagePosition,
-            limit: this.pageSize,
-            doctorId: doctorId,
-          })
-          .subscribe(
-            (data: any) => {
-              console.log(data.data);
-              this.patientIdData = data.data;
-            },
-            (error: any) => {
-              console.log(error.message);
+        this.doctorService.getPatientIdByDoctorId(doctorId).subscribe(
+          (data: any) => {
+            var patientId = data.patientId;
+            console.log('patientId', patientId);
+            // console.log('patientId count', data.patientCount);
+            // console.log('pagePosition', this.pagePosition);
+            // console.log('pageSize', this.pageSize);
+            if (data.patientCount > 0) {
+              if (this.dataCount <= data.patientCount) {
+                if (this.pageSize % 2 == 0 && this.pagePosition != 0) {
+                  this.dataCount = this.pageSize + this.pagePosition;
+                  if (this.dataCount > data.patientCount) {
+                    this.dataCount = data.patientCount;
+                  }
+                } else {
+                  this.dataCount = this.pageSize;
+                  if (this.dataCount > data.patientCount) {
+                    this.dataCount = data.patientCount;
+                  }
+                  // console.log('dataCount', this.dataCount);
+                }
+              } else {
+                this.dataCount = data.patientCount;
+                // console.log('dataCount', this.dataCount);
+              }
+              // console.log('pagePosition', this.pagePosition);
+              // console.log('pageSize', this.dataCount);
+              if (this.searchInput.value == '') {
+                for (let i = this.pagePosition; i < this.dataCount; i++) {
+                  // console.log(i);
+                  this.doctorService
+                    .getPatientsByPatientId(patientId[i])
+                    .subscribe(
+                      (data: any) => {
+                        // console.log(data.data);
+                        this.patientIdDataArr.push(data.data[0]);
+                      },
+                      (error: any) => {
+                        console.log(error.message);
+                      }
+                    );
+                }
+                this.patientIdData = this.patientIdDataArr;
+                this.length = data.patientCount;
+                this.patientIdDataArr.length = 0;
+              } else {
+                console.log(this.docArr);
+                this.doctorService
+                  .getAllPendingPatients({
+                    doctorId: this.docArr,
+                    searchText: this.searchInput.value,
+                    skip: this.pagePosition,
+                    limit: this.pageSize,
+                  })
+                  .subscribe(
+                    (data: any) => {
+                      // console.log(data.data);
+                      for (let i = 0; i < data.totalLength; i++) {
+                        this.patientIdDataArr1.push(data.data[i].patients);
+                      }
+                      this.patientIdData = this.patientIdDataArr1;
+                      this.length = data.totalLength;
+                      this.patientIdDataArr1.length = 0;
+                    },
+                    (error: any) => {
+                      console.log(error.message);
+                    }
+                  );
+              }
+              // console.log('patientData', this.patientIdDataArr);
+            } else {
+              alert('No patients assigned');
             }
-          );
+          },
+          (error: any) => {
+            //console.log(error.message);
+            this.openSnackBar('No patient found', 'Close');
+          }
+        );
+        // console.log('doctorId', doctorId);
+        // this.doctorService
+        //   .getAllPendingPatients({
+        //     searchText: this.searchInput.value ? this.searchInput.value : '',
+        //     skip: this.pagePosition,
+        //     limit: this.pageSize,
+        //     doctorId: doctorId,
+        //   })
+        //   .subscribe(
+        //     (data: any) => {
+        //       console.log(data.data);
+        //       this.patientIdData = data.data;
+        //     },
+        //     (error: any) => {
+        //       console.log(error.message);
+        //     }
+        //   );
       },
       (error: any) => {
         console.log(error.message);
