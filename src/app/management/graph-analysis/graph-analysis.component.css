@@ -1,0 +1,10 @@
+.dialog-body {
+  text-align: justify;
+  font-weight: 400;
+}
+.card-class {
+  width: 97%;
+  height: 68%;
+  align-items: center;
+  background: rgb(170, 165, 165);
+}
