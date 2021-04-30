@@ -44,8 +44,8 @@ export class ManagementComponent implements OnInit {
   pageSize = 5;
   pageSizeOptions: number[] = [5, 10, 25, 100];
   pagePosition = 0;
-  pageSize1 = 3;
-  pageSizeOptions1: number[] = [3, 5, 10, 25, 100];
+  pageSize1 = 5;
+  pageSizeOptions1: number[] = [5, 10, 25, 100];
   pagePosition1 = 0;
   displayedColumns: string[] = ['date', 'count'];
   panelOpenState = false;
@@ -197,7 +197,7 @@ export class ManagementComponent implements OnInit {
 
   onClickPaginator0(event: any) {
     // console.log('event', event);
-    this.pagePosition0 = event.pageIndex0 * event.pageSize0;
+    this.pagePosition0 = event.pageIndex * event.pageSize;
     this.pageSize0 = event.pageSize;
     this.getAppointments();
   }
