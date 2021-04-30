@@ -1,0 +1,21 @@
+<div class="example-container">
+  <form [formGroup]="patientIdForm">
+    <mat-card-header>
+      <mat-card-title class="h1-style">Enter Patient Id</mat-card-title>
+    </mat-card-header>
+    <br />
+    <mat-form-field hintLabel="Enter only 4 digits" appearance="outline">
+      <mat-label>Patient Id</mat-label>
+      <input matInput #input placeholder="Enter Patient Id" formControlName="pId" type="number"
+        onKeyPress="if(this.value.length==4) return false;" required />
+      <mat-hint align="end">{{input.value?.length || 0}}/4</mat-hint>
+      <mat-error *ngIf="pId.invalid || pId.touched">Please enter a value</mat-error>
+    </mat-form-field>
+  </form><br />
+  <button mat-raised-button mat-dialog-close (click)="onClickSearch()" color="primary">
+    Search
+  </button>&nbsp;&nbsp;
+  <button mat-raised-button mat-dialog-close color="warn">
+    Close
+  </button>
+</div>

@@ -11,15 +11,18 @@
   margin: 2.5%;
   max-width: 95%;
 }
-
+.make-huge:hover {
+  color: #000;
+  transform: scale(1.5);
+}
 .example-large-box {
   /* height: 100vh; */
   width: 90%;
   background-color: #673ab7;
 }
 
-.table-size {
-  margin: 10px;
+.mat-sort-header-container {
+  align-items: center;
 }
 
 mat-grid-tile {
@@ -48,12 +51,45 @@ mat-grid-tile {
   background-size: cover;
 }
 
+.example-header-image2 {
+  background-image: url("https://images.pexels.com/photos/4386373/pexels-photo-4386373.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+  background-size: cover;
+}
+
+.mat-paginator {
+  margin-left: 2%;
+  margin-right: 2%;
+  background-color: #673ab7;
+  color: #fff;
+}
+
 .example-card {
-  margin-top: -110%;
+  margin-top: -110%; /*its dashboard right top - doctor creation */
   max-width: 90%;
   color: #fff;
   background: #673ab7;
 }
+
+.table-size {
+  margin-left: 25%;
+  text-align: right;
+  color: #fff;
+  font-size: larger;
+}
+
+.example-card2 {
+  background: transparent;
+  color: #fff;
+}
+
 .grid-section {
-  margin-top: -110%;
+  margin-top: -110%; /*its dashboard left top - count table */
+}
+
+.grid-section1 {
+  margin-top: -110%; /*its dashboard left bottom -  */
+}
+
+.grid-section2 {
+  margin-top: -110%; /*its dashboard right bottom -  */
 }

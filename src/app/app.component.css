@@ -31,16 +31,14 @@ mat-form-field {
   width: 100%;
   position: fixed;
   justify-content: center;
-  z-index: 1100;
+  z-index: 1500;
   align-items: center;
   background: #d8d8d899;
   height: calc(120vh);
 }
-
 .inner {
   padding: 12px;
 }
-
-/* .mat-progress-color::ng-deep circle {
+.mat-spinner-color::ng-deep circle {
   stroke: #673ab7 !important;
-} */
+}

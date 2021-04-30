@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -7,30 +7,35 @@ import { Injectable } from '@angular/core';
 export class MgtService {
   constructor(private httpClient: HttpClient) {}
 
-  // token = localStorage.getItem('token');
-  // headers = new HttpHeaders().set('x-access-token', this.token + '');
+  token = localStorage.getItem('token');
+  headers = new HttpHeaders().set('x-access-token', this.token + '');
 
   mgtURL = 'http://localhost:3000/management/';
   drURL = 'http://localhost:3000/doctor/';
+  comURL = 'http://localhost:3000/common/';
 
-  getAllCounts() {
+  getAllCounts(params: any) {
     return this.httpClient.get(
-      this.mgtURL + 'getAllCounts'
-      // {headers: this.headers,}
+      this.mgtURL +
+        'getAllCounts?skip=' +
+        params.skip +
+        '&limit=' +
+        params.limit,
+      { headers: this.headers }
     );
   }
 
   createDoctor(params: any) {
     return this.httpClient.post(
-      this.drURL + 'createDoctor',
+      this.comURL + 'createDoctorAndPwdMail',
       {
         doctorName: params.fullName,
         emailId: params.emailId,
         mobileNo: params.mobileNo,
         specialization: params.specialization,
         DOP: params.dop,
-      }
-      // {headers: this.headers,}
+      },
+      { headers: this.headers }
     );
   }
 }

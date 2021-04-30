@@ -2,48 +2,52 @@
   <div class="example-container">
     <form [formGroup]="addPatientForm">
       <mat-card-header>
-        <mat-card-title class="h1-style">Add Patient</mat-card-title>
+        <mat-card-title class="h1-style">{{isEdit ? "Edit" : "Add"}} Patient</mat-card-title>
       </mat-card-header>
       <br />
       <mat-form-field appearance="outline">
         <mat-label>Patient Name</mat-label>
         <input matInput placeholder="Enter Patient Name" formControlName="pname" type="text" required />
+        <mat-error *ngIf="pname.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline" class="ml-2">
         <mat-label>Patient's Email</mat-label>
         <input matInput placeholder="Enter Patient Email Address" type="text" formControlName="emailId" type="email"
-          [ngClass]="{ 'is-invalid': submitted && f.emailId.errors }" required />
-        <div *ngIf="submitted && f.emailId.errors">
-          <div *ngIf="f.emailId.errors.email">
-            Email must be a valid email address
-          </div>
-        </div>
-      </mat-form-field><br />
+          required />
+        <mat-error *ngIf="emailId.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field><br /><br />
       <mat-form-field appearance="outline">
-        <mat-label>Gender</mat-label>
-        <input matInput placeholder="Enter Gender" formControlName="gender" type="text" required />
+        <mat-label>DOB</mat-label>
+        <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="dob" required />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="dob.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline" class="ml-2">
         <mat-label>Mobile Number</mat-label>
-        <input matInput formControlName="mobileNo" type="number" pattern="^[6789]\d{9}$" minlength="10" maxlength="10"
-          placeholder="Enter Mobile Number" required />
-        <div *ngIf="f.mobileNo.touched && f.mobileNo.errors">
-          <app-alerts>
-            Mobile Number that must satisfy the following condition:<br />1.
-            must contain 10 digits<br />2. must starts with 6, 7, 8,
-            9</app-alerts>
-        </div>
+        <input matInput formControlName="mobileNo" #input type="number" pattern="^[6789]\d{9}$"
+          onKeyPress="if(this.value.length==10) return false;" placeholder="Enter Mobile Number" required>
+        <mat-hint align="end">Max Length:10 {{input.value?.length || 0}}/10</mat-hint>
+        <mat-error *ngIf="mobileNo.touched && mobileNo.value==''">
+          You must enter a value</mat-error>
+        <mat-error *ngIf="mobileNo.invalid">Enter correct format 1)Must contain 10 numbers 2)Must start with 6,7,8 or 9.
+        </mat-error>
       </mat-form-field>
-      <br />
-      <mat-form-field appearance="outline">
-        <mat-label>DOB</mat-label>
-        <input matInput placeholder="Enter DOB" formControlName="dob" type="date" required />
-      </mat-form-field>
-      <br />
-
+      <br /><br />
+      <div>
+        <mat-label>Gender:</mat-label>&nbsp;&nbsp;
+        <mat-radio-group formControlName="gender" aria-label="Select an option" required>
+          <mat-radio-button value="Female">Female</mat-radio-button>&nbsp;
+          <mat-radio-button value="Male">Male</mat-radio-button>
+        </mat-radio-group>
+      </div>
     </form>
   </div>
-  <button mat-raised-button mat-dialog-close class="btn2" (click)="onClickSave()" color="primary">
+  <button mat-raised-button class="btn2" mat-dialog-close (click)="onClickSave()" color="primary"
+    style="margin-left: 250px;">
     Save
+  </button>&nbsp;
+  <button mat-raised-button mat-dialog-close color="warn">
+    Close
   </button>
 </section>

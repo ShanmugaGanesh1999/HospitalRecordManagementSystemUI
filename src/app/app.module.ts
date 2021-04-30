@@ -32,6 +32,12 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MedicationComponent } from './doctor/medication/medication.component';
+import { MatSelectModule } from '@angular/material/select';
+import { SearchPatientComponent } from './receptionist/search-patient/search-patient.component';
+import { FixAppointmentComponent } from './receptionist/fix-appointment/fix-appointment.component';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSortModule } from '@angular/material/sort';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -42,11 +48,15 @@ import { MedicationComponent } from './doctor/medication/medication.component';
     ManagementComponent,
     AddPatientComponent,
     MedicationComponent,
+    SearchPatientComponent,
+    FixAppointmentComponent,
   ],
   entryComponents: [],
   imports: [
     BrowserModule,
     MatFormFieldModule,
+    MatProgressSpinnerModule,
+    MatSortModule,
     MatInputModule,
     MatNativeDateModule,
     MatDatepickerModule,
@@ -67,13 +77,15 @@ import { MedicationComponent } from './doctor/medication/medication.component';
     ReactiveFormsModule,
     MatInputModule,
     MatCardModule,
-    AlertsModule,
+    AlertsModule.forRoot(),
     MatProgressBarModule,
     MatTabsModule,
     MatSnackBarModule,
     MatRippleModule,
     MatMenuModule,
     MatPaginatorModule,
+    MatSelectModule,
+    MatRadioModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

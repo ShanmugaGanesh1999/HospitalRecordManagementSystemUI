@@ -1,0 +1,37 @@
+ <div>
+   <h2>Patient Details</h2>
+   <span class="highlight">Name:</span>&nbsp;
+   <span class="details">{{patient.name}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <span class="highlight">Email:</span>&nbsp;
+   <span class="details">{{patient.emailId}}</span><br>
+   <span class="highlight">Gender:</span>&nbsp;
+   <span class="details">{{patient.gender}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <span class="highlight">MobileNo:</span>&nbsp;
+   <span class="details">{{patient.mobileNo}}</span><br>
+   <span class="highlight">DOB:</span>&nbsp;
+   <span class="details"> {{patient.dob | date:'MM/dd/yyyy' }}</span>
+   <h2>Fix an appointment?</h2>
+   <div>
+     <form [formGroup]="appointmentForm">
+       <mat-form-field appearance="fill">
+         <mat-label>Doctor</mat-label>
+         <mat-select formControlName="doctorId" required>
+           <mat-option *ngFor="let doctor of doctors" value="{{doctor._id}}">
+             {{doctor.doctorName}}
+             -
+             {{doctor.specialization}}
+           </mat-option>
+         </mat-select>
+         <mat-error *ngIf="doctorId.touched && doctorId.invalid">Select a value</mat-error>
+       </mat-form-field>
+     </form>
+     <hr>
+   </div>
+
+   <button mat-raised-button mat-dialog-close (click)="onClickFix()" color="primary" style="margin-left: 100px;">
+     Fix Appointment
+   </button>&nbsp;
+   <button mat-raised-button mat-dialog-close color="warn">
+     Close
+   </button>
+ </div>

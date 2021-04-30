@@ -1,6 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AddPatientService } from './add-patient.service';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-add-patient',
@@ -16,8 +22,14 @@ export class AddPatientComponent implements OnInit {
   dob = new FormControl();
   saveBtn: boolean = true;
   addPatientForm: FormGroup;
+  isEdit: any;
 
-  constructor(private addPatientService: AddPatientService) {
+  constructor(
+    private addPatientService: AddPatientService,
+    public dialogRef: MatDialogRef<AddPatientComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private _snackBar: MatSnackBar
+  ) {
     this.addPatientForm = new FormGroup({
       pname: this.pname,
       emailId: this.emailId,
@@ -27,30 +39,106 @@ export class AddPatientComponent implements OnInit {
     });
   }
 
-  get f() {
-    return this.addPatientForm.controls;
+  ngOnInit(): void {
+    this.isEdit = this.data.isEdit;
+    console.log(this.isEdit);
+    if (this.isEdit === true) {
+      this.pname.setValue(this.data.details.name);
+      this.emailId.setValue(this.data.details.emailId);
+      this.gender.setValue(this.data.details.gender);
+      this.dob.setValue(this.data.details.dob);
+      this.mobileNo.setValue(this.data.details.mobileNo);
+    }
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 5 * 1000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom',
+    });
+  }
+
+  getErrorMessage() {
+    if (this.addPatientForm.hasError('required')) {
+      return 'You must enter a value';
+    }
+    if (this.emailId.hasError('required')) {
+      return 'You must enter a value';
+    }
+
+    return this.emailId.hasError('email') ? 'Not a valid email' : '';
   }
 
   onClickSave() {
-    this.addPatientService
-      .addPatient({
-        pname: this.pname.value,
-        emailId: this.emailId.value,
-        mobileNo: this.mobileNo.value,
-        gender: this.gender.value,
-        dob: this.dob.value,
-      })
-      .subscribe(
-        (data: any) => {
-          alert('Patient added');
-          this.submitted = true;
-        },
-        (error: any) => {
-          console.log(error.message);
-        }
-      );
-    console.log(this.submitted);
+    if (this.isEdit) {
+      if (
+        this.pname.value === '' ||
+        this.emailId.value === '' ||
+        this.mobileNo.value === '' ||
+        this.gender.value === '' ||
+        this.dob.value === '' ||
+        this.emailId.invalid ||
+        this.mobileNo.invalid
+      ) {
+        this.openSnackBar('Enter proper details', 'Close');
+      } else {
+        this.addPatientService
+          .updatePatient({
+            id: this.data.details._id,
+            pname: this.pname.value,
+            emailId: this.emailId.value,
+            mobileNo: this.mobileNo.value,
+            gender: this.gender.value,
+            dob: this.dob.value,
+          })
+          .subscribe(
+            (data: any) => {
+              //console.log(data);
+              this.openSnackBar('Patient details updated', 'Close');
+            },
+            (error: any) => {
+              //console.log(error.message);
+              this.openSnackBar(error.message, 'Close');
+            }
+          );
+        this.submitted = true;
+        //console.log(this.submitted);
+      }
+    } else {
+      if (
+        this.pname.value === '' ||
+        this.emailId.value === '' ||
+        this.mobileNo.value === '' ||
+        this.gender.value === '' ||
+        this.dob.value === '' ||
+        this.emailId.invalid ||
+        this.mobileNo.invalid
+      ) {
+        this.openSnackBar('Enter proper details', 'Close');
+      } else {
+        this.addPatientService
+          .addPatient({
+            pname: this.pname.value,
+            emailId: this.emailId.value,
+            mobileNo: this.mobileNo.value,
+            gender: this.gender.value,
+            dob: this.dob.value,
+          })
+          .subscribe(
+            (data: any) => {
+              this.openSnackBar('Patient added', 'Close');
+            },
+            (error: any) => {
+              this.openSnackBar(
+                'Something wrong! Patient Not updated',
+                'Close'
+              );
+            }
+          );
+        this.submitted = true;
+        //console.log(this.submitted);
+      }
+    }
   }
-
-  ngOnInit(): void {}
 }
