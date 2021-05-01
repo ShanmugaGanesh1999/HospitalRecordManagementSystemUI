@@ -21,6 +21,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
 import { MatDialog } from '@angular/material/dialog';
 import { PatientPreviousRecordComponent } from '../patient-previous-record/patient-previous-record.component';
+import { GraphAnalysisComponent } from './graph-analysis/graph-analysis.component';
 
 @Component({
   selector: 'app-management',
@@ -56,6 +57,8 @@ export class ManagementComponent implements OnInit {
   searchTerm$ = new Subject<string>();
   searchForm1: FormGroup;
   searchForm: FormGroup;
+
+  color: string = 'rgb(240, 163, 19)';
 
   step = 0;
   setStep(index: number) {
@@ -356,6 +359,16 @@ export class ManagementComponent implements OnInit {
     this.searchInput1.setValue('');
     this.getAllPatients();
   }
+
+  viewGraph() {
+    this.dialog.open(GraphAnalysisComponent, {
+      data: 'this is graph',
+      height: '90%',
+      width: '100%',
+    });
+    this.openSnackBar('Viewing graphical analysis', 'Close');
+  }
+
   onClickPreviousDetails(patientId: any) {
     this.dialog.open(PatientPreviousRecordComponent, {
       data: {

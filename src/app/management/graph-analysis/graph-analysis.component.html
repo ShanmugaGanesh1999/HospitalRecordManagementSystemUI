@@ -1,0 +1,16 @@
+<div class="dialog-body">
+<h1 mat-dialog-title>Graphical Visualization</h1>
+<div mat-dialog-content>
+    This dialog showcases the <strong>Graphical Data Visualization</strong> of "No
+    of Appointments" vs "Doctor's Specialization".
+</div>
+<mat-card class="card-class">
+    <ngx-charts-tree-map [view]="view" [scheme]="colorScheme" [results]="single" [gradient]="gradient"
+        [animations]="animations" [labelFormatting]="labelFormatting" (select)="onSelect($event)">
+    </ngx-charts-tree-map>
+</mat-card>
+<div mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close>Close</button>
+</div>
+</div>
+

@@ -39,7 +39,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSortModule } from '@angular/material/sort';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { PatientPreviousRecordComponent } from './patient-previous-record/patient-previous-record.component';
-
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { GraphAnalysisComponent } from './management/graph-analysis/graph-analysis.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,11 +53,13 @@ import { PatientPreviousRecordComponent } from './patient-previous-record/patien
     SearchPatientComponent,
     FixAppointmentComponent,
     PatientPreviousRecordComponent,
+    GraphAnalysisComponent,
   ],
   entryComponents: [],
   imports: [
     BrowserModule,
     MatFormFieldModule,
+    NgxChartsModule,
     MatProgressSpinnerModule,
     MatSortModule,
     MatInputModule,
