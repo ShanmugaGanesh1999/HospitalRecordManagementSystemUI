@@ -46,49 +46,52 @@
     </mat-form-field>
   </form>
 </div>
-<section class="panel">
-  <mat-accordion *ngFor="let patient of patientIdData; let i = index">
-    <mat-expansion-panel class="details-panel">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          <mat-icon>hotel</mat-icon>&nbsp;&nbsp;
-          <span>{{ patient.patientId }}</span>
-        </mat-panel-title>
-        <mat-panel-description>
-          <span> {{ patient.name }}</span>
-        </mat-panel-description>
-        <mat-panel-description>
-          <span> {{ patient.dob | date: "MM/dd/yyyy" }}</span>
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <mat-icon>perm_identity</mat-icon>&nbsp;&nbsp;
-      <span> Gender: {{ patient.gender }}</span
-      ><br />
-      <mat-icon> email</mat-icon>&nbsp;&nbsp;
-      <span> EmailId: {{ patient.emailId }}</span>
-      <button
-        matTooltip="Add Patient Medication"
-        mat-fab
-        color="Warn"
-        style="margin-left: 30%"
-        (click)="onClickAddPatientMedication(patient.patientId)"
-      >
-        <mat-icon>event</mat-icon>
-      </button>
-      <br />
-      <mat-icon> phone</mat-icon>&nbsp;&nbsp;
-      <span> MobileNo: {{ patient.mobileNo }}</span>
-    </mat-expansion-panel>
-  </mat-accordion>
-</section>
+<div class="example-large-box">
+  <section class="panel">
+    <mat-accordion *ngFor="let patient of patientIdData; let i = index">
+      <mat-expansion-panel class="details-panel">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon>hotel</mat-icon>&nbsp;&nbsp;
+            <span>{{ patient.patientId }}</span>
+          </mat-panel-title>
+          <mat-panel-description>
+            <span> {{ patient.name }}</span>
+          </mat-panel-description>
+          <mat-panel-description>
+            <span> {{ patient.dob | date: "MM/dd/yyyy" }}</span>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-icon>perm_identity</mat-icon>&nbsp;&nbsp;
+        <span> Gender: {{ patient.gender }}</span
+        ><br />
+        <mat-icon> email</mat-icon>&nbsp;&nbsp;
+        <span> EmailId: {{ patient.emailId }}</span>
+        <button
+          matTooltip="Add Patient Medication"
+          mat-fab
+          color="Warn"
+          style="margin-left: 30%"
+          (click)="onClickAddPatientMedication(patient.patientId)"
+        >
+          <mat-icon>event</mat-icon>
+        </button>
+        <br />
+        <mat-icon> phone</mat-icon>&nbsp;&nbsp;
+        <span> MobileNo: {{ patient.mobileNo }}</span>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </section>
 
-<div>
-  <mat-paginator
-    (page)="onClickPaginator($event)"
-    [length]="length"
-    [pageSize]="pageSize"
-    [pageSizeOptions]="pageSizeOptions"
-    [showFirstLastButtons]="true"
-  >
-  </mat-paginator>
+  <div>
+    <mat-paginator
+      style="color: white"
+      (page)="onClickPaginator($event)"
+      [length]="length"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="pageSizeOptions"
+      [showFirstLastButtons]="true"
+    >
+    </mat-paginator>
+  </div>
 </div>

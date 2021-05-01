@@ -9,6 +9,7 @@ import 'rxjs/add/operator/switchMap';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ReceptionistService } from '../receptionist/receptionist.service';
+import { Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-doctor',
@@ -25,12 +26,14 @@ export class DoctorComponent implements OnInit {
   pageSizeOptions: number[] = [5, 10, 25, 100];
   pagePosition = 0;
   dataCount: any = 0;
+  dataCount1: any = 0;
   patientSearchForm: FormGroup;
   searchInput = new FormControl('');
   searchTerm$ = new Subject<string>();
   filled: any = false;
   count: any = 0;
-
+  countArr: any = [];
+  patientId1: any = [];
   constructor(
     private appService: AppService,
     private doctorService: DoctorService,
@@ -56,13 +59,13 @@ export class DoctorComponent implements OnInit {
   getDoctorIdByEmailId(emailId: any) {
     this.doctorService.getDoctorIdByEmailId(emailId).subscribe(
       (data: any) => {
-        console.log(data.doctorId);
+        // console.log(data.doctorId);
         this.docArr = data.doctorId;
         var doctorId = data.doctorId;
         this.doctorService.getPatientIdByDoctorId(doctorId).subscribe(
           (data: any) => {
             var patientId = data.patientId;
-            console.log('patientId', patientId);
+            // console.log('patientId', patientId);
             // console.log('patientId count', data.patientCount);
             // console.log('pagePosition', this.pagePosition);
             // console.log('pageSize', this.pageSize);
@@ -82,11 +85,11 @@ export class DoctorComponent implements OnInit {
                 }
               } else {
                 this.dataCount = data.patientCount;
-                // console.log('dataCount', this.dataCount);
               }
+              console.log(this.searchInput.value.length);
               // console.log('pagePosition', this.pagePosition);
               // console.log('pageSize', this.dataCount);
-              if (this.searchInput.value == '') {
+              if (this.searchInput.value.length == 0) {
                 for (let i = this.pagePosition; i < this.dataCount; i++) {
                   // console.log(i);
                   this.doctorService
@@ -105,26 +108,63 @@ export class DoctorComponent implements OnInit {
                 this.length = data.patientCount;
                 this.patientIdDataArr.length = 0;
               } else {
-                console.log(this.docArr);
+                // console.log(this.docArr);
+                // for (let i = 0; i < data.patientId.length; i++) {
+                //   this.patientId1[i] = data.patientId[i].parseInt();
+                // }
+
                 this.doctorService
                   .getAllPendingPatients({
                     doctorId: this.docArr,
                     searchText: this.searchInput.value,
-                    skip: this.pagePosition,
-                    limit: this.pageSize,
                   })
                   .subscribe(
                     (data: any) => {
-                      // console.log(data.data);
-                      for (let i = 0; i < data.totalLength; i++) {
-                        this.patientIdDataArr1.push(data.data[i].patients);
+                      console.log(data.searchDataCount);
+                      if (data.searchDataCount > 0) {
+                        if (this.dataCount1 <= data.data.length) {
+                          if (
+                            this.pageSize % 2 == 0 &&
+                            this.pagePosition != 0
+                          ) {
+                            this.dataCount1 = this.pageSize + this.pagePosition;
+                            if (this.dataCount1 >= data.data.length) {
+                              this.dataCount1 = data.data.length;
+                            }
+                          } else {
+                            this.dataCount1 = this.pageSize;
+                            if (this.dataCount1 > data.data.length) {
+                              this.dataCount1 = data.data.length;
+                            }
+                            // console.log('dataCount', this.dataCount);
+                          }
+                        } else {
+                          this.dataCount1 = data.data.length;
+                        }
+                        // console.log('pagePosition', this.pagePosition);
+                        // console.log('dataCount1', this.dataCount1);
+                        for (
+                          let i = this.pagePosition;
+                          i < this.dataCount1;
+                          i++
+                        ) {
+                          // console.log(data.data[i]);
+                          setTimeout(() => {
+                            this.patientIdDataArr1.push(data.data[i]);
+                          }, 100);
+                          // console.log(this.patientIdDataArr1);
+                        }
+                        // console.log('patientIdDataArr1', this.patientIdDataArr1);
+                        this.patientIdData = this.patientIdDataArr1;
+                        this.length = data.data.length;
+                        this.patientIdDataArr1.length = 0;
+                      } else {
+                        alert('No patient details found');
                       }
-                      this.patientIdData = this.patientIdDataArr1;
-                      this.length = data.totalLength;
-                      this.patientIdDataArr1.length = 0;
                     },
                     (error: any) => {
-                      console.log(error.message);
+                      alert('No patient details found');
+                      console.log('No patient details found');
                     }
                   );
               }

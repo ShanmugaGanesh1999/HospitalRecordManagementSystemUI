@@ -57,7 +57,7 @@ export class DoctorService {
   }
 
   getAllPendingPatients(params: any) {
-    console.log(params);
+    // console.log(params);
     const token = localStorage.getItem('token');
     //console.log(token);
     const headers = new HttpHeaders().set('x-access-token', token + '');
@@ -66,10 +66,6 @@ export class DoctorService {
       this.basePatientIdUrl +
         'getAllPendingPatients?doctorId=' +
         params.doctorId +
-        '&skip=' +
-        params.skip +
-        '&limit=' +
-        params.limit +
         '&searchText=' +
         params.searchText,
       { headers: headers }
