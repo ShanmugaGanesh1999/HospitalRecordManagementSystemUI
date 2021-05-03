@@ -34,6 +34,17 @@ export class DoctorService {
     );
   }
 
+  getPatientIdByDoctorId1(doctorId: any) {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('x-access-token', token + '');
+    return this.httpClient.get(
+      this.basePatientIdUrl + 'getPatientIdByDoctorId1?doctorId=' + doctorId,
+      {
+        headers: headers,
+      }
+    );
+  }
+
   getPatientsByPatientId(patientId: any) {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('x-access-token', token + '');
@@ -66,6 +77,22 @@ export class DoctorService {
     return this.httpClient.get(
       this.basePatientIdUrl +
         'getAllPendingPatients?doctorId=' +
+        params.doctorId +
+        '&searchText=' +
+        params.searchText,
+      { headers: headers }
+    );
+  }
+
+  getAllFinishedPatients(params: any) {
+    // console.log(params);
+    const token = localStorage.getItem('token');
+    //console.log(token);
+    const headers = new HttpHeaders().set('x-access-token', token + '');
+    //console.log(headers);
+    return this.httpClient.get(
+      this.basePatientIdUrl +
+        'getAllFinishedPatients?doctorId=' +
         params.doctorId +
         '&searchText=' +
         params.searchText,

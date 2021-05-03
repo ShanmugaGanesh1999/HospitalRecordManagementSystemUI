@@ -32,38 +32,104 @@
   <mat-drawer mode="side" opened>
     <!-- <div style="cursor: pointer">Pending Patient Records</div> -->
     <mat-list>
-      <mat-list-item class="list" *ngIf="showPatient" (click)="showPat()"
-        >Pending Records
+      <mat-list-item class="list" (click)="showPat1()">Profile</mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item class="list" (click)="showPat()"
+        >Pending Patient Records
         <!-- <div *ngIf="showPatient1; then pat"></div> -->
       </mat-list-item>
       <mat-divider></mat-divider>
-      <mat-list-item class="list">Finished Records</mat-list-item>
+      <mat-list-item class="list" (click)="showPat2()"
+        >Finished Patient Records</mat-list-item
+      >
       <mat-divider></mat-divider>
     </mat-list>
   </mat-drawer>
-  <mat-drawer-content *ngIf="docDash">
-    <!-- <mat-card class="example-card">
-      <img
-        mat-card-image
-        src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-        alt="Photo of a Shiba Inu"
-      />
-      <mat-card-content>
-        <p>{{ docName }}</p>
-        <mat-card-subtitle></mat-card-subtitle> -->
-    <!-- </mat-card-content> -->
-    <!-- <mat-card-actions>
-      <button mat-button>LIKE</button>
-        <button mat-button>SHARE</button>
-      </mat-card-actions> -->
-    <!-- </mat-card> -->
+  <mat-drawer-content *ngIf="docDash1">
+    <div class="example-large-box">
+      <mat-card class="example-large-box1">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>Finished Records</mat-card-title>
+        </mat-card-header>
+      </mat-card>
+      <div class="right">
+        <form [formGroup]="patientSearchForm1">
+          <mat-form-field>
+            <mat-label style="color: whitesmoke">Search patient name</mat-label>
+            <input
+              matInput
+              formControlName="searchInput1"
+              (keyup)="searchTerm1$.next($any($event.target).value)"
+              type="text"
+            />
+            <button
+              mat-button
+              *ngIf="searchInput1.value"
+              matSuffix
+              mat-icon-button
+              aria-label="Clear"
+              (click)="onClickCloseSearch1()"
+            >
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </form>
+      </div>
+      <mat-accordion *ngFor="let patient of patientIdData; let i = index">
+        <mat-expansion-panel class="details-panel">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <mat-icon>hotel</mat-icon>&nbsp;&nbsp;
+              <span>{{ patient.patientId }}</span>
+            </mat-panel-title>
+            <mat-panel-description>
+              <span> {{ patient.name }}</span>
+            </mat-panel-description>
+            <mat-panel-description>
+              <span> {{ patient.dob | date: "MM/dd/yyyy" }}</span>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <mat-icon>perm_identity</mat-icon>&nbsp;&nbsp;
+          <span> Gender: {{ patient.gender }}</span
+          ><br />
+          <mat-icon> email</mat-icon>&nbsp;&nbsp;
+          <span> EmailId: {{ patient.emailId }}</span
+          ><br />
+          <mat-icon> phone</mat-icon>&nbsp;&nbsp;
+          <span> MobileNo: {{ patient.mobileNo }}</span>
+          <button
+            matTooltip="Add Patient Medication"
+            mat-fab
+            color="primary"
+            style="float: right"
+          >
+            <!-- (click)="onClickAddPatientMedication(patient._id, patient.name)" -->
+            <img
+              style="width: 70%; margin: -12%"
+              src="https://image.flaticon.com/icons/png/128/2937/2937192.png"
+            />
+          </button>
+        </mat-expansion-panel>
+      </mat-accordion>
+      <mat-paginator
+        class="mat-paginator"
+        style="color: white"
+        (page)="onClickPaginator1($event)"
+        [length]="length"
+        [pageSize]="pageSize1"
+        [pageSizeOptions]="pageSizeOptions"
+        [showFirstLastButtons]="true"
+      >
+      </mat-paginator>
+    </div>
   </mat-drawer-content>
   <mat-drawer-content *ngIf="showPatient1">
     <div class="example-large-box">
       <mat-card class="example-large-box1">
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title>Patient Records</mat-card-title>
+          <mat-card-title>Pending Records</mat-card-title>
         </mat-card-header>
       </mat-card>
       <div class="right">
@@ -116,7 +182,14 @@
             mat-fab
             color="primary"
             style="float: right"
-            (click)="onClickAddPatientMedication(patient._id, patient.name)"
+            (click)="
+              onClickAddPatientMedication(
+                patient._id,
+                patient.patientId,
+                patient.name,
+                patient.emailId
+              )
+            "
           >
             <img
               style="width: 70%; margin: -12%"
@@ -135,6 +208,73 @@
         [showFirstLastButtons]="true"
       >
       </mat-paginator>
+    </div>
+  </mat-drawer-content>
+  <mat-drawer-content *ngIf="docDash">
+    <div class="left-card">
+      <mat-card class="example-card">
+        <img
+          mat-card-image
+          src="https://img.freepik.com/free-psd/doctor-with-his-arms-crossed-white-background_1368-22255.jpg?size=338&ext=jpg"
+        />
+        <mat-card-content>
+          <p style="text-align: center; font-size: 150%">Dr. {{ docName }}</p>
+          <mat-card-subtitle></mat-card-subtitle>
+        </mat-card-content>
+
+        <!-- <mat-card-actions>
+      <button mat-button>LIKE</button>
+        <button mat-button>SHARE</button>
+      </mat-card-actions> -->
+      </mat-card>
+      <mat-card class="example-card list-card">
+        <div class="doc">
+          TODAY RECORD HISTORY <br /><br />
+          <div
+            class="float"
+            style="
+              background: #ff0000d1;
+              color: #fafafa;
+              width: 60px;
+              text-align: center;
+              padding: 10px;
+            "
+          >
+            <strong>
+              {{ patLen }}<br />
+              Pending
+            </strong>
+          </div>
+          <div
+            class="float"
+            style="
+              background: #008000db;
+              color: #fafafa;
+              width: 60px;
+              text-align: center;
+              padding: 10px;
+            "
+          >
+            <strong>
+              {{ patLen1 }}<br />
+              Finished
+            </strong>
+          </div>
+          <br /><br /><br />
+          <br /><br />
+          Experience
+          <div style="float: right">{{ docExp }} +</div>
+          <br /><br /><br />
+          Specialization
+          <div style="float: right">{{ docSpec }}</div>
+          <br /><br /><br />
+          EmailId:
+          <div style="float: right">{{ emailId }}</div>
+          <br /><br /><br />
+          Mobile No:
+          <div style="float: right">{{ docPhoneNo }}</div>
+        </div>
+      </mat-card>
     </div>
   </mat-drawer-content>
 </mat-drawer-container>

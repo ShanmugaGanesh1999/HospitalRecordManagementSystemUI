@@ -130,20 +130,39 @@
 .mat-card {
   padding: 0px !important;
 }
+
+.example-card {
+  padding: 16px !important;
+  margin-top: 10%;
+  float: left;
+  background: #673ab7;
+  color: white;
+}
+.float {
+  float: left;
+  margin-left: 19%;
+}
+.left-card {
+  margin-left: 19%;
+  /* margin-left: 4%; */
+}
+.doc {
+  padding: 8%;
+}
+.mat-card-image {
+  width: calc(100% + 32px);
+  margin: 0 -16px 32px -16px !important;
+  /* height: 10%; */
+}
+.list-card {
+  width: 100%;
+}
 .mat-form-field {
   display: inline !important;
   position: relative;
   text-align: left;
 }
-/* .mat-form-field-appearance-legacy .mat-form-field-underline {
-  background-color: #ffd740 !important;
-}
-.mat-select-arrow {
-  color: #ffd740 !important;
-}
-.mat-select-value {
-  color: #ffd740 !important;
-} */
+
 .example-container {
   height: 665px;
 }
@@ -167,11 +186,7 @@
   overflow: auto;
 }
 
-/* .example-card {
-  max-width: 400px;
-}
-
-.example-header-image {
+/* .example-header-image {
   background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
   background-size: cover;
 } */

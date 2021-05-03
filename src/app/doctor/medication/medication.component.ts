@@ -40,55 +40,79 @@ export class MedicationComponent implements OnInit {
     //   // alert('Please enter all details');
     //   return;
     // }
-    // console.log('patientId', this.data.patientId, 'name', this.data.name);
+    // console.log(
+    //   'id',
+    //   this.data.id,
+    //   'patientId',
+    //   this.data.patientId,
+    //   'name',
+    //   this.data.name,
+    //   'emailId',
+    //   this.data.emailId
+    // );
     var patName = this.data.name;
-    this.doctorService
-      .getAppointmentIdByPatientId(this.data.patientId)
-      .subscribe(
-        (data: any) => {
-          // console.log(
-          //   data.appointmentId[0]._id,
-          //   this.prescription.value,
-          //   this.complication.value
-          // );
-          var params = {
-            appointmentId: data.appointmentId[0]._id,
-            complication: this.complication.value,
-            prescription: this.prescription.value,
-          };
-          this.doctorService.createMedication(params).subscribe(
-            (data: any) => {
-              // console.log(data.data);
-              var params1 = {
-                appointmentId: data.data.appointmentId,
-                status: 'Finished',
-              };
-              this.doctorService.statusAppointmentById(params1).subscribe(
-                (data: any) => {
-                  // console.log(data.data);
-                  this.openSnackBar(
-                    `Sent ${patName}'s prescription mail successfully `,
-                    'Close'
-                  );
+    var patName = this.data.patientId;
+    var patName = this.data.emailId;
+    this.doctorService.getAppointmentIdByPatientId(this.data.id).subscribe(
+      (data: any) => {
+        console.log(
+          data.appointmentId[0]._id,
+          this.prescription.value,
+          this.complication.value
+        );
+        var params = {
+          appointmentId: data.appointmentId[0]._id,
+          complication: this.complication.value,
+          prescription: this.prescription.value,
+        };
+        this.doctorService.createMedication(params).subscribe(
+          (data: any) => {
+            // console.log(data.data);
+            var params1 = {
+              appointmentId: data.data.appointmentId,
+              status: 'Finished',
+            };
+            this.doctorService.statusAppointmentById(params1).subscribe(
+              (data: any) => {
+                // console.log(data.data);
+                this.doctorService.statusAppointmentById(params1).subscribe(
+                  (data: any) => {
+                    // console.log(data.data);
 
-                  // this.patientIdDataArr.push(data.data[0]);
-                },
-                (error: any) => {
-                  console.log(error);
-                }
-              );
-              // this.patientIdDataArr.push(data.data[0]);
-            },
-            (error: any) => {
-              console.log(error);
-            }
-          );
-          // this.patientIdDataArr.push(data.data[0]);
-        },
-        (error: any) => {
-          console.log(error.message);
-        }
-      );
+                    this.openSnackBar(
+                      `Sent ${patName}'s prescription mail successfully `,
+                      'Close'
+                    );
+
+                    // this.patientIdDataArr.push(data.data[0]);
+                  },
+                  (error: any) => {
+                    console.log(error);
+                  }
+                );
+                this.openSnackBar(
+                  `Sent ${patName}'s prescription mail successfully `,
+                  'Close'
+                );
+
+                // this.patientIdDataArr.push(data.data[0]);
+              },
+              (error: any) => {
+                console.log(error);
+              }
+            );
+            // this.patientIdDataArr.push(data.data[0]);
+          },
+          (error: any) => {
+            console.log(error);
+          }
+        );
+        // this.patientIdDataArr.push(data.data[0]);
+      },
+      (error: any) => {
+        console.log(error.message);
+      }
+    );
   }
 
   openSnackBar(message: string, action: string) {
