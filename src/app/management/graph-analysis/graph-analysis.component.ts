@@ -13,44 +13,24 @@ export class GraphAnalysisComponent implements OnInit {
     public dialogRef: MatDialogRef<GraphAnalysisComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
-  single: any[] = [
-    {
-      name: 'Germany',
-      value: 8940000,
-    },
-    {
-      name: 'USA',
-      value: 5000000,
-    },
-    {
-      name: 'France',
-      value: 7200000,
-    },
-    {
-      name: 'Italy',
-      value: 4500000,
-    },
-    {
-      name: 'Spain',
-      value: 5730000,
-    },
-    {
-      name: 'UK',
-      value: 8200000,
-    },
-  ];
-  view: [number, number] = [1000, 350];
+  selected = '';
+  specialization = 'Specialization';
+  legendPosition: string = 'below';
+  cardColor: string = '#232837';
+  value: string = 'Value';
+  month = 'Month';
+  single: any[] = [];
 
-  // options
-  gradient: boolean = false;
-  animations: boolean = true;
+  multi: any[] = [];
+
+  view: [number, number] = [1000, 400];
 
   colorScheme = {
     domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5'],
   };
 
   onSelect(event: any) {
-    this.openSnackBar(event.specialization, event.value);
+    this.openSnackBar(event.name, event.value);
   }
 
   openSnackBar(message: string, action: string) {
@@ -66,6 +46,8 @@ export class GraphAnalysisComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.data);
+    this.selected = this.data[0];
+    this.single = this.data[1];
+    this.multi = this.data[2];
   }
 }

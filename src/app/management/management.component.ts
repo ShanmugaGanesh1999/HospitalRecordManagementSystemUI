@@ -39,6 +39,7 @@ import { GraphAnalysisComponent } from './graph-analysis/graph-analysis.componen
   ],
 })
 export class ManagementComponent implements OnInit {
+  selected = '';
   dateCountArr: dateCountElement[] = [];
   length = 0;
   lengthOfPatients = 0;
@@ -87,7 +88,8 @@ export class ManagementComponent implements OnInit {
   pageSize0 = 5;
   pageSizeOptions0: number[] = [5, 10, 25, 100];
   pagePosition0 = 0;
-
+  single: any[] = [];
+  multi: any[] = [];
   constructor(
     private appService: AppService,
     private _snackBar: MatSnackBar,
@@ -102,6 +104,18 @@ export class ManagementComponent implements OnInit {
     this.searchForm = new FormGroup({
       searchInput: this.searchInput,
     });
+    mgtService.getGraphData({ data: 'single' }).subscribe(
+      (data: any) => {
+        this.single = data.data;
+      },
+      (err) => console.log(err)
+    );
+    mgtService.getGraphData({ data: 'multi' }).subscribe(
+      (data: any) => {
+        this.multi = data.data;
+      },
+      (err) => console.log(err)
+    );
     this.createDoctorForm = new FormGroup({
       firstName: this.firstName,
       lastName: this.lastName,
@@ -361,12 +375,17 @@ export class ManagementComponent implements OnInit {
   }
 
   viewGraph() {
-    this.dialog.open(GraphAnalysisComponent, {
-      data: 'this is graph',
-      height: '90%',
-      width: '100%',
-    });
-    this.openSnackBar('Viewing graphical analysis', 'Close');
+    if (this.selected !== '') {
+      this.dialog.open(GraphAnalysisComponent, {
+        data: [this.selected, this.single, this.multi],
+        height: '90%',
+        width: '100%',
+      });
+      this.openSnackBar(
+        'Viewing graphical analysis of ' + this.selected,
+        'Close'
+      );
+    } else this.openSnackBar('Enter perticular graph to view', 'Close');
   }
 
   onClickPreviousDetails(patientId: any) {
