@@ -10,6 +10,7 @@ export class DoctorService {
   baseDoctorEmailIdUrl = 'http://localhost:3000/doctor/';
   basePatientIdUrl = 'http://localhost:3000/appointment/';
   basePatientDetailsUrl = 'http://localhost:3000/patients/';
+  baseMedicationUrl = 'http://localhost:3000/medication/';
 
   getDoctorIdByEmailId(emailId: any) {
     const token = localStorage.getItem('token');
@@ -69,6 +70,54 @@ export class DoctorService {
         '&searchText=' +
         params.searchText,
       { headers: headers }
+    );
+  }
+
+  getAppointmentIdByPatientId(patientId: any) {
+    const token = localStorage.getItem('token');
+    //console.log(token);
+    const headers = new HttpHeaders().set('x-access-token', token + '');
+    //console.log(headers);
+    return this.httpClient.get(
+      this.basePatientIdUrl +
+        'getAppointmentIdByPatientId?patientId=' +
+        patientId,
+      {
+        headers: headers,
+      }
+    );
+  }
+
+  createMedication(params: any) {
+    // console.log(params);
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('x-access-token', token + '');
+    return this.httpClient.post(
+      this.baseMedicationUrl + 'createMedication',
+      {
+        appointmentId: params.appointmentId,
+        prescription: params.prescription,
+        complication: params.complication,
+      },
+      {
+        headers: headers,
+      }
+    );
+  }
+
+  statusAppointmentById(params: any) {
+    console.log(params);
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('x-access-token', token + '');
+    return this.httpClient.put(
+      this.basePatientIdUrl + 'statusAppointmentById',
+      {
+        id: params.appointmentId,
+        status: params.status,
+      },
+      {
+        headers: headers,
+      }
     );
   }
 }

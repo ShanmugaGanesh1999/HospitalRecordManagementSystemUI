@@ -42,3 +42,7 @@ mat-form-field {
 .mat-spinner-color::ng-deep circle {
   stroke: #673ab7 !important;
 }
+
+button {
+  color: rgb(12, 12, 12);
+}

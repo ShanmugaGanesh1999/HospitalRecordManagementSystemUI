@@ -41,6 +41,10 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { PatientPreviousRecordComponent } from './patient-previous-record/patient-previous-record.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { GraphAnalysisComponent } from './management/graph-analysis/graph-analysis.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatListModule } from '@angular/material/list';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -91,6 +95,9 @@ import { GraphAnalysisComponent } from './management/graph-analysis/graph-analys
     MatPaginatorModule,
     MatSelectModule,
     MatRadioModule,
+    MatSidenavModule,
+    MatDividerModule,
+    MatListModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

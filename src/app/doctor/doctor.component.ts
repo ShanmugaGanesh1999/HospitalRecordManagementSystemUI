@@ -34,6 +34,13 @@ export class DoctorComponent implements OnInit {
   count: any = 0;
   countArr: any = [];
   patientId1: any = [];
+  showPatient: boolean = true;
+  showPatient1: boolean = false;
+  docName: any;
+  docSpec: any;
+  docDOB: any;
+  docPhoneNo: any;
+  docDash = true;
   constructor(
     private appService: AppService,
     private doctorService: DoctorService,
@@ -53,13 +60,23 @@ export class DoctorComponent implements OnInit {
     this.searchEventListener(this.searchTerm$);
   }
 
+  showPat() {
+    this.docDash = false;
+    this.showPatient1 = true;
+  }
+
   searchText = '';
   docArr = [];
-
   getDoctorIdByEmailId(emailId: any) {
     this.doctorService.getDoctorIdByEmailId(emailId).subscribe(
       (data: any) => {
-        // console.log(data.doctorId);
+        // console.log(data.doctorData);
+        // console.log(data.doctorData[0].doctorName);
+        this.docName = data.doctorData[0].doctorName;
+        this.docDOB = data.doctorData[0].DOB;
+        this.docPhoneNo = data.doctorData[0].mobileNo;
+        this.docSpec = data.doctorData[0].specialization;
+
         this.docArr = data.doctorId;
         var doctorId = data.doctorId;
         this.doctorService.getPatientIdByDoctorId(doctorId).subscribe(
@@ -159,18 +176,17 @@ export class DoctorComponent implements OnInit {
                         this.length = data.data.length;
                         this.patientIdDataArr1.length = 0;
                       } else {
-                        alert('No patient details found');
+                        this.openSnackBar('No patient found', 'Close');
                       }
                     },
                     (error: any) => {
-                      alert('No patient details found');
-                      console.log('No patient details found');
+                      this.openSnackBar('No patient found', 'Close');
                     }
                   );
               }
               // console.log('patientData', this.patientIdDataArr);
             } else {
-              alert('No patients assigned');
+              this.openSnackBar('No patient assigned', 'Close');
             }
           },
           (error: any) => {
@@ -210,10 +226,16 @@ export class DoctorComponent implements OnInit {
     // console.log(this.pagePosition, this.pageSize, event.pageSize);
   }
 
-  onClickAddPatientMedication(patientId: any) {
+  onClickAddPatientMedication(patientId: any, name: any) {
+    console.log(patientId, name);
+    var data = {
+      patientId: patientId,
+      name: name,
+    };
     this.dialog.open(MedicationComponent, {
-      data: patientId,
+      data: data,
       panelClass: 'main-background',
+      backdropClass: 'backdropBackground',
     });
   }
 
