@@ -104,18 +104,7 @@ export class ManagementComponent implements OnInit {
     this.searchForm = new FormGroup({
       searchInput: this.searchInput,
     });
-    mgtService.getGraphData({ data: 'single' }).subscribe(
-      (data: any) => {
-        this.single = data.data;
-      },
-      (err) => console.log(err)
-    );
-    mgtService.getGraphData({ data: 'multi' }).subscribe(
-      (data: any) => {
-        this.multi = data.data;
-      },
-      (err) => console.log(err)
-    );
+    this.refreshGraph();
     this.createDoctorForm = new FormGroup({
       firstName: this.firstName,
       lastName: this.lastName,
@@ -253,8 +242,22 @@ export class ManagementComponent implements OnInit {
     this.getAppointments();
     this.openSnackBar('Appointment refreshed', 'Close');
   }
-
-  refreshDoctor() {
+  refreshGraph() {
+    this.mgtService.getGraphData({ data: 'single' }).subscribe(
+      (data: any) => {
+        this.single = data.data;
+      },
+      (err) => console.log(err)
+    );
+    this.mgtService.getGraphData({ data: 'multi' }).subscribe(
+      (data: any) => {
+        this.multi = data.data;
+        this.openSnackBar('Graphical Data Refreshed', 'Close');
+      },
+      (err) => console.log(err)
+    );
+  }
+  refreshReceptionistPwd() {
     window.location.reload();
   }
 
