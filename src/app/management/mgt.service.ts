@@ -15,6 +15,15 @@ export class MgtService {
   comURL = 'http://localhost:3000/common/';
   appURL = 'http://localhost:3000/appointment/';
 
+  getGraphData(params: any) {
+    return this.httpClient.get(
+      this.appURL + 'getAppointmentsBySpecialization?data=' + params.data,
+      {
+        headers: this.headers,
+      }
+    );
+  }
+
   getAppointments(params: any) {
     return this.httpClient.get(
       this.appURL +

@@ -17,7 +17,11 @@ export class AppComponent {
   ) {}
 
   openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action);
+    this._snackBar.open(message, action, {
+      duration: 3 * 1000,
+      verticalPosition: 'top',
+      horizontalPosition: 'center',
+    });
   }
 
   logout() {
