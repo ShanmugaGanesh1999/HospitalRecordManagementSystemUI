@@ -16,25 +16,53 @@
   </div>
 </section>
 <mat-grid-list cols="2" rowHeight="2:1">
-
   <mat-grid-tile>
     <div class="example-large-box mat-elevation-z4 grid-section">
       <mat-card class="example-card2">
         <mat-card-header>
           <div mat-card-avatar class="example-header-image2"></div>
           <mat-card-title>Appointments today</mat-card-title>
-          <mat-card-subtitle>Details of today's appointments</mat-card-subtitle>
+          <mat-card-subtitle style="color: white;">Details of today's appointments</mat-card-subtitle>
         </mat-card-header>
         <br /><br />
-        <table class="table">
-          <tr style="text-align: center">
-            <th>Date</th>
-            <th>Doctor</th>
-            <th>Complication</th>
-            <th>Prescription</th>
-          </tr>
-
-        </table>
+        <section>
+          <form [formGroup]="searchForm0">
+            <mat-form-field>
+              <mat-label style="color: white;">Search patient name</mat-label>
+              <input matInput formControlName="searchInput0" (keyup)="searchTerm0$.next($any($event.target).value)"
+                type="text" />
+              <button mat-button *ngIf="searchInput0.value" matSuffix mat-icon-button aria-label="Clear"
+                (click)="onClickCloseSearch0()">
+                <mat-icon>close</mat-icon>
+              </button>
+            </mat-form-field>
+          </form>
+          <table class="table">
+            <tr style="text-align: center">
+              <th>Date</th>
+              <th>Patient's Name</th>
+              <th>Doctor's Name</th>
+              <th></th>
+            </tr>
+            <tr *ngFor="let appointment of appointments">
+              <td>{{ appointment.patientId}}</td>
+              <td>{{ appointment.patientName }}</td>
+              <td>{{ appointment.doctorName }}</td>
+              <td><button mat-button matTooltip="Delete this appointment" mat-icon-button aria-label="Clear"
+                  color="warn" (click)="onclickDeleteAppointment(appointment._id)">
+                  <mat-icon>delete_forever</mat-icon>
+                </button></td>
+            </tr>
+          </table>
+        </section>
+        <mat-paginator (page)="onClickPaginator0($event)" [length]="length0" [pageSize]="pageSize0"
+          [pageSizeOptions]="pageSizeOptions0" [showFirstLastButtons]="true">
+        </mat-paginator>
+        <mat-card-actions>
+          <button mat-button matTooltip="Refresh count data" (click)="refreshAppointment()">
+            REFRESH
+          </button>
+        </mat-card-actions>
       </mat-card>
     </div>
   </mat-grid-tile>
@@ -43,12 +71,12 @@
       <mat-card-header>
         <div mat-card-avatar class="example-header-image"></div>
         <mat-card-title>Patients</mat-card-title>
-        <mat-card-subtitle>Patient record details</mat-card-subtitle>
+        <mat-card-subtitle style="color: white;">Patient record details</mat-card-subtitle>
       </mat-card-header>
       <section class="panel">
         <form [formGroup]="searchForm">
-          <mat-form-field style="color: white;">
-            <mat-label>Search patient name</mat-label>
+          <mat-form-field>
+            <mat-label style="color: white;">Search patient name</mat-label>
             <input matInput formControlName="searchInput" (keyup)="searchTerm$.next($any($event.target).value)"
               type="text" />
             <button mat-button *ngIf="searchInput.value" matSuffix mat-icon-button aria-label="Clear"
@@ -88,6 +116,11 @@
       <mat-paginator (page)="onClickPaginator($event)" [length]="length" [pageSize]="pageSize"
         [pageSizeOptions]="pageSizeOptions" [showFirstLastButtons]="true">
       </mat-paginator>
+      <mat-card-actions>
+        <button mat-button matTooltip="Refresh count data" (click)="refreshPatients()">
+          REFRESH
+        </button>
+      </mat-card-actions>
     </mat-card>
   </mat-grid-tile>
 </mat-grid-list>

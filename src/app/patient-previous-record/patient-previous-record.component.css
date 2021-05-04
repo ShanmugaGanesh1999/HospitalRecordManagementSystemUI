@@ -13,7 +13,9 @@
 .table tr:nth-child(even) {
   background-color: #f2f2f2;
 }
-
+.table tr:nth-child(odd) {
+  background-color: #ada8a8;
+}
 .table tr:hover {
   background-color: #ddd;
 }
