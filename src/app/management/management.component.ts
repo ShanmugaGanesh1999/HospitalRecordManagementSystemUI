@@ -22,6 +22,7 @@ import 'rxjs/add/operator/switchMap';
 import { MatDialog } from '@angular/material/dialog';
 import { PatientPreviousRecordComponent } from '../patient-previous-record/patient-previous-record.component';
 import { GraphAnalysisComponent } from './graph-analysis/graph-analysis.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-management',
@@ -94,9 +95,15 @@ export class ManagementComponent implements OnInit {
     private appService: AppService,
     private _snackBar: MatSnackBar,
     private mgtService: MgtService,
+    private router: Router,
     private receptionistService: ReceptionistService,
     private dialog: MatDialog
   ) {
+    let token = localStorage.getItem('token'),
+      who = localStorage.getItem('who');
+    if (!token || who !== 'Management') {
+      this.router.navigate(['login']);
+    }
     appService.navHead = 'Management';
     appService.logoutButton = true;
     this.getCount();

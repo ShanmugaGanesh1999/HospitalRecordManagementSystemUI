@@ -11,7 +11,7 @@
   margin-top: 15px;
   margin-bottom: 10px;
 }
-.top-section{
+.top-section {
   background: #949396;
 }
 .panel {
@@ -39,7 +39,6 @@
   margin: 16px;
   padding: 16px;
   border-radius: 8px;
-   
 }
 
 .example-stretched-tabs {
@@ -70,12 +69,12 @@ mat-grid-tile {
 }
 
 .example-header-image {
-  background-image: url("https://img.icons8.com/bubbles/2x/patient-care.png");
+  background-image: url("../../assets/reception-patient.png");
   background-size: cover;
 }
 
 .example-header-image2 {
-  background-image: url("https://www.pinclipart.com/picdir/middle/21-217004_doctor-patient-icon-clipart.png");
+  background-image: url("../../assets/reception-aapointment.png");
   background-size: cover;
 }
 
@@ -111,7 +110,7 @@ mat-grid-tile {
 .table th {
   border: 1px solid #ddd;
   padding: 8px;
-  color:black
+  color: black;
 }
 
 .table tr:nth-child(even) {

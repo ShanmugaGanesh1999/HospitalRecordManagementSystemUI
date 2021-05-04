@@ -99,7 +99,7 @@ export class LoginComponent implements OnInit {
     this.appService.loading = true;
     var emailId = this.emailId.value;
     var password = this.password.value;
-    if (emailId !== '' && password !== '') {
+    if (emailId && password) {
       this.loginService.loginApi(emailId, password).subscribe(
         (data: any) => {
           this.appService.loading = false;
@@ -131,12 +131,12 @@ export class LoginComponent implements OnInit {
         }
       );
     } else {
+      this.appService.loading = false;
       this.openSnackBar('Enter email id and password', 'Close');
     }
   }
 
   sendOtp() {
-    this.openLoginInfo1();
     this.appService.loading = true;
     let email = this.email.value;
     if (email) {
@@ -144,9 +144,10 @@ export class LoginComponent implements OnInit {
         (data: any) => {
           localStorage.setItem('email', email);
           this.appService.loading = false;
+          this.openLoginInfo1();
           this.openSnackBar(`OTP has been sent to your mail:${email}`, 'Close');
         },
-        (err: any) => console.log(err)
+        (err: any) => this.openSnackBar('Please enter valid email', 'Close')
       );
     } else {
       this.openSnackBar('Please enter email', 'Close');
@@ -162,10 +163,7 @@ export class LoginComponent implements OnInit {
       if (pwd === cpass && otp.length === 6) {
         this.loginService.otpVerify(otp).subscribe(
           (data: any) => {
-            this.appService.loading = false;
             if (data.verification == 1) {
-              this.appService.loading = true;
-              this.openSnackBar('Please enter email', 'Close');
               let mail = localStorage.getItem('email');
               this.loginService.resetPwd(mail, cpass).subscribe(
                 (data: any) => {
@@ -174,11 +172,11 @@ export class LoginComponent implements OnInit {
                     'Your account password is Updated!',
                     'Close'
                   );
-                  localStorage.removeItem('email');
+                  localStorage.clear();
                   this.closeLoginInfo1();
                 },
                 (err: any) => {
-                  console.log(err);
+                  this.openSnackBar(err.message, 'Close');
                   this.appService.loading = false;
                 }
               );
@@ -200,7 +198,7 @@ export class LoginComponent implements OnInit {
         );
       } else {
         this.openSnackBar(
-          'Passwords not equal. Please enter same passwords',
+          'Passwords not equal / Wrong OTP - Check and enter',
           'Close'
         );
         this.appService.loading = false;

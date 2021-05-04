@@ -47,22 +47,22 @@ mat-grid-tile {
 }
 
 .example-header-image {
-  background-image: url("https://thumbs.dreamstime.com/z/doctor-portrait-23753621.jpg");
+  background-image: url("../../assets/doctor-portrait.jpg");
   background-size: cover;
 }
 
 .example-header-image2 {
-  background-image: url("https://images.pexels.com/photos/4386373/pexels-photo-4386373.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+  background-image: url("../../assets/pexels-count.jpeg");
   background-size: cover;
 }
 
 .example-header-image3 {
-  background-image: url("https://images.pexels.com/photos/4021769/pexels-photo-4021769.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+  background-image: url("../../assets/appointment.webp");
   background-size: cover;
 }
 
 .example-header-image4 {
-  background-image: url("https://cdn.pixabay.com/photo/2016/03/01/07/42/arrows-1229845_960_720.jpg");
+  background-image: url("../../assets/arrows-graph.webp");
   background-size: cover;
 }
 

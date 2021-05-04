@@ -14,6 +14,7 @@ import 'rxjs/add/operator/switchMap';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MgtService } from '../management/mgt.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-receptionist',
@@ -45,9 +46,15 @@ export class ReceptionistComponent implements OnInit {
     private receptionistService: ReceptionistService,
     private fixAppointmentService: FixAppointmentService,
     private appService: AppService,
+    private router: Router,
     private _snackBar: MatSnackBar,
     private mgtService: MgtService
   ) {
+    let token = localStorage.getItem('token'),
+      who = localStorage.getItem('who');
+    if (!token || who !== 'Receptionist') {
+      this.router.navigate(['login']);
+    }
     appService.navHead = 'Receptionist';
     appService.logoutButton = true;
     this.searchForm = new FormGroup({

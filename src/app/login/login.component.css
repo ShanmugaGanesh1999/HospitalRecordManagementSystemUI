@@ -1,22 +1,18 @@
 .main-background {
   color: #696e8c;
   background: linear-gradient(0deg, #b14daca9, #b14daca9),
-    url(https://cdn4.vectorstock.com/i/1000x1000/63/68/medical-background-vector-14626368.jpg) no-repeat center;
+    url("../../assets/medical-background-vector.jpg") no-repeat center;
   background-size: cover;
   font: 600 16px/18px;
   height: 90vh;
   margin-top: 0px;
 }
 
-
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
-
-
-
 
 /*--------------------
 Login Box
@@ -55,7 +51,7 @@ Login Box
   padding: 15px 15px 15px 30px;
   background-color: rgba(255, 255, 255, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius:5px;
+  border-radius: 5px;
   z-index: 0;
 }
 
@@ -71,7 +67,6 @@ Login Box
   z-index: 0;
 }
 
-
 a {
   text-decoration: none;
 }
@@ -86,7 +81,7 @@ button:focus {
   background-color: transparent;
   border: none;
   cursor: pointer;
-  color:blueviolet;
+  color: blueviolet;
 }
 
 .b-form {
@@ -120,7 +115,7 @@ button:focus {
   margin: 6px 0;
 }
 
-.b-support:hover{
+.b-support:hover {
   color: #fff;
   background-color: blueviolet;
   border: blueviolet 1px solid;
