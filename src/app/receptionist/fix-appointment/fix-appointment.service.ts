@@ -9,6 +9,7 @@ export class FixAppointmentService {
 
   baseDoctorUrl = 'http://localhost:3000/doctor/';
   baseAppointmentURL = 'http://localhost:3000/appointment/';
+  baseManagementURL = 'http://localhost:3000/management/';
 
   getDoctorsByStatus(status: any) {
     const token = localStorage.getItem('token');
@@ -32,6 +33,19 @@ export class FixAppointmentService {
         doctorId: params.doctorId,
       },
       { headers: headers }
+    );
+  }
+
+  updateCountByDate(state: any) {
+    const token = localStorage.getItem('token');
+    //console.log(token);
+    const headers = new HttpHeaders().set('x-access-token', token + '');
+    //console.log(headers);
+    return this.httpClient.put(
+      this.baseManagementURL + 'updateCountByDate/?state=' + state,
+      {
+        headers: headers,
+      }
     );
   }
 }

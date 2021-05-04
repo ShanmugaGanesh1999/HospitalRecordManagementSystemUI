@@ -9,6 +9,8 @@ import 'rxjs/add/operator/switchMap';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FinishedMedicationComponent } from './finished-medication/finished-medication.component';
+import { ReceptionistService } from '../receptionist/receptionist.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-doctor',
@@ -55,8 +57,15 @@ export class DoctorComponent implements OnInit {
     private appService: AppService,
     private doctorService: DoctorService,
     private dialog: MatDialog,
-    private _snackBar: MatSnackBar
+    private router: Router,
+    private _snackBar: MatSnackBar,
+    private receptionistService: ReceptionistService
   ) {
+    let token = localStorage.getItem('token'),
+      who = localStorage.getItem('who');
+    if (!token || who !== 'Doctor') {
+      this.router.navigate(['login']);
+    }
     appService.logoutButton = true;
     appService.navHead = 'Doctor';
     this.patientSearchForm = new FormGroup({

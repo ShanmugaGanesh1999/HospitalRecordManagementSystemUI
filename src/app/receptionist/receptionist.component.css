@@ -11,7 +11,7 @@
   margin-top: 15px;
   margin-bottom: 10px;
 }
-.top-section{
+.top-section {
   background: #949396;
 }
 .panel {
@@ -32,7 +32,6 @@
   color: white !important;
 }
 
-.example-small-box,
 .example-large-box {
   /* display: flex; */
   align-items: center;
@@ -64,23 +63,22 @@
 
 mat-grid-tile {
   width: 30%;
-  height: 50%;
+  height: 100%;
   background: #949396;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
 }
 
 .example-header-image {
-  background-image: url("https://img.icons8.com/bubbles/2x/patient-care.png");
+  background-image: url("../../assets/reception-patient.png");
   background-size: cover;
 }
 
 .example-header-image2 {
-  background-image: url("https://www.pinclipart.com/picdir/middle/21-217004_doctor-patient-icon-clipart.png");
+  background-image: url("../../assets/reception-aapointment.png");
   background-size: cover;
 }
 
 .mat-paginator {
-  
   background-color: #673ab7;
   color: #fff;
 }
@@ -102,3 +100,35 @@ mat-grid-tile {
   /*its dashboard left top - count table */
 }
 
+.table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.table td,
+.table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  color: black;
+}
+
+.table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.table tr:nth-child(odd) {
+  background-color: #ada8a8;
+}
+
+.table tr:hover {
+  background-color: #ddd;
+}
+
+.table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: rgb(240, 163, 19);
+  color: black;
+}

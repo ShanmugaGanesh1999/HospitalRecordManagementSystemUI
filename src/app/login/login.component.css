@@ -1,0 +1,142 @@
+.main-background {
+  color: #696e8c;
+  background: linear-gradient(0deg, #b14daca9, #b14daca9),
+    url("../../assets/medical-background-vector.jpg") no-repeat center;
+  background-size: cover;
+  font: 600 16px/18px;
+  height: 90vh;
+  margin-top: 0px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/*--------------------
+Login Box
+---------------------*/
+
+.box {
+  width: 330px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.box-form {
+  width: 320px;
+  position: relative;
+  z-index: 1;
+}
+
+.box-login {
+  position: relative;
+  top: -4px;
+  width: 320px;
+  background: #fdfdfd;
+  border-radius: 10px;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.box-info {
+  width: 260px;
+  top: 60px;
+  position: absolute;
+  right: -5px;
+  padding: 15px 15px 15px 30px;
+  background-color: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+  z-index: 0;
+}
+
+.box-info1 {
+  width: 260px;
+  top: 0px;
+  position: absolute;
+  right: -5px;
+  padding: 15px 15px 15px 30px;
+  background-color: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+  z-index: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+button:focus {
+  outline: 0;
+}
+
+.b {
+  height: 24px;
+  line-height: 24px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: blueviolet;
+}
+
+.b-form {
+  opacity: 0.5;
+}
+
+.b-info {
+  opacity: 0.5;
+  float: right;
+}
+
+.b-form:hover,
+.b-info:hover {
+  opacity: 1;
+}
+
+.b-support {
+  padding: 0px 15px;
+  font-weight: 700;
+  letter-spacing: -1px;
+  font-size: 16px;
+  line-height: 32px;
+  float: right;
+  border-radius: 5px;
+}
+
+.b-support {
+  border: blueviolet 1px solid;
+  background-color: transparent;
+  color: blueviolet;
+  margin: 6px 0;
+}
+
+.b-support:hover {
+  color: #fff;
+  background-color: blueviolet;
+  border: blueviolet 1px solid;
+}
+
+.fieldset-body {
+  display: table;
+  margin: 40px;
+}
+
+/*--------------------
+Transitions
+---------------------*/
+
+.box-form,
+.box-info,
+.b,
+.b-support {
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}

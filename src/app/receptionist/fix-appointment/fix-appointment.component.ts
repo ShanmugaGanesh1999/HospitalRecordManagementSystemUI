@@ -8,6 +8,7 @@ import {
 } from '@angular/material/dialog';
 import { FixAppointmentService } from './fix-appointment.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AppService } from 'src/app/app.service';
 
 @Component({
   selector: 'app-fix-appointment',
@@ -25,7 +26,8 @@ export class FixAppointmentComponent implements OnInit {
     public dialogRef: MatDialogRef<FixAppointmentComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private fixAppointmentService: FixAppointmentService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private appService: AppService
   ) {
     this.appointmentForm = new FormGroup({
       doctorId: this.doctorId,
@@ -42,10 +44,8 @@ export class FixAppointmentComponent implements OnInit {
     this.fixAppointmentService.getDoctorsByStatus(this.status).subscribe(
       (data: any) => {
         this.doctors = data.data;
-        //console.log(this.doctors);
       },
       (error: any) => {
-        //console.log(error.message);
         this._snackBar.open(error.message, 'close', {
           duration: 5000,
           horizontalPosition: 'center',
@@ -56,7 +56,9 @@ export class FixAppointmentComponent implements OnInit {
   }
 
   onClickFix() {
-    if (this.doctorId.value === '') {
+    this.appService.loading = true;
+    var state = 1;
+    if (!this.doctorId.invalid) {
       this.fixAppointmentService
         .fixAppointment({
           patientId: this.patient._id,
@@ -64,15 +66,32 @@ export class FixAppointmentComponent implements OnInit {
         })
         .subscribe(
           (data: any) => {
-            //alert(data.message);
-            this._snackBar.open('Appointment fixed!!!', 'close', {
-              duration: 5000,
-              horizontalPosition: 'center',
-              verticalPosition: 'bottom',
-            });
+            this.fixAppointmentService.updateCountByDate(state).subscribe(
+              (data1: any) => {
+                this.appService.loading = false;
+                window.location.reload();
+                this._snackBar.open('Appointment fixed!!!', 'close', {
+                  duration: 5000,
+                  horizontalPosition: 'center',
+                  verticalPosition: 'bottom',
+                });
+              },
+              (err: any) => {
+                this.appService.loading = false;
+                this._snackBar.open(
+                  'Something went wrong. Appointment not fixed',
+                  'close',
+                  {
+                    duration: 5000,
+                    horizontalPosition: 'center',
+                    verticalPosition: 'bottom',
+                  }
+                );
+              }
+            );
           },
           (error: any) => {
-            //console.log(error.message);
+            this.appService.loading = false;
             this._snackBar.open(error.message, 'close', {
               duration: 5000,
               horizontalPosition: 'center',
@@ -80,7 +99,6 @@ export class FixAppointmentComponent implements OnInit {
             });
           }
         );
-      //console.log(this.submitted);
     } else {
       this._snackBar.open('Choose a doctor to fix appointment', 'close', {
         duration: 5000,
