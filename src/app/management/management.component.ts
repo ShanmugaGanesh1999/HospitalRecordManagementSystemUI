@@ -21,6 +21,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
 import { MatDialog } from '@angular/material/dialog';
 import { PatientPreviousRecordComponent } from '../patient-previous-record/patient-previous-record.component';
+import { GraphAnalysisComponent } from './graph-analysis/graph-analysis.component';
 
 @Component({
   selector: 'app-management',
@@ -38,14 +39,15 @@ import { PatientPreviousRecordComponent } from '../patient-previous-record/patie
   ],
 })
 export class ManagementComponent implements OnInit {
+  selected = '';
   dateCountArr: dateCountElement[] = [];
   length = 0;
   lengthOfPatients = 0;
   pageSize = 5;
   pageSizeOptions: number[] = [5, 10, 25, 100];
   pagePosition = 0;
-  pageSize1 = 3;
-  pageSizeOptions1: number[] = [3, 5, 10, 25, 100];
+  pageSize1 = 5;
+  pageSizeOptions1: number[] = [5, 10, 25, 100];
   pagePosition1 = 0;
   displayedColumns: string[] = ['date', 'count'];
   panelOpenState = false;
@@ -56,6 +58,8 @@ export class ManagementComponent implements OnInit {
   searchTerm$ = new Subject<string>();
   searchForm1: FormGroup;
   searchForm: FormGroup;
+
+  color: string = 'rgb(240, 163, 19)';
 
   step = 0;
   setStep(index: number) {
@@ -84,7 +88,8 @@ export class ManagementComponent implements OnInit {
   pageSize0 = 5;
   pageSizeOptions0: number[] = [5, 10, 25, 100];
   pagePosition0 = 0;
-
+  single: any[] = [];
+  multi: any[] = [];
   constructor(
     private appService: AppService,
     private _snackBar: MatSnackBar,
@@ -99,6 +104,7 @@ export class ManagementComponent implements OnInit {
     this.searchForm = new FormGroup({
       searchInput: this.searchInput,
     });
+    this.refreshGraph();
     this.createDoctorForm = new FormGroup({
       firstName: this.firstName,
       lastName: this.lastName,
@@ -197,7 +203,7 @@ export class ManagementComponent implements OnInit {
 
   onClickPaginator0(event: any) {
     // console.log('event', event);
-    this.pagePosition0 = event.pageIndex0 * event.pageSize0;
+    this.pagePosition0 = event.pageIndex * event.pageSize;
     this.pageSize0 = event.pageSize;
     this.getAppointments();
   }
@@ -236,8 +242,22 @@ export class ManagementComponent implements OnInit {
     this.getAppointments();
     this.openSnackBar('Appointment refreshed', 'Close');
   }
-
-  refreshDoctor() {
+  refreshGraph() {
+    this.mgtService.getGraphData({ data: 'single' }).subscribe(
+      (data: any) => {
+        this.single = data.data;
+      },
+      (err) => console.log(err)
+    );
+    this.mgtService.getGraphData({ data: 'multi' }).subscribe(
+      (data: any) => {
+        this.multi = data.data;
+        this.openSnackBar('Graphical Data Refreshed', 'Close');
+      },
+      (err) => console.log(err)
+    );
+  }
+  refreshReceptionistPwd() {
     window.location.reload();
   }
 
@@ -356,6 +376,21 @@ export class ManagementComponent implements OnInit {
     this.searchInput1.setValue('');
     this.getAllPatients();
   }
+
+  viewGraph() {
+    if (this.selected !== '') {
+      this.dialog.open(GraphAnalysisComponent, {
+        data: [this.selected, this.single, this.multi],
+        height: '90%',
+        width: '100%',
+      });
+      this.openSnackBar(
+        'Viewing graphical analysis of ' + this.selected,
+        'Close'
+      );
+    } else this.openSnackBar('Enter perticular graph to view', 'Close');
+  }
+
   onClickPreviousDetails(patientId: any) {
     this.dialog.open(PatientPreviousRecordComponent, {
       data: {

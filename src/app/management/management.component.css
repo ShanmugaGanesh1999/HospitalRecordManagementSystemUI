@@ -17,7 +17,7 @@
 }
 .example-large-box {
   /* height: 100vh; */
-  width: 90%;
+  width: 95%;
   background-color: #673ab7;
 }
 
@@ -61,6 +61,11 @@ mat-grid-tile {
   background-size: cover;
 }
 
+.example-header-image4 {
+  background-image: url("https://cdn.pixabay.com/photo/2016/03/01/07/42/arrows-1229845_960_720.jpg");
+  background-size: cover;
+}
+
 .mat-paginator {
   margin-left: 2%;
   margin-right: 2%;
@@ -97,7 +102,7 @@ mat-grid-tile {
 }
 
 .grid-section2 {
-  margin-top: -110%; /*its dashboard right bottom -  */
+  margin-top: -90%; /*its dashboard right bottom - graph */
 }
 
 /* section 3 */
@@ -152,4 +157,35 @@ ol li {
   font-size: 15px;
   font-weight: 500;
   color: white !important;
+}
+/* section 4 */
+
+.example-ripple-container {
+  cursor: pointer;
+  text-align: center;
+
+  width: 300px;
+  height: 300px;
+  line-height: 300px;
+  background-color: #fff;
+  color: #673ab7;
+  font-size: xx-large;
+  border-radius: 1.5%;
+
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+
+  -webkit-user-drag: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/** Styles to make the demo look better. */
+.example-ripple-checkbox {
+  margin: 6px 12px 6px 0;
+}
+
+.example-ripple-form-field {
+  margin: 0 12px 0 0;
 }

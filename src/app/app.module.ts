@@ -30,15 +30,17 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MedicationComponent } from './doctor/medication/medication.component';
 import { MatSelectModule } from '@angular/material/select';
 import { SearchPatientComponent } from './receptionist/search-patient/search-patient.component';
 import { FixAppointmentComponent } from './receptionist/fix-appointment/fix-appointment.component';
-import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSortModule } from '@angular/material/sort';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { PatientPreviousRecordComponent } from './patient-previous-record/patient-previous-record.component';
-
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { GraphAnalysisComponent } from './management/graph-analysis/graph-analysis.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,14 +49,17 @@ import { PatientPreviousRecordComponent } from './patient-previous-record/patien
     ReceptionistComponent,
     ManagementComponent,
     AddPatientComponent,
+    MedicationComponent,
     SearchPatientComponent,
     FixAppointmentComponent,
     PatientPreviousRecordComponent,
+    GraphAnalysisComponent,
   ],
   entryComponents: [],
   imports: [
     BrowserModule,
     MatFormFieldModule,
+    NgxChartsModule,
     MatProgressSpinnerModule,
     MatSortModule,
     MatInputModule,
@@ -83,8 +88,8 @@ import { PatientPreviousRecordComponent } from './patient-previous-record/patien
     MatSnackBarModule,
     MatRippleModule,
     MatMenuModule,
-    MatSelectModule,
     MatPaginatorModule,
+    MatSelectModule,
     MatRadioModule,
   ],
   providers: [],

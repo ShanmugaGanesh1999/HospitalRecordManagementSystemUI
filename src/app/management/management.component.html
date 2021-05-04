@@ -147,15 +147,6 @@
               </mat-expansion-panel>
             </mat-accordion>
           </form>
-          <mat-card-actions>
-            <button
-              mat-button
-              matTooltip="Refresh the current page"
-              (click)="refreshDoctor()"
-            >
-              REFRESH
-            </button>
-          </mat-card-actions>
         </mat-card>
       </mat-grid-tile>
       <mat-grid-tile>
@@ -257,7 +248,38 @@
         </div>
       </mat-grid-tile>
       <mat-grid-tile>
-        <div class="example-large-box mat-elevation-z4 grid-section2">4</div>
+        <div class="example-large-box mat-elevation-z4 grid-section2">
+          <mat-card class="example-card2">
+            <mat-card-header>
+              <div mat-card-avatar class="example-header-image4"></div>
+              <mat-card-title>Graphical Analysis</mat-card-title>
+              <mat-card-subtitle>View No of patients vs Specialization</mat-card-subtitle>
+            </mat-card-header>
+            <mat-form-field appearance="fill">
+              <mat-label>Select a graph</mat-label>
+              <mat-select [(value)]="selected">
+                <mat-option value=''>None</mat-option>
+                <mat-option value="treeMap">Tree Map</mat-option>
+                <mat-option value="numberCard">Number Card</mat-option>
+                <mat-option value="heatMap">Heat Map</mat-option>
+                <mat-option value="gaugeChart">Gauge Chart</mat-option>
+                <mat-option value="pieGrid">Pie Grid</mat-option>
+                <mat-option value="advPie">Advance Pie</mat-option>
+                <mat-option value="verticalStackBar">Vertical Stack Bar</mat-option>
+                <mat-option value="horizontalStackBar">Horizontal Stack Bar</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div class="example-ripple-container mat-elevation-z4" matRipple [matRippleCentered]="false"
+              [matRippleDisabled]="false" [matRippleUnbounded]="false" [matRippleColor]="color" (click)='viewGraph()'>
+              See Graph
+            </div>
+            <mat-card-actions>
+              <button mat-button matTooltip="Refresh graph data" (click)="refreshGraph()">
+                REFRESH
+              </button>
+            </mat-card-actions>
+            </mat-card>
+        </div>
       </mat-grid-tile>
     </mat-grid-list>
   </mat-tab>

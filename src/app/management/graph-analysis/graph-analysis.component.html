@@ -1,0 +1,113 @@
+<div class="dialog-body">
+  <h1 mat-dialog-title>Graphical Visualization</h1>
+  <div mat-dialog-content>
+    This dialog showcases the <strong>Graphical Data Visualization</strong> of
+    "No of Appointments" vs "Doctor's Specialization".
+  </div>
+    <mat-card *ngIf="selected == 'treeMap'" class="card-class">
+      <ngx-charts-tree-map
+        [view]="view"
+        [scheme]="colorScheme"
+        [results]="single"
+        [gradient]="false"
+        [animations]="true"
+        [labelFormatting]="labelFormatting"
+        (select)="onSelect($event)"
+      >
+      </ngx-charts-tree-map>
+    </mat-card>
+    <mat-card *ngIf="selected == 'heatMap'" class="card-class">
+      <ngx-charts-heat-map
+        [view]="view"
+        [scheme]="colorScheme"
+        [legend]="true"
+        [showXAxisLabel]="true"
+        [showYAxisLabel]="true"
+        [xAxis]="true"
+        [yAxis]="true"
+        [xAxisLabel]="specialization"
+        [yAxisLabel]="month"
+        [results]="multi"
+        (select)="onSelect($event)"
+      >
+      </ngx-charts-heat-map>
+    </mat-card>
+    <mat-card *ngIf="selected == 'numberCard'" class="card-class">
+      <ngx-charts-number-card
+        [view]="view"
+        [scheme]="colorScheme"
+        [results]="single"
+        [cardColor]="cardColor"
+        (select)="onSelect($event)"
+      >
+      </ngx-charts-number-card>
+    </mat-card>
+    <mat-card class="card-class" *ngIf="selected == 'gaugeChart'">
+      <ngx-charts-gauge
+        [view]="view"
+        [scheme]="colorScheme"
+        [results]="single"
+        [legend]="true"
+        [legendPosition]="legendPosition"
+        (select)="onSelect($event)"
+      >
+      </ngx-charts-gauge>
+    </mat-card>
+    <mat-card class="card-class" *ngIf="selected == 'pieGrid'">
+      <ngx-charts-pie-grid
+        [view]="view"
+        [scheme]="colorScheme"
+        [results]="single"
+        (select)="onSelect($event)"
+      >
+      </ngx-charts-pie-grid>
+    </mat-card>
+    <mat-card class="card-class" *ngIf="selected == 'advPie'">
+      <ngx-charts-advanced-pie-chart
+        [view]="view"
+        [scheme]="colorScheme"
+        [results]="single"
+        [gradient]="true"
+        (select)="onSelect($event)"
+      >
+      </ngx-charts-advanced-pie-chart>
+    </mat-card>
+    <mat-card class="card-class" *ngIf="selected == 'verticalStackBar'">
+      <ngx-charts-bar-vertical-stacked
+        [view]="view"
+        [scheme]="colorScheme"
+        [results]="multi"
+        [gradient]="true"
+        [xAxis]="true"
+        [yAxis]="true"
+        [legend]="true"
+        [showXAxisLabel]="true"
+        [showYAxisLabel]="true"
+        [xAxisLabel]="specialization"
+        [yAxisLabel]="value"
+        [animations]="true"
+        (select)="onSelect($event)"
+      >
+      </ngx-charts-bar-vertical-stacked>
+    </mat-card>
+    <mat-card class="card-class" *ngIf="selected == 'horizontalStackBar'">
+      <ngx-charts-bar-horizontal-stacked
+        [view]="view"
+        [scheme]="colorScheme"
+        [results]="multi"
+        [gradient]="true"
+        [xAxis]="true"
+        [yAxis]="true"
+        [legend]="true"
+        [showXAxisLabel]="true"
+        [showYAxisLabel]="true"
+        [yAxisLabel]="specialization"
+        [xAxisLabel]="value"
+        (select)="onSelect($event)"
+      >
+      </ngx-charts-bar-horizontal-stacked>
+    </mat-card>
+  <mat-card mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close>Close</button>
+  </mat-card>
+</div>
