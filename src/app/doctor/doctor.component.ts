@@ -116,10 +116,8 @@ export class DoctorComponent implements OnInit {
 
   getDoctorIdByEmailId(emailId: any) {
     this.appService.loading = true;
-    console.log(emailId);
     this.doctorService.getDoctorIdByEmailId(emailId).subscribe(
       (data: any) => {
-        console.log(data.doctorData[0].doctorName);
         this.docName = data.doctorData[0].doctorName.toUpperCase();
         this.docDOP = data.doctorData[0].DOP;
         this.docExp =
@@ -157,7 +155,7 @@ export class DoctorComponent implements OnInit {
                         this.patientIdDataArr.push(data.data[0]);
                       },
                       (error: any) => {
-                        console.log(error.message);
+                        this.openSnackBar('No patient found', 'Close');
                       }
                     );
                 }
@@ -173,7 +171,6 @@ export class DoctorComponent implements OnInit {
                   })
                   .subscribe(
                     (data: any) => {
-                      console.log(data.searchDataCount);
                       if (data.searchDataCount > 0) {
                         if (this.dataCount1 <= data.data.length) {
                           if (
@@ -229,20 +226,18 @@ export class DoctorComponent implements OnInit {
         );
       },
       (error: any) => {
-        console.log(error.message);
+        this.openSnackBar(error.message, 'Close');
       }
     );
   }
 
   onClickPaginator(event: any) {
-    console.log('event', event);
     this.pagePosition = event.pageIndex * event.pageSize;
     this.pageSize = event.pageSize;
     this.getDoctorIdByEmailId(this.emailId);
   }
 
   onClickPaginator1(event: any) {
-    console.log('event', event);
     this.pagePosition1 = event.pageIndex * event.pageSize;
     this.pageSize1 = event.pageSize;
     this.getDoctorIdByEmailId1(this.emailId);
@@ -306,19 +301,15 @@ export class DoctorComponent implements OnInit {
       .pipe(debounceTime(400), distinctUntilChanged())
       .switchMap((term: any) => {
         try {
-          console.log('term', term);
           this.getDoctorIdByEmailId(this.emailId);
           return term;
         } catch (error) {
-          console.log(error.message);
           return null;
         }
       })
       .subscribe(
         (term: any) => {},
-        (err: any) => {
-          console.log(err.message);
-        }
+        (err: any) => {}
       );
   }
 
@@ -327,19 +318,15 @@ export class DoctorComponent implements OnInit {
       .pipe(debounceTime(400), distinctUntilChanged())
       .switchMap((term: any) => {
         try {
-          console.log('term', term);
           this.getDoctorIdByEmailId1(this.emailId);
           return term;
         } catch (error) {
-          console.log(error.message);
           return null;
         }
       })
       .subscribe(
         (term: any) => {},
-        (err: any) => {
-          console.log(err.message);
-        }
+        (err: any) => {}
       );
   }
 
@@ -378,7 +365,7 @@ export class DoctorComponent implements OnInit {
                         this.patientIdDataArr.push(data.data[0]);
                       },
                       (error: any) => {
-                        console.log(error.message);
+                        this.openSnackBar('No patient found', 'Close');
                       }
                     );
                 }
@@ -452,7 +439,7 @@ export class DoctorComponent implements OnInit {
         );
       },
       (error: any) => {
-        console.log(error.message);
+        this.openSnackBar(error.message, 'Close');
       }
     );
   }

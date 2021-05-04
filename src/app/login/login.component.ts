@@ -125,7 +125,6 @@ export class LoginComponent implements OnInit {
           }
         },
         (error: any) => {
-          console.log(error.message);
           this.appService.loading = false;
           this.openSnackBar('Enter valid email id and password', 'Close');
         }
@@ -187,7 +186,6 @@ export class LoginComponent implements OnInit {
             }
           },
           (err: any) => {
-            console.log(err);
             this.openSnackBar(
               'OTP has been expired. Please try again later',
               'Close'

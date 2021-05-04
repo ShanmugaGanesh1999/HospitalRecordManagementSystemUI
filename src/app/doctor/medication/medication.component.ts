@@ -85,17 +85,17 @@ export class MedicationComponent implements OnInit {
                 }
               },
               (error: any) => {
-                console.log(error.message);
+                this.openSnackBar('No medication found', 'Close');
               }
             );
           },
           (error: any) => {
-            console.log(error);
+            this.openSnackBar(error.message, 'Close');
           }
         );
       },
       (error: any) => {
-        console.log(error.message);
+        this.openSnackBar(error.message, 'Close');
       }
     );
   }
