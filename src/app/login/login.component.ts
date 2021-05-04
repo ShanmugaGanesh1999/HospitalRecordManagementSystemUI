@@ -114,7 +114,7 @@ export class LoginComponent implements OnInit {
               this.router.navigate(['doctor-page'], {
                 queryParams: { emailId: emailId },
               });
-            } else if (data.path === 'Receptionist') {
+            } else if (data.path === 'Reception') {
               this.router.navigate(['receptionist-page'], {
                 queryParams: { emailId: emailId },
               });

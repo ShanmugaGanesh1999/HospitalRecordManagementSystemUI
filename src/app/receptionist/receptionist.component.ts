@@ -7,9 +7,6 @@ import { FixAppointmentService } from './fix-appointment/fix-appointment.service
 import { AppService } from '../app.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Observable, Subject } from 'rxjs';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -52,7 +49,7 @@ export class ReceptionistComponent implements OnInit {
   ) {
     let token = localStorage.getItem('token'),
       who = localStorage.getItem('who');
-    if (!token || who !== 'Receptionist') {
+    if (!token || who !== 'Reception') {
       this.router.navigate(['login']);
     }
     appService.navHead = 'Receptionist';
@@ -134,7 +131,7 @@ export class ReceptionistComponent implements OnInit {
           }
           this.length0 = data.count;
         },
-        (err) => console.log(err)
+        (err) => this.openSnackBar(err.message, 'Close')
       );
   }
 

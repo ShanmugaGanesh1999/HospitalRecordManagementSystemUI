@@ -286,7 +286,7 @@ export class ManagementComponent implements OnInit {
   }
 
   getAllPatients() {
-    //console.log(this.searchInput1.value);
+    this.appService.loading = true;
     this.receptionistService
       .getAllPatients({
         searchText1: this.searchInput1.value ? this.searchInput1.value : '',
@@ -295,12 +295,12 @@ export class ManagementComponent implements OnInit {
       })
       .subscribe(
         (data: any) => {
+          this.appService.loading = false;
           this.patients = data.data;
           this.lengthOfPatients = data.totalLength;
-          //console.log(this.lengthOfPatients);
         },
         (error: any) => {
-          //console.log(error.message);
+          this.appService.loading = false;
           this.openSnackBar('No patient found', 'Close');
         }
       );

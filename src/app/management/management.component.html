@@ -26,11 +26,7 @@
               [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" [showFirstLastButtons]="true">
             </mat-paginator>
             <mat-card-actions>
-              <button
-                mat-button
-                matTooltip="Refresh count data"
-                (click)="refreshCount()"
-              >
+              <button mat-button matTooltip="Refresh count data" (click)="refreshCount()">
                 REFRESH
               </button>
             </mat-card-actions>
@@ -66,11 +62,7 @@
                 </mat-form-field>
 
                 <mat-action-row>
-                  <button
-                    mat-raised-button
-                    color="primary"
-                    (click)="nextStep()"
-                  >
+                  <button mat-raised-button color="primary" (click)="nextStep()">
                     Next
                   </button>
                 </mat-action-row>
@@ -99,11 +91,7 @@
                   <button mat-raised-button color="warn" (click)="prevStep()">
                     Previous
                   </button>
-                  <button
-                    mat-raised-button
-                    color="primary"
-                    (click)="nextStep()"
-                  >
+                  <button mat-raised-button color="primary" (click)="nextStep()">
                     Next
                   </button>
                 </mat-action-row>
@@ -135,12 +123,7 @@
                   <button mat-raised-button color="warn" (click)="prevStep()">
                     Previous
                   </button>
-                  <button
-                    mat-raised-button
-                    matTooltip="Create a new doctor"
-                    color="primary"
-                    (click)="onSubmit()"
-                  >
+                  <button mat-raised-button matTooltip="Create a new doctor" color="primary" (click)="onSubmit()">
                     Submit
                   </button>
                 </mat-action-row>
@@ -160,90 +143,67 @@
             <form [formGroup]="searchForm">
               <mat-form-field>
                 <mat-label>Filter Patient</mat-label>
-                <input matInput formControlName="searchInput" (keyup)="searchTerm$.next($any($event.target).value)" type="text" />
+                <input matInput formControlName="searchInput" (keyup)="searchTerm$.next($any($event.target).value)"
+                  type="text" />
                 <button mat-button *ngIf="searchInput.value" matSuffix mat-icon-button aria-label="Clear"
                   (click)="onClickCloseSearch()">
                   <mat-icon>close</mat-icon>
                 </button>
               </mat-form-field>
             </form>
-          <table
-            mat-table
-            [dataSource]="dataAppSource"
-            multiTemplateDataRows
-            class="mat-elevation-z8"
-          >
-            <ng-container
-              matColumnDef="{{ column }}"
-              *ngFor="let column of columnsToDisplay"
-            >
-              <th mat-header-cell *matHeaderCellDef style="font-weight: bolder;font-size: larger;">{{ column }}</th>
-              <td mat-cell *matCellDef="let element">{{ element[column] }}</td>
-            </ng-container>
+            <table mat-table [dataSource]="dataAppSource" multiTemplateDataRows class="mat-elevation-z8">
+              <ng-container matColumnDef="{{ column }}" *ngFor="let column of columnsToDisplay">
+                <th mat-header-cell *matHeaderCellDef style="font-weight: bolder;font-size: larger;">{{ column }}</th>
+                <td mat-cell *matCellDef="let element">{{ element[column] }}</td>
+              </ng-container>
 
-            <ng-container matColumnDef="expandedDetail">
-              <td
-                mat-cell
-                *matCellDef="let element"
-                [attr.colspan]="columnsToDisplay.length"
-              >
-                <div
-                  class="example-element-detail"
-                  [@detailExpand]="
+              <ng-container matColumnDef="expandedDetail">
+                <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+                  <div class="example-element-detail" [@detailExpand]="
                     element == expandedElement ? 'expanded' : 'collapsed'
-                  "
-                >
-                  <ol>
-                    <li><strong>Patient EmailId:</strong> &nbsp;
-                      <i style="color: #3399ff;">{{ element.patientEmailId }}</i>
-                    </li>
-                    <li><strong>Patient Age:</strong> &nbsp;
-                      <i style="color: #3399ff;">{{ element.patientAge }}</i>
-                    </li>
-                    <li><strong>Patient Gender:</strong> &nbsp;
-                      <i style="color: #3399ff;">{{ element.patientGender }}</i>
-                    </li>
-                    <li><strong>Doctor EmailId:</strong> &nbsp;
-                      <i style="color: #3399ff;">{{ element.doctorEmailId }}</i>
-                    </li>
-                    <li><strong>Doctor Specialization:</strong> &nbsp;
-                      <i style="color: #3399ff;">{{ element.doctorSpecialization }}</i>
-                    </li>
-                    <li><strong>Doctor Experience:</strong> &nbsp;
-                      <i style="color: #3399ff;">{{ element.doctorExperience }}</i>
-                    </li>
-                    <li><strong>Patient Complication:</strong> &nbsp;
-                      <i style="color: #3399ff;">{{ element.complication }}</i>
-                    </li>
-                  </ol>
-                </div>
-              </td>
-            </ng-container>
+                  ">
+                    <ol>
+                      <li><strong>Patient EmailId:</strong> &nbsp;
+                        <i style="color: #3399ff;">{{ element.patientEmailId }}</i>
+                      </li>
+                      <li><strong>Patient Age:</strong> &nbsp;
+                        <i style="color: #3399ff;">{{ element.patientAge }}</i>
+                      </li>
+                      <li><strong>Patient Gender:</strong> &nbsp;
+                        <i style="color: #3399ff;">{{ element.patientGender }}</i>
+                      </li>
+                      <li><strong>Doctor EmailId:</strong> &nbsp;
+                        <i style="color: #3399ff;">{{ element.doctorEmailId }}</i>
+                      </li>
+                      <li><strong>Doctor Specialization:</strong> &nbsp;
+                        <i style="color: #3399ff;">{{ element.doctorSpecialization }}</i>
+                      </li>
+                      <li><strong>Doctor Experience:</strong> &nbsp;
+                        <i style="color: #3399ff;">{{ element.doctorExperience }}</i>
+                      </li>
+                      <li><strong>Patient Complication:</strong> &nbsp;
+                        <i style="color: #3399ff;">{{ element.complication }}</i>
+                      </li>
+                    </ol>
+                  </div>
+                </td>
+              </ng-container>
 
-            <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-            <tr
-              mat-row
-              *matRowDef="let element; columns: columnsToDisplay"
-              class="example-element-row"
-              [class.example-expanded-row]="expandedElement === element"
-              (click)="
+              <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+              <tr mat-row *matRowDef="let element; columns: columnsToDisplay" class="example-element-row"
+                [class.example-expanded-row]="expandedElement === element" (click)="
                 expandedElement = expandedElement === element ? null : element
-              "
-            ></tr>
-            <tr
-              mat-row
-              *matRowDef="let row; columns: ['expandedDetail']"
-              class="example-detail-row"
-            ></tr>
-          </table>
-          <mat-paginator class="mat-paginator" (page)="onClickPaginator0($event)" [length]="length0" [pageSize]="pageSize0"
-            [pageSizeOptions]="pageSizeOptions0" [showFirstLastButtons]="true">
-          </mat-paginator>
-          <mat-card-actions>
-            <button mat-button matTooltip="Refresh appointment data" (click)="refreshAppointment()">
-              REFRESH
-            </button>
-          </mat-card-actions>
+              "></tr>
+              <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+            </table>
+            <mat-paginator class="mat-paginator" (page)="onClickPaginator0($event)" [length]="length0"
+              [pageSize]="pageSize0" [pageSizeOptions]="pageSizeOptions0" [showFirstLastButtons]="true">
+            </mat-paginator>
+            <mat-card-actions>
+              <button mat-button matTooltip="Refresh appointment data" (click)="refreshAppointment()">
+                REFRESH
+              </button>
+            </mat-card-actions>
           </mat-card>
         </div>
       </mat-grid-tile>
@@ -278,7 +238,7 @@
                 REFRESH
               </button>
             </mat-card-actions>
-            </mat-card>
+          </mat-card>
         </div>
       </mat-grid-tile>
     </mat-grid-list>
@@ -319,8 +279,8 @@
           <span> EmailId: {{patient.emailId}}</span><br>
           <mat-icon> phone</mat-icon>&nbsp;&nbsp;
           <span> MobileNo: {{patient.mobileNo}}</span>
-          <button mat-fab mat-raised-button mat-dialog-close color="primary"
-            (click)="onClickPreviousDetails(patient._id)" style="float: right; ">
+          <button mat-fab mat-raised-button color="primary" (click)="onClickPreviousDetails(patient._id)"
+            style="float: right; ">
             <mat-icon>description</mat-icon>
           </button>
         </mat-expansion-panel>
