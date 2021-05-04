@@ -69,10 +69,11 @@
           <mat-icon> phone</mat-icon>&nbsp;&nbsp;
           <span> MobileNo: {{ patient.mobileNo }}</span>
           <button
-            matTooltip="Add Patient Medication"
+            matTooltip="View Patient Medication"
             mat-fab
             color="primary"
             style="float: right"
+            (click)="onClickAddPatientMedication1(patient._id)"
           >
             <img
               style="width: 70%; margin: -12%"
