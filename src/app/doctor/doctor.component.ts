@@ -77,8 +77,8 @@ export class DoctorComponent implements OnInit {
     this.patientSearchForm1 = new FormGroup({
       searchInput1: this.searchInput1,
     });
-    this.getDoctorIdByEmailId(this.emailId);
-    this.getDoctorIdByEmailId1(this.emailId);
+    // this.getDoctorIdByEmailId(this.emailId);
+    // this.getDoctorIdByEmailId1(this.emailId);
   }
 
   ngOnInit(): void {
