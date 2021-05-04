@@ -10,7 +10,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FinishedMedicationComponent } from './finished-medication/finished-medication.component';
 import { ReceptionistService } from '../receptionist/receptionist.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-doctor',
@@ -21,7 +21,7 @@ export class DoctorComponent implements OnInit {
   patientIdData: any = [];
   patientIdDataArr: any = [];
   patientIdDataArr1: any = [];
-  emailId = 'sankavi.rs@mailfence.com';
+  emailId: any;
   length = 0;
   pageSize = 5;
   pageSizeOptions: number[] = [5, 10, 25, 100];
@@ -59,8 +59,11 @@ export class DoctorComponent implements OnInit {
     private dialog: MatDialog,
     private router: Router,
     private _snackBar: MatSnackBar,
-    private receptionistService: ReceptionistService
+    private route: ActivatedRoute
   ) {
+    this.route.queryParams.subscribe((params: any) => {
+      this.emailId = params['emailId'];
+    });
     let token = localStorage.getItem('token'),
       who = localStorage.getItem('who');
     if (!token || who !== 'Doctor') {
