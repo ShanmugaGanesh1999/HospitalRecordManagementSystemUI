@@ -27,39 +27,18 @@ export class MedicationComponent implements OnInit {
     });
   }
 
-  // get f() {
-  //   return this.addPatientMedicationForm.controls;
-  // }
-
   ngOnInit(): void {}
-
+  appId: any = [];
+  com: any = [];
+  pres: any = [];
   onClickSave() {
-    // console.log(this.submitted, this.addPatientMedicationForm.invalid);
     this.submitted = true;
-    // if (this.addPatientMedicationForm.invalid) {
-    //   // alert('Please enter all details');
-    //   return;
-    // }
-    // console.log(
-    //   'id',
-    //   this.data.id,
-    //   'patientId',
-    //   this.data.patientId,
-    //   'name',
-    //   this.data.name,
-    //   'emailId',
-    //   this.data.emailId
-    // );
     var patName = this.data.name;
-    var patName = this.data.patientId;
-    var patName = this.data.emailId;
     this.doctorService.getAppointmentIdByPatientId(this.data.id).subscribe(
       (data: any) => {
-        console.log(
-          data.appointmentId[0]._id,
-          this.prescription.value,
-          this.complication.value
-        );
+        this.appId.push(data.appointmentId[0]._id);
+        this.com.push(this.complication.value);
+        this.pres.push(this.prescription.value);
         var params = {
           appointmentId: data.appointmentId[0]._id,
           complication: this.complication.value,
@@ -67,47 +46,53 @@ export class MedicationComponent implements OnInit {
         };
         this.doctorService.createMedication(params).subscribe(
           (data: any) => {
-            // console.log(data.data);
-            var params1 = {
-              appointmentId: data.data.appointmentId,
-              status: 'Finished',
+            var params = {
+              patientId: this.data.patientId,
+              name: this.data.name,
+              emailId: this.data.emailId,
+              doctorName: this.data.doctorName,
+              specialization: this.data.specialization,
+              mobileNo: this.data.mobileNo,
+              complication: this.com[0],
+              prescription: this.pres[0],
+              gender: this.data.gender,
+              dob: this.data.dob,
+              docEmailId: this.data.docEmailId,
             };
-            this.doctorService.statusAppointmentById(params1).subscribe(
+            this.doctorService.sendPrescriptionByPatientId(params).subscribe(
               (data: any) => {
-                // console.log(data.data);
-                this.doctorService.statusAppointmentById(params1).subscribe(
-                  (data: any) => {
-                    // console.log(data.data);
-
-                    this.openSnackBar(
-                      `Sent ${patName}'s prescription mail successfully `,
-                      'Close'
-                    );
-
-                    // this.patientIdDataArr.push(data.data[0]);
-                  },
-                  (error: any) => {
-                    console.log(error);
-                  }
-                );
-                this.openSnackBar(
-                  `Sent ${patName}'s prescription mail successfully `,
-                  'Close'
-                );
-
-                // this.patientIdDataArr.push(data.data[0]);
+                if (data.message === 'Sent prescription mail successfully') {
+                  var params1 = {
+                    appointmentId: this.appId[0],
+                    status: 'Finished',
+                  };
+                  this.doctorService.statusAppointmentById(params1).subscribe(
+                    (data: any) => {
+                      this.openSnackBar(
+                        `Sent ${patName}'s prescription mail successfully `,
+                        'Close'
+                      );
+                    },
+                    (error: any) => {
+                      this.openSnackBar('Error sending mail', 'Close');
+                    }
+                  );
+                } else {
+                  this.openSnackBar(
+                    'Error updating appointment status',
+                    'Close'
+                  );
+                }
               },
               (error: any) => {
-                console.log(error);
+                console.log(error.message);
               }
             );
-            // this.patientIdDataArr.push(data.data[0]);
           },
           (error: any) => {
             console.log(error);
           }
         );
-        // this.patientIdDataArr.push(data.data[0]);
       },
       (error: any) => {
         console.log(error.message);

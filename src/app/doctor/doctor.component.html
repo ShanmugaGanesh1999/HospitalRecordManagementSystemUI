@@ -1,42 +1,10 @@
-<!-- <section>
-  <div class="example-flex-container">
-    <div class="example-button-container">
-      <form [formGroup]="patientSearchForm">
-        <mat-form-field class="search-input">
-          <mat-label style="color: #1e86a1">Search candidate name</mat-label>
-          <input
-            matInput
-            formControlName="searchInput"
-            (keyup)="searchTerm$.next($any($event.target).value)"
-            type="text"
-          />
-          <button
-            mat-fab
-            mat-raised-button
-            matTooltip="Search for Patient"
-            color="accent"
-          >
-            <mat-icon>search</mat-icon>
-          </button>
-        </mat-form-field>
-      </form>
-    </div>
-  </div>
-</section> -->
-
-<!-- <mat-card class="example-large-box3">
-  <div mat-card-avatar class="example-header-image3"></div>
-  <mat-card-title>{{ emailId }}</mat-card-title>
-</mat-card> -->
 <mat-drawer-container class="example-container">
   <mat-drawer mode="side" opened>
-    <!-- <div style="cursor: pointer">Pending Patient Records</div> -->
     <mat-list>
       <mat-list-item class="list" (click)="showPat1()">Profile</mat-list-item>
       <mat-divider></mat-divider>
       <mat-list-item class="list" (click)="showPat()"
         >Pending Patient Records
-        <!-- <div *ngIf="showPatient1; then pat"></div> -->
       </mat-list-item>
       <mat-divider></mat-divider>
       <mat-list-item class="list" (click)="showPat2()"
@@ -104,7 +72,6 @@
             color="primary"
             style="float: right"
           >
-            <!-- (click)="onClickAddPatientMedication(patient._id, patient.name)" -->
             <img
               style="width: 70%; margin: -12%"
               src="https://image.flaticon.com/icons/png/128/2937/2937192.png"
@@ -187,7 +154,9 @@
                 patient._id,
                 patient.patientId,
                 patient.name,
-                patient.emailId
+                patient.emailId,
+                patient.gender,
+                patient.dob
               )
             "
           >
@@ -221,11 +190,6 @@
           <p style="text-align: center; font-size: 150%">Dr. {{ docName }}</p>
           <mat-card-subtitle></mat-card-subtitle>
         </mat-card-content>
-
-        <!-- <mat-card-actions>
-      <button mat-button>LIKE</button>
-        <button mat-button>SHARE</button>
-      </mat-card-actions> -->
       </mat-card>
       <mat-card class="example-card list-card">
         <div class="doc">

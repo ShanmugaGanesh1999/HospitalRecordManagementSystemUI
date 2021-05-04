@@ -1,0 +1,32 @@
+<div class="main-background example-container">
+  <mat-icon
+    mat-dialog-close
+    style="color: #ffd740; margin-left: 96%; cursor: pointer"
+    >close</mat-icon
+  >
+  <mat-card-header>
+    <mat-card-title class="h1-style">Patient Medication</mat-card-title>
+  </mat-card-header>
+  <br />
+  <form [formGroup]="addPatientMedicationForm1">
+    <mat-form-field class="ml-2">
+      <mat-label>Prescription</mat-label>
+      <mat-card>
+        <textarea
+          matInput
+          type="text"
+          formControlName="prescription"
+          [readonly]="true"
+        >
+        </textarea></mat-card></mat-form-field
+    ><br />
+    <mat-form-field class="ml-2">
+      <mat-label>Complication</mat-label>
+      <mat-card>
+        <textarea matInput formControlName="complication" [readonly]="true">
+        </textarea>
+      </mat-card>
+    </mat-form-field>
+    <br />
+  </form>
+</div>

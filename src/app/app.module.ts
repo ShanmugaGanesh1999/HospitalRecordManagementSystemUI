@@ -44,6 +44,7 @@ import { GraphAnalysisComponent } from './management/graph-analysis/graph-analys
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
+import { FinishedMedicationComponent } from './doctor/finished-medication/finished-medication.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { MatListModule } from '@angular/material/list';
     FixAppointmentComponent,
     PatientPreviousRecordComponent,
     GraphAnalysisComponent,
+    FinishedMedicationComponent,
   ],
   entryComponents: [],
   imports: [
