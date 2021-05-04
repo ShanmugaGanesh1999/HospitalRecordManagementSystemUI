@@ -24,7 +24,6 @@ export class FinishedMedicationComponent implements OnInit {
       prescription: this.prescription,
       complication: this.complication,
     });
-    console.log(this.data[0]);
     this.prescription.setValue(this.data[0]);
     this.complication.setValue(this.data[1]);
   }
