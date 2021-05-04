@@ -44,6 +44,11 @@ export class MedicationComponent implements OnInit {
           complication: this.complication.value,
           prescription: this.prescription.value,
         };
+        this.openSnackBar(
+          'Please wait till the send prescription mail notification',
+          'Close'
+        );
+
         this.doctorService.createMedication(params).subscribe(
           (data: any) => {
             var params = {

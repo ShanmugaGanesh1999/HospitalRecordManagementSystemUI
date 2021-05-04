@@ -94,7 +94,6 @@ export class DoctorComponent implements OnInit {
   }
 
   showPat1() {
-    this.docDash = true;
     this.showPatient1 = false;
     this.docDash1 = false;
     this.pagePosition = 0;

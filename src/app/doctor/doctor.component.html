@@ -1,7 +1,9 @@
 <mat-drawer-container class="example-container">
   <mat-drawer mode="side" opened>
     <mat-list>
-      <mat-list-item class="list" (click)="showPat1()">Profile</mat-list-item>
+      <mat-list-item class="list" #id1 (click)="showPat1()"
+        >Profile</mat-list-item
+      >
       <mat-divider></mat-divider>
       <mat-list-item class="list" (click)="showPat()"
         >Pending Patient Records
@@ -179,7 +181,7 @@
       </mat-paginator>
     </div>
   </mat-drawer-content>
-  <mat-drawer-content *ngIf="docDash">
+  <mat-drawer-content class="id1">
     <div class="left-card">
       <mat-card class="example-card">
         <img
