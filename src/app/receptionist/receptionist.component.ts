@@ -52,7 +52,7 @@ export class ReceptionistComponent implements OnInit {
   ) {
     let token = localStorage.getItem('token'),
       who = localStorage.getItem('who');
-    if (!token || who !== 'Receptionist') {
+    if (!token || who !== 'Reception') {
       this.router.navigate(['login']);
     }
     appService.navHead = 'Receptionist';

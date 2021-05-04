@@ -1,4 +1,4 @@
-/* .example-flex-container {
+.example-flex-container {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -190,4 +190,4 @@
   padding-top: 0px !important;
   display: block;
   -webkit-tap-highlight-color: transparent;
-} */
+}

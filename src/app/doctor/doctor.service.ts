@@ -50,9 +50,7 @@ export class DoctorService {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('x-access-token', token + '');
     return this.httpClient.get(
-      this.basePatientDetailsUrl +
-        'getPatientsByPatientId?patientId=' +
-        patientId,
+      this.basePatientDetailsUrl + 'getPatientsById?patientId=' + patientId,
       {
         headers: headers,
       }
