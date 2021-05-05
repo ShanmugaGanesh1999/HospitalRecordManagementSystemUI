@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { ClipboardService } from 'ngx-clipboard';
 import { AppService } from './app.service';
+import { ContactComponent } from './contact/contact.component';
 import { LoginService } from './login/login.service';
 
 @Component({
@@ -11,10 +14,14 @@ import { LoginService } from './login/login.service';
 })
 export class AppComponent {
   title = 'hospital-mgt';
+  curDateTime = Date.now();
+  curPgLink: string = '';
   constructor(
     private router: Router,
     private loginService: LoginService,
     private _snackBar: MatSnackBar,
+    private dialog: MatDialog,
+    private clipboardService: ClipboardService,
     public appService: AppService
   ) {}
 
@@ -43,6 +50,27 @@ export class AppComponent {
       }
     );
   }
+  onClick(action: any) {
+    let text;
+    if (action === 1) {
+      text = 'Feedback';
+    } else if (action === 2) {
+      text = 'Report';
+    }
+    this.dialog.open(ContactComponent, {
+      data: [text, localStorage.getItem('who')],
+      width: '52%',
+      height: '80%',
+    });
+    this.openSnackBar('Opening dialog for ' + text, 'Close');
+  }
 
-  ngOnInit(): void {}
+  copyContent() {
+    this.clipboardService.copyFromContent(this.curPgLink);
+    this.openSnackBar('Current URL has been Copied into Clipboard', 'Close');
+  }
+
+  ngOnInit(): void {
+    this.curPgLink = window.location.href;
+  }
 }
