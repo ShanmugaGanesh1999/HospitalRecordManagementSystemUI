@@ -46,7 +46,7 @@
           </mat-form-field>
         </form>
       </div>
-      <mat-accordion *ngFor="let patient of patientIdData; let i = index">
+      <mat-accordion *ngFor="let patient of patientIdData1; let i = index">
         <mat-expansion-panel class="details-panel1">
           <mat-expansion-panel-header>
             <mat-panel-title>
@@ -86,7 +86,7 @@
         class="mat-paginator"
         style="color: white"
         (page)="onClickPaginator1($event)"
-        [length]="length"
+        [length]="length1"
         [pageSize]="pageSize1"
         [pageSizeOptions]="pageSizeOptions"
         [showFirstLastButtons]="true"

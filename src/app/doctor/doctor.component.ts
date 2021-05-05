@@ -19,10 +19,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class DoctorComponent implements OnInit {
   patientIdData: any = [];
+  patientIdData1: any = [];
   patientIdDataArr: any = [];
   patientIdDataArr1: any = [];
   emailId: any;
   length = 0;
+  length1 = 0;
   pageSize = 5;
   pageSizeOptions: number[] = [5, 10, 25, 100];
   pagePosition = 0;
@@ -78,13 +80,13 @@ export class DoctorComponent implements OnInit {
       searchInput1: this.searchInput1,
     });
     if (this.emailId != undefined) {
-      this.getDoctorIdByEmailId(this.emailId);
-      this.getDoctorIdByEmailId1(this.emailId);
+      // this.getDoctorIdByEmailId1(this.emailId);
     }
     this.appService.loading = false;
   }
 
   ngOnInit(): void {
+    this.getDoctorIdByEmailId(this.emailId);
     this.searchEventListener(this.searchTerm$);
     this.searchEventListener1(this.searchTerm1$);
   }
@@ -198,12 +200,12 @@ export class DoctorComponent implements OnInit {
                           i++
                         ) {
                           setTimeout(() => {
-                            this.patientIdDataArr1.push(data.data[i]);
+                            this.patientIdDataArr.push(data.data[i]);
                           }, 20);
                         }
-                        this.patientIdData = this.patientIdDataArr1;
+                        this.patientIdData = this.patientIdDataArr;
                         this.length = data.data.length;
-                        this.patientIdDataArr1.length = 0;
+                        this.patientIdDataArr.length = 0;
                         this.appService.loading = false;
                       } else {
                         this.appService.loading = false;
@@ -333,6 +335,7 @@ export class DoctorComponent implements OnInit {
   }
 
   getDoctorIdByEmailId1(emailId: any) {
+    console.log('ok');
     this.appService.loading = true;
     this.doctorService.getDoctorIdByEmailId(emailId).subscribe(
       (data: any) => {
@@ -340,6 +343,7 @@ export class DoctorComponent implements OnInit {
         var doctorId = data.doctorId;
         this.doctorService.getPatientIdByDoctorId1(doctorId).subscribe(
           (data: any) => {
+            console.log(data);
             this.patLen1 = data.patientId.length;
             var patientId = data.patientId;
             if (data.patientCount > 0) {
@@ -358,24 +362,30 @@ export class DoctorComponent implements OnInit {
               } else {
                 this.dataCount = data.patientCount;
               }
-              if (this.searchInput1.value.length == 0) {
+              if (
+                this.searchInput1.value.length == 0 &&
+                data.patientCount != 0
+              ) {
+                console.log('1');
+
                 for (let i = this.pagePosition1; i < this.dataCount; i++) {
                   this.doctorService
                     .getPatientsByPatientId(patientId[i])
                     .subscribe(
                       (data: any) => {
-                        this.patientIdDataArr.push(data.data[0]);
+                        this.patientIdDataArr1.push(data.data[0]);
                       },
                       (error: any) => {
                         this.openSnackBar('No patient found', 'Close');
                       }
                     );
                 }
-                this.patientIdData = this.patientIdDataArr;
-                this.length = data.patientCount;
-                this.patientIdDataArr.length = 0;
+                this.patientIdData1 = this.patientIdDataArr1;
+                this.length1 = data.patientCount;
+                this.patientIdDataArr1.length = 0;
                 this.appService.loading = false;
               } else {
+                console.log('2');
                 this.pagePosition1 = 0;
                 this.pageSize1 = 5;
                 this.doctorService
