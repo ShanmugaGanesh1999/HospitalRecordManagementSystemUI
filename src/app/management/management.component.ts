@@ -524,7 +524,7 @@ export class ManagementComponent implements OnInit {
         'Viewing graphical analysis of ' + this.selected,
         'Close'
       );
-    } else this.openSnackBar('Enter perticular graph to view', 'Close');
+    } else this.openSnackBar('Enter particular graph to view', 'Close');
   }
 
   onClickPreviousDetails(patientId: any) {

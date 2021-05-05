@@ -244,12 +244,12 @@ export class DoctorComponent implements OnInit {
                         this.appService.loading = false;
                       } else {
                         this.appService.loading = false;
-                        this.openSnackBar('No patient found', 'Close');
+                        this.openSnackBar('No patient assigned', 'Close');
                       }
                     },
                     (error: any) => {
                       this.appService.loading = false;
-                      this.openSnackBar('No patient found', 'Close');
+                      this.openSnackBar('No patient assigned', 'Close');
                     }
                   );
               }
@@ -260,7 +260,7 @@ export class DoctorComponent implements OnInit {
           },
           (error: any) => {
             this.appService.loading = false;
-            this.openSnackBar('No patient found', 'Close');
+            this.openSnackBar('No patient assigned', 'Close');
           }
         );
       },
@@ -406,7 +406,7 @@ export class DoctorComponent implements OnInit {
                         this.patientIdDataArr1.push(data.data[0]);
                       },
                       (error: any) => {
-                        this.openSnackBar('No patient found', 'Close');
+                        this.openSnackBar('No patient assigned', 'Close');
                       }
                     );
                 }
@@ -464,7 +464,7 @@ export class DoctorComponent implements OnInit {
                     },
                     (error: any) => {
                       this.appService.loading = false;
-                      this.openSnackBar('No patient found', 'Close');
+                      this.openSnackBar('No patient assigned', 'Close');
                     }
                   );
               }
@@ -475,7 +475,7 @@ export class DoctorComponent implements OnInit {
           },
           (error: any) => {
             this.appService.loading = false;
-            this.openSnackBar('No patient found', 'Close');
+            this.openSnackBar('No patient assigned', 'Close');
           }
         );
       },
