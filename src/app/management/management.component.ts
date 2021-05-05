@@ -107,11 +107,11 @@ export class ManagementComponent implements OnInit {
     private receptionistService: ReceptionistService,
     private dialog: MatDialog
   ) {
-    // let token = localStorage.getItem('token'),
-    //   who = localStorage.getItem('who');
-    // if (!token || who !== 'Management') {
-    //   this.router.navigate(['login']);
-    // }
+    let token = localStorage.getItem('token'),
+      who = localStorage.getItem('who');
+    if (!token || who !== 'Management') {
+      this.router.navigate(['login']);
+    }
     appService.navHead = 'Management';
     appService.logoutButton = true;
     this.getCount();
@@ -148,7 +148,7 @@ export class ManagementComponent implements OnInit {
       })
       .subscribe(
         (data: any) => {
-          // console.log(data);
+          // console.log(data.data);
           if (data.count > 0) {
             this.dataAppSource = new MatTableDataSource<AppointmentElement>(
               data.data

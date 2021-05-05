@@ -93,4 +93,17 @@ export class MgtService {
       { headers: this.headers }
     );
   }
+
+  sendReport(params: any) {
+    return this.httpClient.post(
+      this.comURL + 'sendReport',
+      {
+        from: params.from,
+        to: params.to,
+        heading: params.heading,
+        description: params.description,
+      },
+      { headers: this.headers }
+    );
+  }
 }

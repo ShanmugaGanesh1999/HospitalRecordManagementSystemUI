@@ -47,10 +47,17 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  keyDownFunction(event: any) {
+    if (event.keyCode === 13) {
+      this.onClickLogin();
+    }
+  }
+
   ngOnInit(): void {
     $(document).ready(function (this: any) {
       setTimeout(this.closeLoginInfo, 10000);
     });
+    localStorage.setItem('who', 'Anonymous');
   }
 
   openLoginInfo() {
