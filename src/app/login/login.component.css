@@ -25,12 +25,14 @@ Login Box
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+  
 }
 
 .box-form {
   width: 320px;
   position: relative;
   z-index: 1;
+  color:black;
 }
 
 .box-login {
@@ -41,6 +43,9 @@ Login Box
   border-radius: 10px;
   overflow: hidden;
   z-index: 2;
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)),
+  url("https://st.depositphotos.com/2691351/3246/i/950/depositphotos_32461595-stock-photo-doctor-coat-with-stethoscope.jpg") no-repeat center;
+  background-size: cover;
 }
 
 .box-info {
@@ -67,12 +72,12 @@ Login Box
   z-index: 0;
 }
 
-a {
-  text-decoration: none;
-}
-
 button:focus {
   outline: 0;
+}
+
+.h1-style,mat-label{
+   color:black;
 }
 
 .b {
@@ -81,12 +86,9 @@ button:focus {
   background-color: transparent;
   border: none;
   cursor: pointer;
-  color: blueviolet;
+  color: black;
 }
 
-.b-form {
-  opacity: 0.5;
-}
 
 .b-info {
   opacity: 0.5;
