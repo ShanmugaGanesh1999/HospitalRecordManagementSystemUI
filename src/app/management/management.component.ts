@@ -43,21 +43,29 @@ export class ManagementComponent implements OnInit {
   selected = '';
   dateCountArr: dateCountElement[] = [];
   length = 0;
+  length2 = 0;
   lengthOfPatients = 0;
   pageSize = 5;
+  pageSize2 = 5;
   pageSizeOptions: number[] = [5, 10, 25, 100];
+  pageSizeOptions2: number[] = [5, 10, 25, 100];
   pagePosition = 0;
+  pagePosition2 = 0;
   pageSize1 = 5;
   pageSizeOptions1: number[] = [5, 10, 25, 100];
   pagePosition1 = 0;
   displayedColumns: string[] = ['date', 'count'];
   panelOpenState = false;
   patients: any = [];
+  doctors: any = [];
   searchInput1 = new FormControl('');
   searchInput = new FormControl('');
   searchTerm1$ = new Subject<string>();
+  searchInput2 = new FormControl('');
+  searchTerm2$ = new Subject<string>();
   searchTerm$ = new Subject<string>();
   searchForm1: FormGroup;
+  searchForm2: FormGroup;
   searchForm: FormGroup;
 
   color: string = 'rgb(240, 163, 19)';
@@ -108,6 +116,7 @@ export class ManagementComponent implements OnInit {
     appService.logoutButton = true;
     this.getCount();
     this.getAppointments();
+    this.getAllDoctors();
     this.searchForm = new FormGroup({
       searchInput: this.searchInput,
     });
@@ -122,6 +131,9 @@ export class ManagementComponent implements OnInit {
     });
     this.searchForm1 = new FormGroup({
       searchInput1: this.searchInput1,
+    });
+    this.searchForm2 = new FormGroup({
+      searchInput2: this.searchInput2,
     });
     this.getAllPatients();
   }
@@ -161,6 +173,83 @@ export class ManagementComponent implements OnInit {
         },
         (err) => console.log(err)
       );
+  }
+
+  getAllDoctors() {
+    this.appService.loading = true;
+    this.mgtService
+      .getAllDoctors({
+        search: this.searchInput2.value ? this.searchInput2.value : '',
+        skip: this.pagePosition2,
+        limit: this.pageSize2,
+      })
+      .subscribe(
+        (data: any) => {
+          if (data.count > 0) {
+            data.data.forEach((element: any) => {
+              if (element.status == 'Active') {
+                element['color'] = 'details-panel1';
+                element['tooltip'] = 'Suspend Doctor';
+                element['icon'] = 'thumb_up_alt';
+                element['disable'] = 'gpp_bad';
+              } else if (element.status == 'Away') {
+                element['icon'] = 'thumb_up_off_alt';
+                element['tooltip'] = 'Suspend Doctor';
+                element['disable'] = 'gpp_bad';
+                element['color'] = 'details-panel';
+              } else if (element.status == 'Suspended') {
+                element['icon'] = 'thumb_down_alt';
+                element['disable'] = 'verified';
+                element['tooltip'] = 'Activate Doctor';
+                element['color'] = 'details-panel2';
+              }
+            });
+            this.doctors = data.data;
+            if (this.searchInput2.value != '')
+              this.openSnackBar(
+                `Doctor found for "${this.searchInput2.value}" :)`,
+                'Close'
+              );
+            else this.openSnackBar('Doctor found :)', 'Close');
+          } else {
+            this.dataAppSource = new MatTableDataSource<AppointmentElement>();
+            if (this.searchInput2.value != '')
+              this.openSnackBar(
+                `Doctor not found for "${this.searchInput2.value}" :(`,
+                'Close'
+              );
+            else this.openSnackBar('Doctor not found :(', 'Close');
+          }
+          this.length2 = data.count;
+          this.appService.loading = false;
+        },
+        (err) => console.log(err)
+      );
+  }
+  onClickStatus(docId: any, status: any) {
+    this.appService.loading = true;
+    let to: String;
+    if (status == 'Suspended') {
+      to = 'Away';
+    } else {
+      to = 'Suspended';
+    }
+    this.mgtService.changeDoctorStatus({ id: docId, status: to }).subscribe(
+      (data: any) => {
+        this.openSnackBar(
+          `Doctor: ${data.doctorName}, status updated to ${to}`,
+          'Close'
+        );
+        this.appService.loading = false;
+        this.getAllDoctors();
+      },
+      (err) => console.log(err)
+    );
+  }
+
+  refreshDoctor() {
+    this.getAllDoctors();
+    this.openSnackBar('Doctor details refreshed', 'Close');
   }
 
   onSubmit() {
@@ -322,11 +411,37 @@ export class ManagementComponent implements OnInit {
       })
       .subscribe(
         (term: any) => {
-          console.log(term);
+          // console.log(term);
         },
         (err: any) => {
           console.log('456', err);
           this.searchEventListener1(this.searchTerm1$);
+        }
+      );
+  }
+
+  searchEventListener2(searchTerms2: Observable<string>) {
+    searchTerms2
+      .pipe(debounceTime(400), distinctUntilChanged())
+      .switchMap((term: any) => {
+        try {
+          // console.log('term', term);
+          console.log('term', term);
+          this.getAllDoctors();
+
+          return term;
+        } catch (error) {
+          //console.log('123', error.message);
+          return null;
+        }
+      })
+      .subscribe(
+        (term: any) => {
+          // console.log(term);
+        },
+        (err: any) => {
+          console.log('456', err);
+          this.searchEventListener2(this.searchTerm2$);
         }
       );
   }
@@ -347,7 +462,7 @@ export class ManagementComponent implements OnInit {
       })
       .subscribe(
         (term: any) => {
-          console.log(term);
+          // console.log(term);
         },
         (err: any) => {
           console.log('456', err);
@@ -362,12 +477,15 @@ export class ManagementComponent implements OnInit {
   }
 
   searchText = '';
+  searchText2 = '';
 
   ngOnInit(): void {
     this.searchEventListener(this.searchTerm$);
     this.searchEventListener1(this.searchTerm1$);
+    this.searchEventListener2(this.searchTerm2$);
     this.getAppointments();
     this.getAllPatients();
+    this.getAllDoctors();
   }
 
   searchText1 = '';
@@ -379,9 +497,20 @@ export class ManagementComponent implements OnInit {
     this.getAllPatients();
   }
 
+  onClickPaginator2(event: any) {
+    this.pagePosition2 = event.pageIndex * event.pageSize;
+    this.pageSize2 = event.pageSize;
+    this.getAllDoctors();
+  }
+
   onClickCloseSearch1() {
     this.searchInput1.setValue('');
     this.getAllPatients();
+  }
+
+  onClickCloseSearch2() {
+    this.searchInput2.setValue('');
+    this.getAllDoctors();
   }
 
   viewGraph() {
