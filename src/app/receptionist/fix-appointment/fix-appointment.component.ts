@@ -36,8 +36,15 @@ export class FixAppointmentComponent implements OnInit {
 
   ngOnInit(): void {
     this.patient = this.data.details[0];
-    //console.log(this.patient);
     this.getDoctorsByStatus();
+  }
+
+  openSnackbar(text: string, action: string) {
+    this._snackBar.open(text, action, {
+      duration: 5000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom',
+    });
   }
 
   getDoctorsByStatus() {
@@ -70,41 +77,24 @@ export class FixAppointmentComponent implements OnInit {
               (data1: any) => {
                 this.appService.loading = false;
                 window.location.reload();
-                this._snackBar.open('Appointment fixed!!!', 'close', {
-                  duration: 5000,
-                  horizontalPosition: 'center',
-                  verticalPosition: 'bottom',
-                });
+                this.openSnackbar('Appointment fixed', 'Close');
               },
               (err: any) => {
                 this.appService.loading = false;
-                this._snackBar.open(
+                this.openSnackbar(
                   'Something went wrong. Appointment not fixed',
-                  'close',
-                  {
-                    duration: 5000,
-                    horizontalPosition: 'center',
-                    verticalPosition: 'bottom',
-                  }
+                  'Close'
                 );
               }
             );
           },
           (error: any) => {
             this.appService.loading = false;
-            this._snackBar.open(error.message, 'close', {
-              duration: 5000,
-              horizontalPosition: 'center',
-              verticalPosition: 'bottom',
-            });
+            this.openSnackbar(error.message, 'Close');
           }
         );
     } else {
-      this._snackBar.open('Choose a doctor to fix appointment', 'close', {
-        duration: 5000,
-        horizontalPosition: 'center',
-        verticalPosition: 'bottom',
-      });
+      this.openSnackbar('Choose a doctor to fix appointment', 'Close');
     }
   }
 }
