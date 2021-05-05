@@ -63,7 +63,7 @@ body {
   background: linear-gradient(0deg, #b14daca9, #b14daca9),
     url("https://image.shutterstock.com/image-photo/blue-dna-structure-isolated-background-260nw-1238405779.jpg")
       no-repeat center !important;
-  background-size: cover;
+  background-size: cover !important;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   height: fit-content;
 }
