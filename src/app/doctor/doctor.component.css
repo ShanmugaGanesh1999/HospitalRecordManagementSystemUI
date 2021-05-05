@@ -15,8 +15,17 @@
   margin: 30px;
 }
 
+.details-panel1 {
+  background-color: rgb(7, 231, 56);
+  border: solid 10px white;
+  color: white !important;
+  font-weight: 350;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  margin-top: 1%;
+}
+
 .details-panel {
-  background-color: rgb(240, 163, 19);
+  background-color: rgb(245, 104, 79);
   border: solid 10px white;
   color: white !important;
   font-weight: 350;
