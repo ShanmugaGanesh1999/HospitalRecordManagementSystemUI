@@ -41,6 +41,34 @@ export class MgtService {
     );
   }
 
+  changeDoctorStatus(params: any) {
+    return this.httpClient.put(
+      this.drURL + 'updateDoctorStatusById',
+      {
+        id: params.id,
+        status: params.status,
+      },
+      {
+        headers: this.headers,
+      }
+    );
+  }
+
+  getAllDoctors(params: any) {
+    return this.httpClient.get(
+      this.drURL +
+        'getAllDoctors?search=' +
+        params.search +
+        '&skip=' +
+        params.skip +
+        '&limit=' +
+        params.limit,
+      {
+        headers: this.headers,
+      }
+    );
+  }
+
   getAllCounts(params: any) {
     return this.httpClient.get(
       this.mgtURL +
