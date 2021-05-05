@@ -7,6 +7,10 @@
   padding: 16px;
   border-radius: 8px;
 }
+.mat-grid-tile {
+  background: transparent;
+}
+
 .example-stretched-tabs {
   margin: 2.5%;
   max-width: 95%;

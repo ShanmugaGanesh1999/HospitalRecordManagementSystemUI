@@ -146,9 +146,13 @@ export class LoginComponent implements OnInit {
           this.openLoginInfo1();
           this.openSnackBar(`OTP has been sent to your mail:${email}`, 'Close');
         },
-        (err: any) => this.openSnackBar('Please enter valid email', 'Close')
+        (err: any) => {
+          this.appService.loading = false;
+          this.openSnackBar('Please enter valid email', 'Close');
+        }
       );
     } else {
+      this.appService.loading = false;
       this.openSnackBar('Please enter email', 'Close');
     }
   }
@@ -186,20 +190,20 @@ export class LoginComponent implements OnInit {
             }
           },
           (err: any) => {
+            this.appService.loading = false;
             this.openSnackBar(
               'OTP has been expired. Please try again later',
               'Close'
             );
-            this.appService.loading = false;
             this.closeLoginInfo1();
           }
         );
       } else {
+        this.appService.loading = false;
         this.openSnackBar(
           'Passwords not equal / Wrong OTP - Check and enter',
           'Close'
         );
-        this.appService.loading = false;
       }
     }
   }

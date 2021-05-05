@@ -61,14 +61,14 @@ export class DoctorComponent implements OnInit {
     private _snackBar: MatSnackBar,
     private route: ActivatedRoute
   ) {
-    this.route.queryParams.subscribe((params: any) => {
-      this.emailId = params['emailId'];
-    });
     let token = localStorage.getItem('token'),
       who = localStorage.getItem('who');
     if (!token || who !== 'Doctor') {
       this.router.navigate(['login']);
     }
+    this.route.queryParams.subscribe((params: any) => {
+      this.emailId = params['emailId'];
+    });
     appService.logoutButton = true;
     appService.navHead = 'Doctor';
     this.patientSearchForm = new FormGroup({
@@ -77,8 +77,11 @@ export class DoctorComponent implements OnInit {
     this.patientSearchForm1 = new FormGroup({
       searchInput1: this.searchInput1,
     });
-    this.getDoctorIdByEmailId(this.emailId);
-    this.getDoctorIdByEmailId1(this.emailId);
+    if (this.emailId != undefined) {
+      this.getDoctorIdByEmailId(this.emailId);
+      this.getDoctorIdByEmailId1(this.emailId);
+    }
+    this.appService.loading = false;
   }
 
   ngOnInit(): void {
