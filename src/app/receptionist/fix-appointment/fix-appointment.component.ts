@@ -17,6 +17,7 @@ import { AppService } from 'src/app/app.service';
 })
 export class FixAppointmentComponent implements OnInit {
   patient: any;
+  activeDetails: any = [];
   doctors: any = [];
   status = 'Active';
   doctorId = new FormControl();
@@ -50,7 +51,15 @@ export class FixAppointmentComponent implements OnInit {
   getDoctorsByStatus() {
     this.fixAppointmentService.getDoctorsByStatus(this.status).subscribe(
       (data: any) => {
-        this.doctors = data.data;
+        this.activeDetails = data.data;
+        for (let i = 0; i < this.activeDetails.length; i++) {
+          if (
+            this.activeDetails[i].doctorName !== 'Management' &&
+            this.activeDetails[i].doctorName !== 'Receptionist'
+          ) {
+            this.doctors.push(this.activeDetails[i]);
+          }
+        }
       },
       (error: any) => {
         this._snackBar.open(error.message, 'close', {
