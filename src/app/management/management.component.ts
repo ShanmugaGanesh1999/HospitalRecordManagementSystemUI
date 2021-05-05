@@ -99,11 +99,11 @@ export class ManagementComponent implements OnInit {
     private receptionistService: ReceptionistService,
     private dialog: MatDialog
   ) {
-    let token = localStorage.getItem('token'),
-      who = localStorage.getItem('who');
-    if (!token || who !== 'Management') {
-      this.router.navigate(['login']);
-    }
+    // let token = localStorage.getItem('token'),
+    //   who = localStorage.getItem('who');
+    // if (!token || who !== 'Management') {
+    //   this.router.navigate(['login']);
+    // }
     appService.navHead = 'Management';
     appService.logoutButton = true;
     this.getCount();
