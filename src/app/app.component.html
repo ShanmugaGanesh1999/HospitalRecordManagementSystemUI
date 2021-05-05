@@ -1,53 +1,55 @@
-<mat-toolbar color="primary" class="app-toolbar mat-elevation-z4">
-  <span class="material-icons"> local_hospital </span> &nbsp;
-  <span>Hospital</span> &nbsp;
-  <span class="page-center">{{ appService.navHead }}</span>
-  <span class="example-spacer"></span>
-  <button
-    mat-icon-button
-    [matMenuTriggerFor]="menu"
-    aria-label="Example icon-button with a menu"
-  >
-    <mat-icon>more_vert</mat-icon>
-  </button>
-  <mat-menu #menu="matMenu">
+<body>
+  <mat-toolbar color="primary" class="app-toolbar mat-elevation-z4">
+    <span class="material-icons"> local_hospital </span> &nbsp;
+    <span>Hospital</span> &nbsp;
+    <span class="page-center">{{ appService.navHead }}</span>
+    <span class="example-spacer"></span>
     <button
-      mat-menu-item
-      class="highlight"
-      (click)="openSnackBar('Link copied', 'Close')"
+      mat-icon-button
+      [matMenuTriggerFor]="menu"
+      aria-label="Example icon-button with a menu"
     >
-      <mat-icon>share</mat-icon>
-      <span>Share</span>
+      <mat-icon>more_vert</mat-icon>
     </button>
-    <button
-      mat-menu-item
-      class="highlight"
-      (click)="openSnackBar('Opening feedback', 'Close')"
-    >
-      <mat-icon>feedback</mat-icon>
-      <span>Feedback</span>
-    </button>
-    <button
-      mat-menu-item
-      class="highlight"
-      (click)="openSnackBar('Reporting Deveploper', 'Close')"
-    >
-      <mat-icon>report</mat-icon>
-      <span>Report</span>
-    </button>
-    <div *ngIf="appService.logoutButton">
-      <button mat-menu-item class="highlight" (click)="logout()">
-        <mat-icon>power_settings_new</mat-icon>
-        <span>Logout</span>
+    <mat-menu #menu="matMenu">
+      <button
+        mat-menu-item
+        class="highlight"
+        (click)="openSnackBar('Link copied', 'Close')"
+      >
+        <mat-icon>share</mat-icon>
+        <span>Share</span>
       </button>
+      <button
+        mat-menu-item
+        class="highlight"
+        (click)="openSnackBar('Opening feedback', 'Close')"
+      >
+        <mat-icon>feedback</mat-icon>
+        <span>Feedback</span>
+      </button>
+      <button
+        mat-menu-item
+        class="highlight"
+        (click)="openSnackBar('Reporting Deveploper', 'Close')"
+      >
+        <mat-icon>report</mat-icon>
+        <span>Report</span>
+      </button>
+      <div *ngIf="appService.logoutButton">
+        <button mat-menu-item class="highlight" (click)="logout()">
+          <mat-icon>power_settings_new</mat-icon>
+          <span>Logout</span>
+        </button>
+      </div>
+    </mat-menu>
+  </mat-toolbar>
+
+  <div *ngIf="appService.loading" class="wrapper">
+    <div class="inner">
+      <mat-spinner class="mat-spinner-color"></mat-spinner>
     </div>
-  </mat-menu>
-</mat-toolbar>
-
-<div *ngIf="appService.loading" class="wrapper">
-  <div class="inner">
-    <mat-spinner class="mat-spinner-color"></mat-spinner>
   </div>
-</div>
 
-<router-outlet></router-outlet>
+  <router-outlet></router-outlet>
+</body>
