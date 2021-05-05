@@ -16,7 +16,7 @@
 }
 
 .details-panel1 {
-  background-color: #008000db;
+  background-color: rgb(7, 231, 56);
   border: solid 10px white;
   color: white !important;
   font-weight: 350;
@@ -25,7 +25,7 @@
 }
 
 .details-panel {
-  background-color: #ff0000d1;
+  background-color: rgb(245, 104, 79);
   border: solid 10px white;
   color: white !important;
   font-weight: 350;
