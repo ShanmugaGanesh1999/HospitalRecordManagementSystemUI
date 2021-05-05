@@ -31,6 +31,7 @@ export class AppComponent {
       (data: any) => {
         this.openSnackBar(data.message, 'Close');
         localStorage.clear();
+        this.openSnackBar('Logged out successfully', 'Close');
         this.router.navigate(['login']);
       },
       (err) => {
@@ -38,9 +39,7 @@ export class AppComponent {
           err.message ===
           'Http failure response for http://localhost:3000/common/logout: 401 Unauthorized'
         )
-          this.openSnackBar('Logged out successfully', 'Close');
-        localStorage.clear();
-        this.router.navigate(['login']);
+          this.openSnackBar(`Can't logout`, 'Close');
       }
     );
   }
