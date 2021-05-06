@@ -19,7 +19,7 @@
 }
 
 .details-panel {
-  background-color: rgb(240, 163, 19);
+  background-color: #D291BC;
   border: solid 10px white;
   color: white !important;
   font-weight: 500;
@@ -129,6 +129,6 @@ mat-grid-tile {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: center;
-  background-color: rgb(240, 163, 19);
+  background-color: #FF7F50;
   color: black;
 }
