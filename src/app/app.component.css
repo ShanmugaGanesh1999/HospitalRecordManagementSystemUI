@@ -2,8 +2,14 @@
   flex: 1 1 auto;
 }
 
-.page-center {
+.page-left {
   margin-left: 2%;
+  color: #fff;
+  opacity: 0.8;
+}
+
+.page-right {
+  margin-right: 2%;
   color: #fff;
   opacity: 0.8;
 }

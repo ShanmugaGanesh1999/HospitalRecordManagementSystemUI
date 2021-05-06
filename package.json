@@ -24,6 +24,7 @@
     "@swimlane/ngx-charts": "^17.0.1",
     "angular-alert-module": "^2.0.3",
     "jquery": "^3.6.0",
+    "ngx-clipboard": "^14.0.1",
     "rxjs": "~6.6.0",
     "rxjs-compat": "^6.6.7",
     "tslib": "^2.0.0",

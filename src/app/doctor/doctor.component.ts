@@ -19,10 +19,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class DoctorComponent implements OnInit {
   patientIdData: any = [];
+  patientIdData1: any = [];
   patientIdDataArr: any = [];
   patientIdDataArr1: any = [];
   emailId: any;
   length = 0;
+  length1 = 0;
   pageSize = 5;
   pageSizeOptions: number[] = [5, 10, 25, 100];
   pagePosition = 0;
@@ -78,8 +80,8 @@ export class DoctorComponent implements OnInit {
       searchInput1: this.searchInput1,
     });
     if (this.emailId != undefined) {
-      this.getDoctorIdByEmailId(this.emailId);
-      this.getDoctorIdByEmailId1(this.emailId);
+      this.getDoctorIdByEmailId2(this.emailId);
+      // this.getDoctorIdByEmailId1(this.emailId);
     }
     this.appService.loading = false;
   }
@@ -101,7 +103,7 @@ export class DoctorComponent implements OnInit {
     this.docDash1 = false;
     this.pagePosition = 0;
     this.pageSize = 5;
-    this.getDoctorIdByEmailId(this.emailId);
+    this.getDoctorIdByEmailId2(this.emailId);
   }
 
   showPat2() {
@@ -115,6 +117,42 @@ export class DoctorComponent implements OnInit {
 
   searchText = '';
   docArr = [];
+
+  getDoctorIdByEmailId2(emailId: any) {
+    this.appService.loading = true;
+    this.doctorService.getDoctorIdByEmailId(emailId).subscribe(
+      (data: any) => {
+        this.docName = data.doctorData[0].doctorName.toUpperCase();
+        this.docDOP = data.doctorData[0].DOP;
+        this.docExp =
+          new Date().getFullYear() - new Date(this.docDOP).getFullYear();
+        this.docPhoneNo = data.doctorData[0].mobileNo;
+        this.docSpec = data.doctorData[0].specialization;
+        this.docArr = data.doctorId;
+        this.doctorService.getPatientIdByDoctorId(data.doctorId).subscribe(
+          (data: any) => {
+            this.patLen = data.patientId.length;
+          },
+          (err) => {
+            this.appService.loading = false;
+          }
+        );
+        this.doctorService.getPatientIdByDoctorId1(data.doctorId).subscribe(
+          (data: any) => {
+            this.patLen1 = data.patientId.length;
+          },
+          (err) => {
+            this.appService.loading = false;
+          }
+        );
+        this.appService.loading = false;
+      },
+      (error: any) => {
+        this.appService.loading = false;
+        this.openSnackBar(error.message, 'Close');
+      }
+    );
+  }
 
   getDoctorIdByEmailId(emailId: any) {
     this.appService.loading = true;
@@ -131,7 +169,6 @@ export class DoctorComponent implements OnInit {
         this.doctorService.getPatientIdByDoctorId(doctorId).subscribe(
           (data: any) => {
             var patientId = data.patientId;
-            this.patLen = data.patientId.length;
             if (data.patientCount > 0) {
               if (this.dataCount <= data.patientCount) {
                 if (this.pageSize % 5 == 0 && this.pagePosition != 0) {
@@ -198,21 +235,21 @@ export class DoctorComponent implements OnInit {
                           i++
                         ) {
                           setTimeout(() => {
-                            this.patientIdDataArr1.push(data.data[i]);
+                            this.patientIdDataArr.push(data.data[i]);
                           }, 20);
                         }
-                        this.patientIdData = this.patientIdDataArr1;
+                        this.patientIdData = this.patientIdDataArr;
                         this.length = data.data.length;
-                        this.patientIdDataArr1.length = 0;
+                        this.patientIdDataArr.length = 0;
                         this.appService.loading = false;
                       } else {
                         this.appService.loading = false;
-                        this.openSnackBar('No patient found', 'Close');
+                        this.openSnackBar('No patient assigned', 'Close');
                       }
                     },
                     (error: any) => {
                       this.appService.loading = false;
-                      this.openSnackBar('No patient found', 'Close');
+                      this.openSnackBar('No patient assigned', 'Close');
                     }
                   );
               }
@@ -223,7 +260,7 @@ export class DoctorComponent implements OnInit {
           },
           (error: any) => {
             this.appService.loading = false;
-            this.openSnackBar('No patient found', 'Close');
+            this.openSnackBar('No patient assigned', 'Close');
           }
         );
       },
@@ -340,7 +377,6 @@ export class DoctorComponent implements OnInit {
         var doctorId = data.doctorId;
         this.doctorService.getPatientIdByDoctorId1(doctorId).subscribe(
           (data: any) => {
-            this.patLen1 = data.patientId.length;
             var patientId = data.patientId;
             if (data.patientCount > 0) {
               if (this.dataCount <= data.patientCount) {
@@ -358,22 +394,25 @@ export class DoctorComponent implements OnInit {
               } else {
                 this.dataCount = data.patientCount;
               }
-              if (this.searchInput1.value.length == 0) {
+              if (
+                this.searchInput1.value.length == 0 &&
+                data.patientCount != 0
+              ) {
                 for (let i = this.pagePosition1; i < this.dataCount; i++) {
                   this.doctorService
                     .getPatientsByPatientId(patientId[i])
                     .subscribe(
                       (data: any) => {
-                        this.patientIdDataArr.push(data.data[0]);
+                        this.patientIdDataArr1.push(data.data[0]);
                       },
                       (error: any) => {
-                        this.openSnackBar('No patient found', 'Close');
+                        this.openSnackBar('No patient assigned', 'Close');
                       }
                     );
                 }
-                this.patientIdData = this.patientIdDataArr;
-                this.length = data.patientCount;
-                this.patientIdDataArr.length = 0;
+                this.patientIdData1 = this.patientIdDataArr1;
+                this.length1 = data.patientCount;
+                this.patientIdDataArr1.length = 0;
                 this.appService.loading = false;
               } else {
                 this.pagePosition1 = 0;
@@ -425,7 +464,7 @@ export class DoctorComponent implements OnInit {
                     },
                     (error: any) => {
                       this.appService.loading = false;
-                      this.openSnackBar('No patient found', 'Close');
+                      this.openSnackBar('No patient assigned', 'Close');
                     }
                   );
               }
@@ -436,7 +475,7 @@ export class DoctorComponent implements OnInit {
           },
           (error: any) => {
             this.appService.loading = false;
-            this.openSnackBar('No patient found', 'Close');
+            this.openSnackBar('No patient assigned', 'Close');
           }
         );
       },

@@ -3,7 +3,7 @@
     <div class='box-form'>
       <div class='box-login'>
         <div class='fieldset-body'>
-          <form [formGroup]="loginForm">
+          <form [formGroup]="loginForm" (keydown)="keyDownFunction($event)">
             <mat-card-header>
               <mat-card-title class="h1-style">Login</mat-card-title>
             </mat-card-header>

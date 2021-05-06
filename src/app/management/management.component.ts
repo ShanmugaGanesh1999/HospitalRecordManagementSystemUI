@@ -148,7 +148,7 @@ export class ManagementComponent implements OnInit {
       })
       .subscribe(
         (data: any) => {
-          // console.log(data);
+          // console.log(data.data);
           if (data.count > 0) {
             this.dataAppSource = new MatTableDataSource<AppointmentElement>(
               data.data
@@ -524,7 +524,7 @@ export class ManagementComponent implements OnInit {
         'Viewing graphical analysis of ' + this.selected,
         'Close'
       );
-    } else this.openSnackBar('Enter perticular graph to view', 'Close');
+    } else this.openSnackBar('Enter particular graph to view', 'Close');
   }
 
   onClickPreviousDetails(patientId: any) {

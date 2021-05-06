@@ -45,7 +45,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { FinishedMedicationComponent } from './doctor/finished-medication/finished-medication.component';
-
+import { ContactComponent } from './contact/contact.component';
+import { ClipboardModule } from 'ngx-clipboard';
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,12 +61,14 @@ import { FinishedMedicationComponent } from './doctor/finished-medication/finish
     PatientPreviousRecordComponent,
     GraphAnalysisComponent,
     FinishedMedicationComponent,
+    ContactComponent,
   ],
   entryComponents: [],
   imports: [
     BrowserModule,
     MatFormFieldModule,
     NgxChartsModule,
+    ClipboardModule,
     MatProgressSpinnerModule,
     MatSortModule,
     MatInputModule,
