@@ -93,11 +93,14 @@ export class ReceptionistComponent implements OnInit {
         details: [],
         isEdit: this.isEdit,
       },
+      panelClass: 'main-background',
     });
   }
 
   onClickSearchPatient() {
-    this.dialog.open(SearchPatientComponent);
+    this.dialog.open(SearchPatientComponent, {
+      panelClass: 'main-background',
+    });
   }
 
   getAppointments() {
@@ -160,6 +163,7 @@ export class ReceptionistComponent implements OnInit {
         details: patient,
         isEdit: true,
       },
+      panelClass: 'main-background',
     });
   }
 

@@ -1,3 +1,8 @@
+::ng-deep.main-background mat-dialog-container {
+  background:#ecb2ec no-repeat center !important;
+  margin: 5px !important;
+}
+
 mat-form-field {
   color: rgb(0, 0, 8);
   width: 270px;

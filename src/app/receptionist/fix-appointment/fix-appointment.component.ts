@@ -60,6 +60,17 @@ export class FixAppointmentComponent implements OnInit {
             this.doctors.push(this.activeDetails[i]);
           }
         }
+        if (this.doctors === '') {
+          this._snackBar.open(
+            'No Doctors available now. Please check after some time.',
+            'close',
+            {
+              duration: 5000,
+              horizontalPosition: 'center',
+              verticalPosition: 'bottom',
+            }
+          );
+        }
       },
       (error: any) => {
         this._snackBar.open(error.message, 'close', {

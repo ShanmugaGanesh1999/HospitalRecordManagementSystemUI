@@ -19,12 +19,12 @@
 }
 
 .details-panel {
-  background-color: #D291BC;
+  background-color: #BA55D3;
   border: solid 10px white;
   color: white !important;
   font-weight: 500;
 }
-
+/**#D291BC**/
 .mat-expansion-panel-header {
   font-family: Roboto, "Helvetica Neue", sans-serif;
   font-size: 15px;
@@ -66,6 +66,21 @@ mat-grid-tile {
   height: 100%;
   background: transparent;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+}
+
+mat-grid-list{
+   margin:2.5%
+}
+
+.main{
+  margin: 0;
+  background: linear-gradient(0deg, #e6e6fada, #e6e6fada),
+  url("https://images.megapixl.com/4723/47234029.jpg") no-repeat center;
+  background-size: cover;
+  font-family: Roboto,
+  "Helvetica Neue",
+  sans-serif;
+  height: 120vh;
 }
 
 .example-header-image {
@@ -118,17 +133,17 @@ mat-grid-tile {
 }
 
 .table tr:nth-child(odd) {
-  background-color: #ada8a8;
+  background-color: #D8BFD8;
 }
 
 .table tr:hover {
-  background-color: #ddd;
+  background-color: #DDA0DD;
 }
 
 .table th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: center;
-  background-color: #FF7F50;
+  background-color: #bd7ea8;
   color: black;
 }

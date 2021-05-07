@@ -36,6 +36,7 @@ export class SearchPatientComponent implements OnInit {
           data: {
             details: this.patient,
           },
+          panelClass: 'main-background',
         });
       },
       (error: any) => {
