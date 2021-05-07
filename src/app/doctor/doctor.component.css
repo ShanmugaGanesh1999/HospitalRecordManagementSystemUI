@@ -16,7 +16,7 @@
 }
 
 .details-panel1 {
-  background-color: rgb(7, 231, 56);
+  background-color: #77DD76;
   border: solid 10px white;
   color: white !important;
   font-weight: 350;
@@ -25,7 +25,7 @@
 }
 
 .details-panel {
-  background-color: rgb(245, 104, 79);
+  background-color: #FF6962;
   border: solid 10px white;
   color: white !important;
   font-weight: 350;
@@ -175,15 +175,37 @@
 .mat-drawer.mat-drawer-side {
   z-index: 2;
   width: 15%;
+  background-color: #9370DB;
 }
 
 .list:hover {
-  background-color: #b48ff0;
+  background-color: indigo;
   color: #fff;
 }
 
+.mat-list-item-focus{
+background-color: indigo;
+color: #fff;
+}
+
+.list{
+  color: #fff;
+}
+
+.mat-drawer-container {
+  margin: 0;
+  background: linear-gradient(0deg, #e6e6fada, #e6e6fada),
+  url("https://images.megapixl.com/4723/47234029.jpg") no-repeat center;
+  background-size: cover;
+  font-family: Roboto,
+    "Helvetica Neue",
+    sans-serif;
+  height: 100vh;
+  z-index:1000
+}
+
 .mat-drawer-content {
-  background: #808080e0;
+  background: transparent;
   position: relative;
   z-index: 1;
   display: block;

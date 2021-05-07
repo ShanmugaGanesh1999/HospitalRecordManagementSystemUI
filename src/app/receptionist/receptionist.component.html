@@ -1,125 +1,129 @@
-<section class="top-section">
-  <div>
-    <div class="example-flex-container">
-      <div class="example-button-container">
-        <button mat-fab mat-raised-button matTooltip="Add Patient" color="primary" (click)="onClickAddPatient()">
-          <mat-icon>add</mat-icon>
-        </button>
-      </div>
-      <div class="example-button-container">
-        <button mat-fab mat-raised-button matTooltip="Search for Patient" color="accent"
-          (click)="onClickSearchPatient()">
-          <mat-icon>search</mat-icon>
-        </button>
+<div class="main">
+  <section class="top-section">
+    <div>
+      <div class="example-flex-container">
+        <div class="example-button-container">
+          <button mat-fab mat-raised-button matTooltip="Add Patient" (click)="onClickAddPatient()"
+            style="background-color: #4B0082 ;color:white">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+        <div class="example-button-container">
+          <button mat-fab mat-raised-button matTooltip="Search for Patient" (click)="onClickSearchPatient()"
+            style="background-color: #9370DB;color:white">
+            <mat-icon>search</mat-icon>
+          </button>
+        </div>
       </div>
     </div>
-  </div>
-</section>
-<mat-grid-list cols="2" rowHeight="2:1">
-  <mat-grid-tile>
-    <div class="example-large-box mat-elevation-z4 grid-section">
-      <mat-card class="example-card2">
+  </section>
+  <mat-grid-list cols="2" rowHeight="2:1">
+    <mat-grid-tile>
+      <div class="example-large-box mat-elevation-z4 grid-section">
+        <mat-card class="example-card2">
+          <mat-card-header>
+            <div mat-card-avatar class="example-header-image2"></div>
+            <mat-card-title>Appointments today</mat-card-title>
+            <mat-card-subtitle style="color: white;">Details of today's appointments</mat-card-subtitle>
+          </mat-card-header>
+          <br /><br />
+          <section>
+            <form [formGroup]="searchForm0">
+              <mat-form-field>
+                <mat-label style="color: white;">Search patient name</mat-label>
+                <input matInput formControlName="searchInput0" (keyup)="searchTerm0$.next($any($event.target).value)"
+                  type="text" />
+                <button mat-button *ngIf="searchInput0.value" matSuffix mat-icon-button aria-label="Clear"
+                  (click)="onClickCloseSearch0()">
+                  <mat-icon>close</mat-icon>
+                </button>
+              </mat-form-field>
+            </form>
+            <table class="table">
+              <tr style="text-align: center">
+                <th>Date</th>
+                <th>Patient's Name</th>
+                <th>Doctor's Name</th>
+                <th></th>
+              </tr>
+              <tr *ngFor="let appointment of appointments">
+                <td>{{ appointment.patientId}}</td>
+                <td>{{ appointment.patientName }}</td>
+                <td>{{ appointment.doctorName }}</td>
+                <td><button mat-button matTooltip="Delete this appointment" mat-icon-button aria-label="Clear"
+                    color="warn" (click)="onclickDeleteAppointment(appointment._id)">
+                    <mat-icon>delete_forever</mat-icon>
+                  </button></td>
+              </tr>
+            </table>
+          </section>
+          <mat-paginator (page)="onClickPaginator0($event)" [length]="length0" [pageSize]="pageSize0"
+            [pageSizeOptions]="pageSizeOptions0" [showFirstLastButtons]="true">
+          </mat-paginator>
+          <mat-card-actions>
+            <button mat-button matTooltip="Refresh count data" (click)="refreshAppointment()">
+              REFRESH
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-card class="example-card">
         <mat-card-header>
-          <div mat-card-avatar class="example-header-image2"></div>
-          <mat-card-title>Appointments today</mat-card-title>
-          <mat-card-subtitle style="color: white;">Details of today's appointments</mat-card-subtitle>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>Patients</mat-card-title>
+          <mat-card-subtitle style="color: white;">Patient record details</mat-card-subtitle>
         </mat-card-header>
-        <br /><br />
-        <section>
-          <form [formGroup]="searchForm0">
+        <section class="panel">
+          <form [formGroup]="searchForm">
             <mat-form-field>
               <mat-label style="color: white;">Search patient name</mat-label>
-              <input matInput formControlName="searchInput0" (keyup)="searchTerm0$.next($any($event.target).value)"
+              <input matInput formControlName="searchInput" (keyup)="searchTerm$.next($any($event.target).value)"
                 type="text" />
-              <button mat-button *ngIf="searchInput0.value" matSuffix mat-icon-button aria-label="Clear"
-                (click)="onClickCloseSearch0()">
+              <button mat-button *ngIf="searchInput.value" matSuffix mat-icon-button aria-label="Clear"
+                (click)="onClickCloseSearch()">
                 <mat-icon>close</mat-icon>
               </button>
             </mat-form-field>
           </form>
-          <table class="table">
-            <tr style="text-align: center">
-              <th>Date</th>
-              <th>Patient's Name</th>
-              <th>Doctor's Name</th>
-              <th></th>
-            </tr>
-            <tr *ngFor="let appointment of appointments">
-              <td>{{ appointment.patientId}}</td>
-              <td>{{ appointment.patientName }}</td>
-              <td>{{ appointment.doctorName }}</td>
-              <td><button mat-button matTooltip="Delete this appointment" mat-icon-button aria-label="Clear"
-                  color="warn" (click)="onclickDeleteAppointment(appointment._id)">
-                  <mat-icon>delete_forever</mat-icon>
-                </button></td>
-            </tr>
-          </table>
+
+          <mat-accordion *ngFor="let patient of patients,let i = index">
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
+              class="details-panel">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <mat-icon>hotel</mat-icon>&nbsp;&nbsp;
+                  <span>{{patient.patientId}}</span>
+                </mat-panel-title>
+                <mat-panel-description>
+                  <span> {{patient.name}}</span>
+                </mat-panel-description>
+                <mat-panel-description>
+                  <span> {{patient.dob | date:'MM/dd/yyyy' }}</span>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <mat-icon>perm_identity</mat-icon>&nbsp;&nbsp;
+              <span> Gender: {{patient.gender}}</span><br>
+              <mat-icon> email</mat-icon>&nbsp;&nbsp;
+              <span> EmailId: {{patient.emailId}}</span><br>
+              <mat-icon> phone</mat-icon>&nbsp;&nbsp;
+              <span> MobileNo: {{patient.mobileNo}}</span>
+              <button mat-fab mat-raised-button (click)="onClickEdit(patient)" color="primary" style="float: right; ">
+                <mat-icon>edit</mat-icon>
+              </button>
+            </mat-expansion-panel>
+          </mat-accordion>
         </section>
-        <mat-paginator (page)="onClickPaginator0($event)" [length]="length0" [pageSize]="pageSize0"
-          [pageSizeOptions]="pageSizeOptions0" [showFirstLastButtons]="true">
+        <mat-paginator (page)="onClickPaginator($event)" [length]="length" [pageSize]="pageSize"
+          [pageSizeOptions]="pageSizeOptions" [showFirstLastButtons]="true">
         </mat-paginator>
         <mat-card-actions>
-          <button mat-button matTooltip="Refresh count data" (click)="refreshAppointment()">
+          <button mat-button matTooltip="Refresh count data" (click)="refreshPatients()">
             REFRESH
           </button>
         </mat-card-actions>
       </mat-card>
-    </div>
-  </mat-grid-tile>
-  <mat-grid-tile>
-    <mat-card class="example-card">
-      <mat-card-header>
-        <div mat-card-avatar class="example-header-image"></div>
-        <mat-card-title>Patients</mat-card-title>
-        <mat-card-subtitle style="color: white;">Patient record details</mat-card-subtitle>
-      </mat-card-header>
-      <section class="panel">
-        <form [formGroup]="searchForm">
-          <mat-form-field>
-            <mat-label style="color: white;">Search patient name</mat-label>
-            <input matInput formControlName="searchInput" (keyup)="searchTerm$.next($any($event.target).value)"
-              type="text" />
-            <button mat-button *ngIf="searchInput.value" matSuffix mat-icon-button aria-label="Clear"
-              (click)="onClickCloseSearch()">
-              <mat-icon>close</mat-icon>
-            </button>
-          </mat-form-field>
-        </form>
-
-        <mat-accordion *ngFor="let patient of patients,let i = index">
-          <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="details-panel">
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                <mat-icon>hotel</mat-icon>&nbsp;&nbsp;
-                <span>{{patient.patientId}}</span>
-              </mat-panel-title>
-              <mat-panel-description>
-                <span> {{patient.name}}</span>
-              </mat-panel-description>
-              <mat-panel-description>
-                <span> {{patient.dob | date:'MM/dd/yyyy' }}</span>
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-            <mat-icon>perm_identity</mat-icon>&nbsp;&nbsp;
-            <span> Gender: {{patient.gender}}</span><br>
-            <mat-icon> email</mat-icon>&nbsp;&nbsp;
-            <span> EmailId: {{patient.emailId}}</span><br>
-            <mat-icon> phone</mat-icon>&nbsp;&nbsp;
-            <span> MobileNo: {{patient.mobileNo}}</span>
-            <button mat-fab mat-raised-button (click)="onClickEdit(patient)" color="primary" style="float: right; ">
-              <mat-icon>edit</mat-icon>
-            </button>
-          </mat-expansion-panel>
-        </mat-accordion>
-      </section>
-      <mat-paginator (page)="onClickPaginator($event)" [length]="length" [pageSize]="pageSize"
-        [pageSizeOptions]="pageSizeOptions" [showFirstLastButtons]="true">
-      </mat-paginator>
-      <mat-card-actions>
-        <button mat-button matTooltip="Refresh count data" (click)="refreshPatients()">
-          REFRESH
-        </button>
-      </mat-card-actions>
-    </mat-card>
-  </mat-grid-tile>
-</mat-grid-list>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

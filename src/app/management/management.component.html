@@ -1,9 +1,5 @@
-<mat-tab-group
-  dynamicHeight
-  animationDuration="1500ms"
-  mat-stretch-tabs
-  class="example-stretched-tabs mat-elevation-z4"
->
+<mat-tab-group dynamicHeight animationDuration="1500ms" mat-stretch-tabs
+  class="example-stretched-tabs mat-elevation-z4">
   <mat-tab label="Dashboard">
     <mat-grid-list cols="2" row="2" rowHeight="1:1">
       <mat-grid-tile>
@@ -14,11 +10,7 @@
               <mat-card-title>View Count</mat-card-title>
               <mat-card-subtitle>Number of Appointments</mat-card-subtitle>
             </mat-card-header>
-            <table
-              matSort
-              (matSortChange)="sortData($event)"
-              class="table-size"
-            >
+            <table matSort (matSortChange)="sortData($event)" class="table-size">
               <tr style="text-align: center">
                 <th mat-sort-header="date">Date</th>
                 <th mat-sort-header="count">Count</th>
@@ -30,21 +22,11 @@
               </tr>
             </table>
 
-            <mat-paginator
-              class="mat-paginator"
-              (page)="onClickPaginator($event)"
-              [length]="length"
-              [pageSize]="pageSize"
-              [pageSizeOptions]="pageSizeOptions"
-              [showFirstLastButtons]="true"
-            >
+            <mat-paginator class="mat-paginator" (page)="onClickPaginator($event)" [length]="length"
+              [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" [showFirstLastButtons]="true">
             </mat-paginator>
             <mat-card-actions>
-              <button
-                mat-button
-                matTooltip="Refresh count data"
-                (click)="refreshCount()"
-              >
+              <button mat-button matTooltip="Refresh count data" (click)="refreshCount()">
                 REFRESH
               </button>
             </mat-card-actions>
@@ -58,16 +40,9 @@
             <mat-card-title>Create Doctor</mat-card-title>
             <mat-card-subtitle>Add Doctor details</mat-card-subtitle>
           </mat-card-header>
-          <form
-            [formGroup]="createDoctorForm"
-            (keydown)="keyDownFunction($event)"
-          >
+          <form [formGroup]="createDoctorForm" (keydown)="keyDownFunction($event)">
             <mat-accordion class="example-headers-align">
-              <mat-expansion-panel
-                [expanded]="step === 0"
-                (opened)="setStep(0)"
-                hideToggle
-              >
+              <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
                 <mat-expansion-panel-header>
                   <mat-panel-title> Personal data </mat-panel-title>
                   <mat-panel-description>
@@ -78,44 +53,22 @@
 
                 <mat-form-field>
                   <mat-label>First name</mat-label>
-                  <input
-                    matInput
-                    name="firstName"
-                    type="text"
-                    min="3"
-                    formControlName="firstName"
-                    required
-                  />
+                  <input matInput name="firstName" type="text" min="3" formControlName="firstName" required />
                 </mat-form-field>
 
                 <mat-form-field>
                   <mat-label>Last name</mat-label>
-                  <input
-                    matInput
-                    name="firstName"
-                    type="text"
-                    min="1"
-                    formControlName="lastName"
-                    required
-                  />
+                  <input matInput name="firstName" type="text" min="1" formControlName="lastName" required />
                 </mat-form-field>
 
                 <mat-action-row>
-                  <button
-                    mat-raised-button
-                    color="primary"
-                    (click)="nextStep()"
-                  >
+                  <button mat-raised-button color="primary" (click)="nextStep()">
                     Next
                   </button>
                 </mat-action-row>
               </mat-expansion-panel>
 
-              <mat-expansion-panel
-                [expanded]="step === 1"
-                (opened)="setStep(1)"
-                hideToggle
-              >
+              <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
                 <mat-expansion-panel-header>
                   <mat-panel-title> Contact Information </mat-panel-title>
                   <mat-panel-description>
@@ -126,47 +79,25 @@
 
                 <mat-form-field>
                   <mat-label>Email Id</mat-label>
-                  <input
-                    matInput
-                    name="emailId"
-                    type="email"
-                    formControlName="emailId"
-                    required
-                  />
+                  <input matInput name="emailId" type="email" formControlName="emailId" required />
                 </mat-form-field>
 
                 <mat-form-field>
                   <mat-label>Mobile No</mat-label>
-                  <input
-                    matInput
-                    name="mobileNo"
-                    type="number"
-                    min="10"
-                    max="10"
-                    formControlName="mobileNo"
-                    required
-                  />
+                  <input matInput name="mobileNo" type="number" min="10" max="10" formControlName="mobileNo" required />
                 </mat-form-field>
 
                 <mat-action-row>
                   <button mat-raised-button color="warn" (click)="prevStep()">
                     Previous
                   </button>
-                  <button
-                    mat-raised-button
-                    color="primary"
-                    (click)="nextStep()"
-                  >
+                  <button mat-raised-button color="primary" (click)="nextStep()">
                     Next
                   </button>
                 </mat-action-row>
               </mat-expansion-panel>
 
-              <mat-expansion-panel
-                [expanded]="step === 2"
-                (opened)="setStep(2)"
-                hideToggle
-              >
+              <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
                 <mat-expansion-panel-header>
                   <mat-panel-title> Professional Information </mat-panel-title>
                   <mat-panel-description>
@@ -177,43 +108,22 @@
 
                 <mat-form-field>
                   <mat-label>Date of practice</mat-label>
-                  <input
-                    matInput
-                    name="dop"
-                    formControlName="dop"
-                    required
-                    [matDatepicker]="picker"
-                    placeholder="Choose a date"
-                  />
-                  <mat-datepicker-toggle
-                    matSuffix
-                    [for]="picker"
-                  ></mat-datepicker-toggle>
+                  <input matInput name="dop" formControlName="dop" required [matDatepicker]="picker"
+                    placeholder="Choose a date" />
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                   <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
 
                 <mat-form-field>
                   <mat-label>Specialization</mat-label>
-                  <input
-                    matInput
-                    name="specialization"
-                    type="text"
-                    min="3"
-                    formControlName="specialization"
-                    required
-                  />
+                  <input matInput name="specialization" type="text" min="3" formControlName="specialization" required />
                 </mat-form-field>
 
                 <mat-action-row>
                   <button mat-raised-button color="warn" (click)="prevStep()">
                     Previous
                   </button>
-                  <button
-                    mat-raised-button
-                    matTooltip="Create a new doctor"
-                    color="primary"
-                    (click)="onSubmit()"
-                  >
+                  <button mat-raised-button matTooltip="Create a new doctor" color="primary" (click)="onSubmit()">
                     Submit
                   </button>
                 </mat-action-row>
@@ -228,46 +138,22 @@
             <mat-card-header>
               <div mat-card-avatar class="example-header-image3"></div>
               <mat-card-title>View Appointment</mat-card-title>
-              <mat-card-subtitle
-                >Number of Appointments Today</mat-card-subtitle
-              >
+              <mat-card-subtitle>Number of Appointments Today</mat-card-subtitle>
             </mat-card-header>
             <form [formGroup]="searchForm">
               <mat-form-field>
                 <mat-label>Filter Patient</mat-label>
-                <input
-                  matInput
-                  formControlName="searchInput"
-                  (keyup)="searchTerm$.next($any($event.target).value)"
-                  type="text"
-                />
-                <button
-                  mat-button
-                  *ngIf="searchInput.value"
-                  matSuffix
-                  mat-icon-button
-                  aria-label="Clear"
-                  (click)="onClickCloseSearch()"
-                >
+                <input matInput formControlName="searchInput" (keyup)="searchTerm$.next($any($event.target).value)"
+                  type="text" />
+                <button mat-button *ngIf="searchInput.value" matSuffix mat-icon-button aria-label="Clear"
+                  (click)="onClickCloseSearch()">
                   <mat-icon>close</mat-icon>
                 </button>
               </mat-form-field>
             </form>
-            <table
-              mat-table
-              [dataSource]="dataAppSource"
-              multiTemplateDataRows
-              class="mat-elevation-z8"
-            >
-              <ng-container
-                matColumnDef="{{ column }}"
-                *ngFor="let column of columnsToDisplay"
-              >
-                <th
-                  mat-header-cell
-                  *matHeaderCellDef
-                  style="font-weight: bolder; font-size: larger"
-                >
+            <table mat-table [dataSource]="dataAppSource" multiTemplateDataRows class="mat-elevation-z8">
+              <ng-container matColumnDef="{{ column }}" *ngFor="let column of columnsToDisplay">
+                <th mat-header-cell *matHeaderCellDef style="font-weight: bolder; font-size: larger">
                   {{ column }}
                 </th>
                 <td mat-cell *matCellDef="let element">
@@ -276,17 +162,10 @@
               </ng-container>
 
               <ng-container matColumnDef="expandedDetail">
-                <td
-                  mat-cell
-                  *matCellDef="let element"
-                  [attr.colspan]="columnsToDisplay.length"
-                >
-                  <div
-                    class="example-element-detail"
-                    [@detailExpand]="
+                <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+                  <div class="example-element-detail" [@detailExpand]="
                       element == expandedElement ? 'expanded' : 'collapsed'
-                    "
-                  >
+                    ">
                     <ol>
                       <li>
                         <strong>Patient EmailId:</strong> &nbsp;
@@ -336,36 +215,17 @@
               </ng-container>
 
               <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-              <tr
-                mat-row
-                *matRowDef="let element; columns: columnsToDisplay"
-                class="example-element-row"
-                [class.example-expanded-row]="expandedElement === element"
-                (click)="
+              <tr mat-row *matRowDef="let element; columns: columnsToDisplay" class="example-element-row"
+                [class.example-expanded-row]="expandedElement === element" (click)="
                   expandedElement = expandedElement === element ? null : element
-                "
-              ></tr>
-              <tr
-                mat-row
-                *matRowDef="let row; columns: ['expandedDetail']"
-                class="example-detail-row"
-              ></tr>
+                "></tr>
+              <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
             </table>
-            <mat-paginator
-              class="mat-paginator"
-              (page)="onClickPaginator0($event)"
-              [length]="length0"
-              [pageSize]="pageSize0"
-              [pageSizeOptions]="pageSizeOptions0"
-              [showFirstLastButtons]="true"
-            >
+            <mat-paginator class="mat-paginator" (page)="onClickPaginator0($event)" [length]="length0"
+              [pageSize]="pageSize0" [pageSizeOptions]="pageSizeOptions0" [showFirstLastButtons]="true">
             </mat-paginator>
             <mat-card-actions>
-              <button
-                mat-button
-                matTooltip="Refresh appointment data"
-                (click)="refreshAppointment()"
-              >
+              <button mat-button matTooltip="Refresh appointment data" (click)="refreshAppointment()">
                 REFRESH
               </button>
             </mat-card-actions>
@@ -378,9 +238,7 @@
             <mat-card-header>
               <div mat-card-avatar class="example-header-image4"></div>
               <mat-card-title>Graphical Analysis</mat-card-title>
-              <mat-card-subtitle
-                >View No of patients vs Specialization</mat-card-subtitle
-              >
+              <mat-card-subtitle>View No of patients vs Specialization</mat-card-subtitle>
             </mat-card-header>
             <mat-form-field appearance="fill">
               <mat-label>Select a graph</mat-label>
@@ -392,31 +250,16 @@
                 <mat-option value="gaugeChart">Gauge Chart</mat-option>
                 <mat-option value="pieGrid">Pie Grid</mat-option>
                 <mat-option value="advPie">Advance Pie</mat-option>
-                <mat-option value="verticalStackBar"
-                  >Vertical Stack Bar</mat-option
-                >
-                <mat-option value="horizontalStackBar"
-                  >Horizontal Stack Bar</mat-option
-                >
+                <mat-option value="verticalStackBar">Vertical Stack Bar</mat-option>
+                <mat-option value="horizontalStackBar">Horizontal Stack Bar</mat-option>
               </mat-select>
             </mat-form-field>
-            <div
-              class="example-ripple-container mat-elevation-z4"
-              matRipple
-              [matRippleCentered]="false"
-              [matRippleDisabled]="false"
-              [matRippleUnbounded]="false"
-              [matRippleColor]="color"
-              (click)="viewGraph()"
-            >
+            <div class="example-ripple-container mat-elevation-z4" matRipple [matRippleCentered]="false"
+              [matRippleDisabled]="false" [matRippleUnbounded]="false" [matRippleColor]="color" (click)="viewGraph()">
               See Graph
             </div>
             <mat-card-actions>
-              <button
-                mat-button
-                matTooltip="Refresh graph data"
-                (click)="refreshGraph()"
-              >
+              <button mat-button matTooltip="Refresh graph data" (click)="refreshGraph()">
                 REFRESH
               </button>
             </mat-card-actions>
@@ -431,38 +274,23 @@
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"></div>
           <mat-card-title>Doctors</mat-card-title>
-          <mat-card-subtitle
-            >View No of Doctors in our hospital</mat-card-subtitle
-          >
+          <mat-card-subtitle>View No of Doctors in our hospital</mat-card-subtitle>
         </mat-card-header>
 
         <form [formGroup]="searchForm2">
           <mat-form-field>
             <mat-label>Filter Doctor</mat-label>
-            <input
-              matInput
-              formControlName="searchInput2"
-              (keyup)="searchTerm2$.next($any($event.target).value)"
-              type="text"
-            />
-            <button
-              mat-button
-              *ngIf="searchInput2.value"
-              matSuffix
-              mat-icon-button
-              aria-label="Clear"
-              (click)="onClickCloseSearch2()"
-            >
+            <input matInput formControlName="searchInput2" (keyup)="searchTerm2$.next($any($event.target).value)"
+              type="text" />
+            <button mat-button *ngIf="searchInput2.value" matSuffix mat-icon-button aria-label="Clear"
+              (click)="onClickCloseSearch2()">
               <mat-icon>close</mat-icon>
             </button>
           </mat-form-field>
         </form>
         <mat-accordion *ngFor="let doc of doctors; let i = index">
-          <mat-expansion-panel
-            (opened)="panelOpenState = true"
-            (closed)="panelOpenState = false"
-            class="{{ doc.color }}"
-          >
+          <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
+            class="{{ doc.color }}">
             <mat-expansion-panel-header>
               <mat-panel-title>
                 <mat-icon>masks</mat-icon>&nbsp;&nbsp;
@@ -478,41 +306,23 @@
               </mat-panel-description>
             </mat-expansion-panel-header>
             <mat-icon>events</mat-icon>&nbsp;&nbsp;
-            <span> Date of Practice: {{ doc.DOP | date: "fullDate" }}</span
-            ><br />
+            <span> Date of Practice: {{ doc.DOP | date: "fullDate" }}</span><br />
             <mat-icon> email</mat-icon>&nbsp;&nbsp;
-            <span> Email Id: {{ doc.emailId }}</span
-            ><br />
+            <span> Email Id: {{ doc.emailId }}</span><br />
             <mat-icon> phone</mat-icon>&nbsp;&nbsp;
             <span> Mobile Number: {{ doc.mobileNo }}</span>
-            <button
-              mat-fab
-              matTooltip={{doc.tooltip}}
-              mat-raised-button
-              color="primary"
-              (click)="onClickStatus(doc._id,doc.status)"
-              style="float: right"
-            >
+            <button mat-fab matTooltip={{doc.tooltip}} mat-raised-button color="primary"
+              (click)="onClickStatus(doc._id,doc.status)" style="float: right">
               <mat-icon>{{doc.disable}}</mat-icon>
             </button>
           </mat-expansion-panel>
         </mat-accordion>
-        <mat-paginator
-          class="mat-paginator"
-          (page)="onClickPaginator2($event)"
-          [length]="length2"
-          [pageSize]="pageSize2"
-          [pageSizeOptions]="pageSizeOptions2"
-          [showFirstLastButtons]="true"
-        >
+        <mat-paginator class="mat-paginator" (page)="onClickPaginator2($event)" [length]="length2"
+          [pageSize]="pageSize2" [pageSizeOptions]="pageSizeOptions2" [showFirstLastButtons]="true">
         </mat-paginator>
 
         <mat-card-actions>
-          <button
-            mat-button
-            matTooltip="Refresh graph data"
-            (click)="refreshDoctor()"
-          >
+          <button mat-button matTooltip="Refresh graph data" (click)="refreshDoctor()">
             REFRESH
           </button>
         </mat-card-actions>
@@ -524,30 +334,16 @@
       <form [formGroup]="searchForm1">
         <mat-form-field>
           <mat-label>Search patient name</mat-label>
-          <input
-            matInput
-            formControlName="searchInput1"
-            (keyup)="searchTerm1$.next($any($event.target).value)"
-            type="text"
-          />
-          <button
-            mat-button
-            *ngIf="searchInput1.value"
-            matSuffix
-            mat-icon-button
-            aria-label="Clear"
-            (click)="onClickCloseSearch1()"
-          >
+          <input matInput formControlName="searchInput1" (keyup)="searchTerm1$.next($any($event.target).value)"
+            type="text" />
+          <button mat-button *ngIf="searchInput1.value" matSuffix mat-icon-button aria-label="Clear"
+            (click)="onClickCloseSearch1()">
             <mat-icon>close</mat-icon>
           </button>
         </mat-form-field>
       </form>
       <mat-accordion *ngFor="let patient of patients; let i = index">
-        <mat-expansion-panel
-          (opened)="panelOpenState = true"
-          (closed)="panelOpenState = false"
-          class="details-panel"
-        >
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="patients-panel">
           <mat-expansion-panel-header>
             <mat-panel-title>
               <mat-icon>hotel</mat-icon>&nbsp;&nbsp;
@@ -561,32 +357,19 @@
             </mat-panel-description>
           </mat-expansion-panel-header>
           <mat-icon>perm_identity</mat-icon>&nbsp;&nbsp;
-          <span> Gender: {{ patient.gender }}</span
-          ><br />
+          <span> Gender: {{ patient.gender }}</span><br />
           <mat-icon> email</mat-icon>&nbsp;&nbsp;
-          <span> EmailId: {{ patient.emailId }}</span
-          ><br />
+          <span> EmailId: {{ patient.emailId }}</span><br />
           <mat-icon> phone</mat-icon>&nbsp;&nbsp;
           <span> MobileNo: {{ patient.mobileNo }}</span>
-          <button
-            mat-fab
-            mat-raised-button
-            color="primary"
-            (click)="onClickPreviousDetails(patient._id)"
-            style="float: right"
-          >
+          <button mat-fab mat-raised-button color="primary" (click)="onClickPreviousDetails(patient._id)"
+            style="float: right;background-color: #DAF7A6;color:rgba(0, 0, 0, 0.767)">
             <mat-icon>description</mat-icon>
           </button>
         </mat-expansion-panel>
       </mat-accordion>
-      <mat-paginator
-        class="mat-paginator"
-        (page)="onClickPaginator1($event)"
-        [length]="lengthOfPatients"
-        [pageSize]="pageSize1"
-        [pageSizeOptions]="pageSizeOptions1"
-        [showFirstLastButtons]="true"
-      >
+      <mat-paginator class="mat-paginator" (page)="onClickPaginator1($event)" [length]="lengthOfPatients"
+        [pageSize]="pageSize1" [pageSizeOptions]="pageSizeOptions1" [showFirstLastButtons]="true">
       </mat-paginator>
     </div>
   </mat-tab>

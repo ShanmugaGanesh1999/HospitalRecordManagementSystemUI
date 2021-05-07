@@ -1,3 +1,7 @@
+::ng-deep.main-background mat-dialog-container {
+  background: #ecb2ec no-repeat center !important;
+  margin: 5px !important;
+}
 .highlight{
     font-weight: 500;
 }

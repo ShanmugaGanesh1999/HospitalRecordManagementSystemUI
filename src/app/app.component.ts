@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -32,9 +32,13 @@ export class AppComponent {
       horizontalPosition: 'center',
     });
   }
-
+  @HostListener('window:beforeunload', ['$event'])
+  beforeunloadHandler(event: Event) {
+    if (localStorage.getItem('who') !== 'Anonymous') this.logout();
+    return false;
+  }
   logout() {
-    this.loginService.logout(localStorage.getItem('token')).subscribe(
+    this.loginService.logout().subscribe(
       (data: any) => {
         this.openSnackBar(data.message, 'Close');
         localStorage.clear();
@@ -42,11 +46,7 @@ export class AppComponent {
         this.router.navigate(['login']);
       },
       (err) => {
-        if (
-          err.message ===
-          'Http failure response for http://localhost:3000/common/logout: 401 Unauthorized'
-        )
-          this.openSnackBar(`Can't logout`, 'Close');
+        this.openSnackBar(`Can't logout`, 'Close');
       }
     );
   }

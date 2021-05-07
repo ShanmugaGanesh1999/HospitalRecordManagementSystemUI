@@ -156,6 +156,13 @@ ol li {
   font-weight: 500;
 }
 
+.patients-panel{
+  background-color: #eb3166;
+  border: solid 10px white;
+  color: white !important;
+  font-weight: 500;
+}
+
 .mat-expansion-panel-header {
   font-family: Roboto, "Helvetica Neue", sans-serif;
   font-size: 15px;
