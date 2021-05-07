@@ -8,7 +8,6 @@ import {
 } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AppService } from 'src/app/app.service';
-import { ReceptionistComponent } from '../receptionist.component';
 
 @Component({
   selector: 'app-add-patient',
@@ -31,8 +30,7 @@ export class AddPatientComponent implements OnInit {
     public dialogRef: MatDialogRef<AddPatientComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private _snackBar: MatSnackBar,
-    private appService: AppService,
-    private receptionComponent: ReceptionistComponent
+    private appService: AppService
   ) {
     this.addPatientForm = new FormGroup({
       pname: this.pname,
@@ -102,7 +100,7 @@ export class AddPatientComponent implements OnInit {
             (data: any) => {
               this.openSnackBar('Patient details updated', 'Close');
               this.appService.loading = false;
-              this.receptionComponent.refreshPatients();
+              window.location.reload();
             },
             (error: any) => {
               this.appService.loading = false;
@@ -135,11 +133,14 @@ export class AddPatientComponent implements OnInit {
             (data: any) => {
               this.openSnackBar('Patient added', 'Close');
               this.appService.loading = false;
-              this.receptionComponent.refreshPatients();
+              window.location.reload();
             },
             (error: any) => {
               this.appService.loading = false;
-              this.openSnackBar('Something wrong! Patient Not added', 'Close');
+              this.openSnackBar(
+                'Something wrong! Patient Not updated',
+                'Close'
+              );
             }
           );
         this.submitted = true;
