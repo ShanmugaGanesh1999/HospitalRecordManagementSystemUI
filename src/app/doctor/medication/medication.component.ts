@@ -34,6 +34,7 @@ export class MedicationComponent implements OnInit {
   onClickSave() {
     this.submitted = true;
     var patName = this.data.name;
+    console.log(this.data.id);
     this.doctorService.getAppointmentIdByPatientId(this.data.id).subscribe(
       (data: any) => {
         this.appId.push(data.appointmentId[0]._id);
@@ -76,7 +77,7 @@ export class MedicationComponent implements OnInit {
                         `Sent ${patName}'s prescription mail successfully `,
                         'Close'
                       );
-                      window.location.reload();
+                      // window.location.reload();
                     },
                     (error: any) => {
                       this.openSnackBar('Error sending mail', 'Close');
