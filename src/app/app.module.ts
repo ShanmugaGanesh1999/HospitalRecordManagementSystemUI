@@ -47,6 +47,7 @@ import { MatListModule } from '@angular/material/list';
 import { FinishedMedicationComponent } from './doctor/finished-medication/finished-medication.component';
 import { ContactComponent } from './contact/contact.component';
 import { ClipboardModule } from 'ngx-clipboard';
+
 @NgModule({
   declarations: [
     AppComponent,

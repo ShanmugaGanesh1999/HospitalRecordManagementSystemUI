@@ -9,7 +9,6 @@ import 'rxjs/add/operator/switchMap';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FinishedMedicationComponent } from './finished-medication/finished-medication.component';
-import { ReceptionistService } from '../receptionist/receptionist.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({

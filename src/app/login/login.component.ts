@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AppService } from '../app.service';
@@ -133,7 +133,11 @@ export class LoginComponent implements OnInit {
         },
         (error: any) => {
           this.appService.loading = false;
-          this.openSnackBar('Enter valid email id and password', 'Close');
+          this.openSnackBar(
+            `Unable to find login credentials for emailId: ${emailId},
+            Contact Management for futher details!`,
+            'Close'
+          );
         }
       );
     } else {
