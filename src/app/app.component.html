@@ -4,7 +4,7 @@
     <span>Hospital</span> &nbsp;
     <span class="page-left">{{ appService.navHead }}</span>
     <span class="example-spacer"></span>
-    <span class="page-right">{{ curDateTime | date: "medium" }}</span>
+    <span class="page-right">{{ curDateTime | date:'dd/MM/yyyy HH:mm:ss' }}</span>
     <button
       mat-icon-button
       [matMenuTriggerFor]="menu"

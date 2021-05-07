@@ -14,7 +14,7 @@ import { LoginService } from './login/login.service';
 })
 export class AppComponent {
   title = 'hospital-mgt';
-  curDateTime = Date.now();
+  curDateTime: any;
   curPgLink: string = '';
   constructor(
     private router: Router,
@@ -72,5 +72,6 @@ export class AppComponent {
 
   ngOnInit(): void {
     this.curPgLink = window.location.href;
+    this.curDateTime = new Date();
   }
 }
