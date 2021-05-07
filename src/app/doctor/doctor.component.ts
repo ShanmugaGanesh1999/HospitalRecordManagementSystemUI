@@ -376,13 +376,13 @@ export class DoctorComponent implements OnInit {
 
   getDoctorIdByEmailId1(emailId: any) {
     this.appService.loading = true;
-    console.log('s' + this.searchInput.value + 'a');
     this.doctorService.getDoctorIdByEmailId(emailId).subscribe(
       (data: any) => {
         this.docArr = data.doctorId;
         var doctorId = data.doctorId;
         this.doctorService.getPatientIdByDoctorId1(doctorId).subscribe(
           (data: any) => {
+            console.log(data.patientId);
             var patientId = data.patientId;
             if (data.patientCount > 0) {
               if (this.dataCount <= data.patientCount) {
