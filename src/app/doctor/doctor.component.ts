@@ -381,7 +381,7 @@ export class DoctorComponent implements OnInit {
         var doctorId = data.doctorId;
         this.doctorService.getPatientIdByDoctorId1(doctorId).subscribe(
           (data: any) => {
-            console.log(data.patientId);
+            // console.log(data.patientId);
             var patientId = data.patientId;
             if (data.patientCount > 0) {
               if (this.dataCount <= data.patientCount) {
