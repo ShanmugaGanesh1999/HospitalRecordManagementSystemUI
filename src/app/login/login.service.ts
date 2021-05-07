@@ -6,8 +6,6 @@ import { Injectable } from '@angular/core';
 })
 export class LoginService {
   constructor(private httpClient: HttpClient) {}
-  token = localStorage.getItem('token');
-  headers = new HttpHeaders().set('x-access-token', this.token + '');
   baseUrl = 'http://localhost:3000/common/';
 
   loginApi(emailId: any, password: any) {
@@ -17,11 +15,13 @@ export class LoginService {
     });
   }
 
-  logout(params: any) {
+  logout() {
+    let token = localStorage.getItem('token');
+    let headers = new HttpHeaders().set('x-access-token', token + '');
     return this.httpClient.post(
       this.baseUrl + 'logout',
-      { params },
-      { headers: this.headers }
+      {},
+      { headers: headers }
     );
   }
 

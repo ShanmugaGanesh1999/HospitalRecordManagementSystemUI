@@ -11,9 +11,7 @@ export class PatientPreviousRecordService {
 
   getDetails(pId: any) {
     const token = localStorage.getItem('token');
-    //console.log(token);
     const headers = new HttpHeaders().set('x-access-token', token + '');
-    //console.log(headers);
     return this.httpClient.get(
       this.baseUrl + 'getAppointmentDetailsByPatientId/?patientObjectId=' + pId,
       { headers: headers }
