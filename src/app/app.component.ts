@@ -35,7 +35,7 @@ export class AppComponent {
   @HostListener('window:beforeunload', ['$event'])
   beforeunloadHandler(event: Event) {
     if (localStorage.getItem('who') !== 'Anonymous') this.logout();
-    return false;
+    return true;
   }
   logout() {
     this.loginService.logout().subscribe(
