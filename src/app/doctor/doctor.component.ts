@@ -130,7 +130,7 @@ export class DoctorComponent implements OnInit {
         this.docArr = data.doctorId;
         this.doctorService.getPatientIdByDoctorId(data.doctorId).subscribe(
           (data: any) => {
-            this.patLen = data.patientId.length;
+            this.patLen = data.patientCount;
           },
           (err) => {
             this.appService.loading = false;
@@ -138,7 +138,7 @@ export class DoctorComponent implements OnInit {
         );
         this.doctorService.getPatientIdByDoctorId1(data.doctorId).subscribe(
           (data: any) => {
-            this.patLen1 = data.patientId.length;
+            this.patLen1 = data.patientCount;
           },
           (err) => {
             this.appService.loading = false;

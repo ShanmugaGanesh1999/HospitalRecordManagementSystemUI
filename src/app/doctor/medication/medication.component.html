@@ -10,18 +10,6 @@
   <br />
   <form [formGroup]="addPatientMedicationForm">
     <mat-form-field class="ml-2">
-      <mat-label>Prescription</mat-label>
-      <mat-card>
-        <textarea
-          matInput
-          placeholder="Enter Patient Prescription"
-          formControlName="prescription"
-          type="text"
-          required
-        >
-        </textarea></mat-card></mat-form-field
-    ><br />
-    <mat-form-field class="ml-2">
       <mat-label>Complication</mat-label>
       <mat-card>
         <textarea
@@ -33,6 +21,18 @@
         ></textarea>
       </mat-card> </mat-form-field
     ><br />
+    <mat-form-field class="ml-2">
+      <mat-label>Prescription</mat-label>
+      <mat-card>
+        <textarea
+          matInput
+          placeholder="Enter Patient Prescription"
+          formControlName="prescription"
+          type="text"
+          required
+        >
+        </textarea></mat-card></mat-form-field
+    ><br />
     <button
       matTooltip="Send medication mail to patient"
       mat-fab
@@ -41,7 +41,7 @@
       (click)="onClickSave()"
       [disabled]="!addPatientMedicationForm.valid"
     >
-      <mat-icon style="color: #673ab7">done</mat-icon>
+      <mat-icon mat-dialog-close style="color: #673ab7">done</mat-icon>
     </button>
   </form>
 </div>
