@@ -66,10 +66,9 @@ button {
 
 body {
   margin: 0;
-  background: linear-gradient(0deg, #b14daca9, #b14daca9),
-    url("../assets/background.jpg")
-      no-repeat center !important;
-  background-size: cover !important;
+  background: linear-gradient(0deg, #e6e6fada, #e6e6fada),
+  url("../assets/background.jpg") no-repeat center;
+  background-size: cover;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   height: fit-content;
 }
