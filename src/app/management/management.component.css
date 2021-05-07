@@ -50,6 +50,11 @@ mat-grid-tile {
   margin-left: 8px;
 }
 
+.search,
+mat-card-subtitle{
+  color:white;
+}
+
 .example-header-image {
   background-image: url("../../assets/doctor-portrait.jpg");
   background-size: cover;
@@ -136,12 +141,12 @@ tr.example-element-row:not(.example-expanded-row):active {
 }
 
 ol {
-  background: #ff9999;
+  background: #DDA0DD;
   padding: 20px;
 }
 
 ol li {
-  background: #ffe5e5;
+  background: #D8BFD8;
   padding: 5px;
   margin-left: 35px;
 }
@@ -150,14 +155,14 @@ ol li {
 }
 
 .details-panel {
-  background-color: rgb(240, 163, 19);
+  background-color: rgb(248, 176, 41);
   border: solid 10px white;
   color: white !important;
   font-weight: 500;
 }
 
 .patients-panel{
-  background-color: #eb3166;
+  background-color: #BA55D3;
   border: solid 10px white;
   color: white !important;
   font-weight: 500;
@@ -202,14 +207,14 @@ ol li {
 }
 
 .details-panel1 {
-  background-color: rgb(7, 231, 56);
+  background-color: #77DD76;
   border: solid 10px white;
   color: white !important;
   font-weight: 500;
 }
 
 .details-panel2 {
-  background-color: rgb(219, 78, 54);
+  background-color: #FF6962;
   border: solid 10px white;
   color: white !important;
   font-weight: 500;
