@@ -53,6 +53,8 @@ export class DoctorComponent implements OnInit {
   patLen: any;
   patLen1: any;
   docDash1: any;
+  active: boolean = true;
+  inActive: boolean = false;
 
   constructor(
     private appService: AppService,
@@ -112,6 +114,40 @@ export class DoctorComponent implements OnInit {
     this.pagePosition = 0;
     this.pageSize1 = 5;
     this.getDoctorIdByEmailId1(this.emailId);
+  }
+
+  makeInActivate() {
+    this.active = false;
+    this.inActive = true;
+    var params = {
+      emailId: this.emailId,
+      status: 'Away',
+    };
+    this.doctorService.updateDoctorStatus(params).subscribe(
+      (data: any) => {
+        this.openSnackBar('Account inactivated', 'Close');
+      },
+      (error: any) => {
+        this.openSnackBar('Error inactivating account', 'Close');
+      }
+    );
+  }
+
+  makeActivate() {
+    this.active = true;
+    this.inActive = false;
+    var params = {
+      emailId: this.emailId,
+      status: 'Active',
+    };
+    this.doctorService.updateDoctorStatus(params).subscribe(
+      (data: any) => {
+        this.openSnackBar('Account activated', 'Close');
+      },
+      (error: any) => {
+        this.openSnackBar('Error activating account', 'Close');
+      }
+    );
   }
 
   searchText = '';

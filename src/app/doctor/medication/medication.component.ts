@@ -34,7 +34,7 @@ export class MedicationComponent implements OnInit {
   onClickSave() {
     this.submitted = true;
     var patName = this.data.name;
-    console.log(this.data.id);
+    // console.log(this.data.id);
     this.doctorService.getAppointmentIdByPatientId(this.data.id).subscribe(
       (data: any) => {
         this.appId.push(data.appointmentId[0]._id);
@@ -78,6 +78,19 @@ export class MedicationComponent implements OnInit {
                         'Close'
                       );
                       // window.location.reload();
+                      // var params = {
+                      //   emailId: this.data.docEmailId,
+                      //   status: 'Active',
+                      // };
+                      // this.doctorService.updateDoctorStatus(params).subscribe(
+                      //   (data: any) => {
+                      //     this.openSnackBar(
+                      //       'Please check your prescription mail',
+                      //       'Close'
+                      //     );
+                      //   },
+                      //   (error: any) => {}
+                      // );
                     },
                     (error: any) => {
                       this.openSnackBar('Error sending mail', 'Close');
@@ -112,8 +125,6 @@ export class MedicationComponent implements OnInit {
       horizontalPosition: 'center',
       verticalPosition: 'bottom',
     });
-    setTimeout(() => {
-      window.location.reload();
-    }, 200);
+    window.location.reload();
   }
 }

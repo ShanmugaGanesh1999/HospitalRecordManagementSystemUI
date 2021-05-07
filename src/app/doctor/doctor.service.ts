@@ -46,6 +46,18 @@ export class DoctorService {
     );
   }
 
+  updateDoctorStatus(params: any) {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('x-access-token', token + '');
+    return this.httpClient.put(
+      this.baseDoctorEmailIdUrl + 'updateDoctorStatusByEmailId',
+      params,
+      {
+        headers: headers,
+      }
+    );
+  }
+
   getPatientsByPatientId(patientId: any) {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('x-access-token', token + '');

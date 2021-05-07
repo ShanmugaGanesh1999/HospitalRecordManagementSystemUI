@@ -1,8 +1,8 @@
 <section class="main-background">
-  <div class='box'>
-    <div class='box-form'>
-      <div class='box-login'>
-        <div class='fieldset-body'>
+  <div class="box">
+    <div class="box-form">
+      <div class="box-login">
+        <div class="fieldset-body">
           <form [formGroup]="loginForm" (keydown)="keyDownFunction($event)">
             <mat-card-header>
               <mat-card-title class="h1-style">Login</mat-card-title>
@@ -10,31 +10,66 @@
             <br />
             <mat-form-field appearance="outline">
               <mat-label>EmailId</mat-label>
-              <input matInput placeholder="Enter EmailId" formControlName="emailId" type="text" required />
-              <mat-error *ngIf="emailId.invalid">Please enter a value</mat-error>
-            </mat-form-field><br />
+              <input
+                matInput
+                placeholder="Enter EmailId"
+                formControlName="emailId"
+                type="text"
+                required
+              />
+              <mat-error *ngIf="emailId.invalid"
+                >Please enter your emailId</mat-error
+              > </mat-form-field
+            ><br />
             <mat-form-field appearance="outline">
               <mat-label>Password</mat-label>
-              <input matInput [type]="hide ? 'password' : 'text'" placeholder="Enter Password"
-                formControlName="password" required />
-              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                [attr.aria-pressed]="hide">
-                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              <input
+                matInput
+                [type]="hide ? 'password' : 'text'"
+                placeholder="Enter Password"
+                formControlName="password"
+                required
+              />
+              <button
+                mat-icon-button
+                matSuffix
+                (click)="hide = !hide"
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide"
+              >
+                <mat-icon>{{
+                  hide ? "visibility_off" : "visibility"
+                }}</mat-icon>
               </button>
-              <mat-error *ngIf="password.invalid">Please enter a value</mat-error>
+              <mat-error *ngIf="password.invalid"
+                >Please enter your password</mat-error
+              >
             </mat-form-field>
           </form>
-          <button (click)="openLoginInfo()" class='b b-form' color="primary">Forgot Password?</button>
+          <button (click)="openLoginInfo()" class="b b-form" color="primary">
+            Forgot Password?
+          </button>
           <br />
-          <button mat-fab mat-raised-button matTooltip="Login" (click)="onClickLogin()" class=" btn2" color="primary"
-            style="float: right;">
-            <mat-icon>login</mat-icon>
-          </button>&nbsp;
+          <button
+            mat-fab
+            mat-raised-button
+            matTooltip="Login"
+            (click)="onClickLogin()"
+            class="btn2"
+            color="primary"
+            style="float: right"
+          >
+            <mat-icon>login</mat-icon></button
+          >&nbsp;
         </div>
       </div>
     </div>
-    <div class='box-info'>
-      <button (click)="closeLoginInfo()" class='b b-info' title='Back to Sign In'>
+    <div class="box-info">
+      <button
+        (click)="closeLoginInfo()"
+        class="b b-info"
+        title="Back to Sign In"
+      >
         <mat-icon>close</mat-icon>
       </button>
       <form [formGroup]="forgotForm">
@@ -44,14 +79,28 @@
         <br />
         <mat-form-field appearance="outline">
           <mat-label>EmailId</mat-label>
-          <input matInput placeholder="Enter EmailId" formControlName="email" type="text" required />
-          <mat-error *ngIf="email.invalid">Please enter a value</mat-error>
-        </mat-form-field><br />
-        <button (click)="sendOtp()" class='b-support' title='Forgot Password?'>Send OTP</button>
+          <input
+            matInput
+            placeholder="Enter EmailId"
+            formControlName="email"
+            type="text"
+            required
+          />
+          <mat-error *ngIf="email.invalid"
+            >Please enter a value</mat-error
+          > </mat-form-field
+        ><br />
+        <button (click)="sendOtp()" class="b-support" title="Forgot Password?">
+          Send OTP
+        </button>
       </form>
     </div>
-    <div class='box-info1'>
-      <button (click)="closeLoginInfo1()" class='b b-info' title='Back to Sign In'>
+    <div class="box-info1">
+      <button
+        (click)="closeLoginInfo1()"
+        class="b b-info"
+        title="Back to Sign In"
+      >
         <mat-icon>close</mat-icon>
       </button>
       <form [formGroup]="resetForm">
@@ -61,24 +110,47 @@
         <br />
         <mat-form-field appearance="outline">
           <mat-label>OTP</mat-label>
-          <input matInput placeholder="Enter OTP" formControlName="otp" type="text" required />
-          <mat-error *ngIf="otp.invalid">Please enter a value</mat-error>
-        </mat-form-field><br />
+          <input
+            matInput
+            placeholder="Enter OTP"
+            formControlName="otp"
+            type="text"
+            required
+          />
+          <mat-error *ngIf="otp.invalid"
+            >Please enter a value</mat-error
+          > </mat-form-field
+        ><br />
         <mat-form-field appearance="outline">
           <mat-label>New Password</mat-label>
-          <input matInput placeholder="Enter New Password" formControlName="pass" type="text" required />
-          <mat-error *ngIf="pass.invalid">Please enter a value</mat-error>
-        </mat-form-field><br />
+          <input
+            matInput
+            placeholder="Enter New Password"
+            formControlName="pass"
+            type="text"
+            required
+          />
+          <mat-error *ngIf="pass.invalid"
+            >Please enter a value</mat-error
+          > </mat-form-field
+        ><br />
         <mat-form-field appearance="outline">
           <mat-label>Confirm Password</mat-label>
-          <input matInput placeholder="Repeat Password" formControlName="rpass" type="text" required />
-          <mat-error *ngIf="rpass.invalid">Please re-enter the password</mat-error>
-        </mat-form-field><br />
-        <button (click)="onClickSet()" class='b-support'>Set Password</button>
+          <input
+            matInput
+            placeholder="Repeat Password"
+            formControlName="rpass"
+            type="text"
+            required
+          />
+          <mat-error *ngIf="rpass.invalid"
+            >Please re-enter the password</mat-error
+          > </mat-form-field
+        ><br />
+        <button (click)="onClickSet()" class="b-support">Set Password</button>
       </form>
     </div>
   </div>
-
 </section>
 
 <!--<div class="login">

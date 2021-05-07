@@ -16,7 +16,7 @@
 }
 
 .details-panel1 {
-  background-color: #77DD76;
+  background-color: #77dd76;
   border: solid 10px white;
   color: white !important;
   font-weight: 350;
@@ -25,12 +25,19 @@
 }
 
 .details-panel {
-  background-color: #FF6962;
+  background-color: #ff6962;
   border: solid 10px white;
   color: white !important;
   font-weight: 350;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   margin-top: 1%;
+}
+
+.list1 {
+  margin-top: 205%;
+  margin-left: 25%;
+  cursor: pointer;
+  color: whitesmoke;
 }
 
 .mat-expansion-panel-header {
@@ -175,7 +182,7 @@
 .mat-drawer.mat-drawer-side {
   z-index: 2;
   width: 15%;
-  background-color: #9370DB;
+  background-color: #9370db;
 }
 
 .list:hover {
@@ -183,25 +190,23 @@
   color: #fff;
 }
 
-.mat-list-item-focus{
-background-color: indigo;
-color: #fff;
+.mat-list-item-focus {
+  background-color: indigo;
+  color: #fff;
 }
 
-.list{
+.list {
   color: #fff;
 }
 
 .mat-drawer-container {
   margin: 0;
   background: linear-gradient(0deg, #e6e6fada, #e6e6fada),
-  url("../../assets/background.jpg") no-repeat center;
+    url("../../assets/background.jpg") no-repeat center;
   background-size: cover;
-  font-family: Roboto,
-    "Helvetica Neue",
-    sans-serif;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
   height: 100vh;
-  z-index:1000
+  z-index: 1000;
 }
 
 .mat-drawer-content {
