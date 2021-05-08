@@ -12,7 +12,8 @@
       <mat-error *ngIf="pId.invalid || pId.touched">Please enter a value</mat-error>
     </mat-form-field>
   </form><br />
-  <button mat-raised-button mat-dialog-close (click)="onClickSearch()" color="primary">
+  <button mat-raised-button mat-dialog-close (click)="onClickSearch()" color="primary"
+    [disabled]="!patientIdForm.valid">
     Search
   </button>&nbsp;&nbsp;
   <button mat-raised-button mat-dialog-close color="warn">

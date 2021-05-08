@@ -59,8 +59,7 @@ export class AppComponent {
     }
     this.dialog.open(ContactComponent, {
       data: [text, localStorage.getItem('who')],
-      width: '52%',
-      height: '80%',
+      panelClass: 'main-background',
     });
     this.openSnackBar('Opening dialog for ' + text, 'Close');
   }

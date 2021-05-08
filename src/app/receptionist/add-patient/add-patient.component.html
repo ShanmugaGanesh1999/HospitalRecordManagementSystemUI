@@ -44,7 +44,7 @@
     </form>
   </div>
   <button mat-raised-button class="btn2" mat-dialog-close (click)="onClickSave()" color="primary"
-    style="margin-left: 250px;">
+    style="margin-left: 250px;" [disabled]="!addPatientForm.valid">
     Save
   </button>&nbsp;
   <button mat-raised-button mat-dialog-close color="warn">

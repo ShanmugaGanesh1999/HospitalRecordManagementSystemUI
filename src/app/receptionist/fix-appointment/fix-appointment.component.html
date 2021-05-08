@@ -28,7 +28,8 @@
      <hr>
    </div>
 
-   <button mat-raised-button mat-dialog-close (click)="onClickFix()" color="primary" style="margin-left: 100px;">
+   <button mat-raised-button mat-dialog-close (click)="onClickFix()" color="primary" style="margin-left: 100px;"
+     [disabled]="!appointmentForm.valid">
      Fix Appointment
    </button>&nbsp;
    <button mat-raised-button mat-dialog-close color="warn">
