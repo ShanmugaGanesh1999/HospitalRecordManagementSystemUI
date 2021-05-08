@@ -51,6 +51,7 @@ export class AppComponent {
       },
       (err) => {
         this.openSnackBar(`Can't logout`, 'Close');
+        window.close();
       }
     );
   }
