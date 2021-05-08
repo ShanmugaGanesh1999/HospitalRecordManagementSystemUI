@@ -7,25 +7,53 @@
   <mat-card-content>
     <form [formGroup]="reportForm" class="example-form">
       <mat-form-field class="example-full-width">
-        <mat-label style="color: indigo;">From</mat-label>
-        <input matInput formControlName="from" type="text" [readonly]="true" />
-      </mat-form-field><br />
+        <mat-label style="color: indigo">From</mat-label>
+        <input
+          matInput
+          formControlName="from"
+          type="text"
+          [readonly]="true"
+        /> </mat-form-field
+      ><br />
       <mat-form-field class="example-full-width">
-        <mat-label style="color:indigo;">To</mat-label>
-        <input matInput formControlName="to" type="text" [readonly]="true" />
-      </mat-form-field><br />
+        <mat-label style="color: indigo">To</mat-label>
+        <input
+          matInput
+          formControlName="to"
+          type="text"
+          [readonly]="true"
+        /> </mat-form-field
+      ><br />
       <mat-form-field class="example-full-width">
         <mat-label>Description</mat-label>
-        <textarea matInput placeholder="(Mandatory)" type="text" formControlName="description" required></textarea>
+        <textarea
+          matInput
+          placeholder="(Mandatory)"
+          type="text"
+          formControlName="description"
+          required
+        ></textarea>
       </mat-form-field>
+      <mat-card-actions mat-dialog-actions class="card-bottom">
+        <button
+          mat-raised-button
+          mat-dialog-close
+          style="margin-right: 10%; margin-left: 30%; background-color: #ff6962"
+        >
+          Close
+        </button>
+        <button
+          matTooltip="Send us notification"
+          mat-fab
+          mat-dialog-button
+          mat-dialog-close
+          (click)="onClickSend()"
+          [disabled]="!reportForm.valid"
+          style="background-color: indigo; color: white"
+        >
+          <mat-icon>send</mat-icon>
+        </button>
+      </mat-card-actions>
     </form>
   </mat-card-content>
-  <mat-card-actions mat-dialog-actions class='card-bottom'>
-    <button mat-raised-button mat-dialog-close
-      style="margin-right: 10%;margin-left: 30%;background-color: #ff6962;">Close</button>
-    <button matTooltip="Send us notification" mat-fab mat-dialog-button mat-dialog-close (click)="onClickSend()"
-      [disabled]="!reportForm.valid" style="background-color: indigo;color:white">
-      <mat-icon>send</mat-icon>
-    </button>
-  </mat-card-actions>
 </mat-card>

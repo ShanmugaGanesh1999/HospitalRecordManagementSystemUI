@@ -345,7 +345,6 @@ export class DoctorComponent implements OnInit {
     this.dialog.open(MedicationComponent, {
       data: data,
       panelClass: 'main-background',
-      backdropClass: 'backdropBackground',
     });
   }
   medArr: any = [];
@@ -361,7 +360,6 @@ export class DoctorComponent implements OnInit {
               this.dialog.open(FinishedMedicationComponent, {
                 data: this.medArr,
                 panelClass: 'main-background',
-                backdropClass: 'backdropBackground',
               });
             },
             (error: any) => {

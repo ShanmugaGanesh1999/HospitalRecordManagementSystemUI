@@ -4,17 +4,16 @@
 }
 .example-card {
   width: 600px;
-  height: 400px;
   background: #ecb2ec;
   font-weight: 600;
   font-size: larger;
   color: #fff;
-
 }
 
 .example-header-image {
   background-image: url("../../assets/report.jpeg");
   background-size: cover;
+  margin-left: 190px;
 }
 
 .example-form {
@@ -22,6 +21,7 @@
   max-width: 400px;
   width: 100%;
   font-size: large;
+  margin-left: 90px;
   font-weight: 500;
 }
 
@@ -40,9 +40,15 @@
   width: 100% !important;
 }
 
-::ng-deep.main-background .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label,
-.mat-form-field-appearance-legacy.mat-form-field-can-float .mat-input-server:focus+.mat-form-field-label-wrapper .mat-form-field-label {
-  transform: translateY(-1.28125em) scale(0.75) perspective(100px) translateZ(0.001px);
+::ng-deep.main-background
+  .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float
+  .mat-form-field-label,
+.mat-form-field-appearance-legacy.mat-form-field-can-float
+  .mat-input-server:focus
+  + .mat-form-field-label-wrapper
+  .mat-form-field-label {
+  transform: translateY(-1.28125em) scale(0.75) perspective(100px)
+    translateZ(0.001px);
   -ms-transform: translateY(-1.28125em) scale(0.75);
   width: 133.3333333333%;
 }
