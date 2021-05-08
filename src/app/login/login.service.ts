@@ -29,8 +29,11 @@ export class LoginService {
     return this.httpClient.post(this.baseUrl + `emailOtp?emailId=${email}`, {});
   }
 
-  otpVerify(otp: any) {
-    return this.httpClient.post(this.baseUrl + `verifyOtp?otp=${otp}`, {});
+  otpVerify(email: any, otp: any) {
+    return this.httpClient.post(
+      this.baseUrl + `verifyOtp?otp=${otp}&email=${email}`,
+      {}
+    );
   }
 
   resetPwd(email: any, pwd: any) {

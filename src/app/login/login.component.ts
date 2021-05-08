@@ -170,15 +170,15 @@ export class LoginComponent implements OnInit {
 
   onClickSet() {
     this.appService.loading = true;
+    let mail = localStorage.getItem('email');
     let otp = this.otp.value;
     let pwd = this.pass.value;
     let cpass = this.rpass.value;
     if (otp && pwd && cpass) {
       if (pwd === cpass && otp.length === 6) {
-        this.loginService.otpVerify(otp).subscribe(
+        this.loginService.otpVerify(mail, otp).subscribe(
           (data: any) => {
             if (data.verification == 1) {
-              let mail = localStorage.getItem('email');
               this.loginService.resetPwd(mail, cpass).subscribe(
                 (data: any) => {
                   this.appService.loading = false;
