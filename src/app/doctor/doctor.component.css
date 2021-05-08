@@ -34,7 +34,7 @@
 }
 
 .list1 {
-  margin-top: 205%;
+  margin-top: 2%;
   margin-left: 25%;
   cursor: pointer;
   color: whitesmoke;
@@ -205,7 +205,7 @@
     url("../../assets/background.jpg") no-repeat center;
   background-size: cover;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  height: 100vh;
+  /* height: 100vh; */
   z-index: 1000;
 }
 

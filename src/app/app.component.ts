@@ -14,7 +14,7 @@ import { LoginService } from './login/login.service';
 })
 export class AppComponent {
   title = 'hospital-mgt';
-  curDateTime: any;
+  today: Date = new Date();
   curPgLink: string = '';
   constructor(
     private router: Router,
@@ -23,7 +23,11 @@ export class AppComponent {
     private dialog: MatDialog,
     private clipboardService: ClipboardService,
     public appService: AppService
-  ) {}
+  ) {
+    setInterval(() => {
+      this.today = new Date();
+    }, 1);
+  }
 
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
@@ -35,7 +39,7 @@ export class AppComponent {
   @HostListener('window:beforeunload', ['$event'])
   beforeunloadHandler(event: Event) {
     if (localStorage.getItem('who') !== 'Anonymous') this.logout();
-    return true;
+    return false;
   }
   logout() {
     this.loginService.logout().subscribe(
@@ -71,6 +75,6 @@ export class AppComponent {
 
   ngOnInit(): void {
     this.curPgLink = window.location.href;
-    this.curDateTime = new Date();
+    // this.curDateTime = new Date();
   }
 }
